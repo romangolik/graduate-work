@@ -1,0 +1,58 @@
+@keyframes popUp {
+  0% {
+    transform: translateY(100vh);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.modal-container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+
+  display: block;
+  height: 100vh;
+  width: 100vw;
+  padding: 100px 0;
+
+  background-color: rgba(0, 0, 0, 0.7);
+
+  animation: opacity 0.2s ease;
+}
+
+.modal-window {
+  display: block;
+  margin: 0 auto;
+  padding: 40px;
+  max-width: 400px;
+
+  border-radius: 10px;
+  background-color: white;
+
+  transform: translateY(100vh);
+
+  animation: popUp .4s ease .2s forwards;
+}
+
+.modal-window label {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.modal-window input {
+  display: inline-block;
+  width: 100%;
+}

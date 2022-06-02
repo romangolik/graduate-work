@@ -1,0 +1,29 @@
+:root {
+  --header-height: 100px;
+
+  //Colors
+  --white: #FFFFFF;
+  --black: #031021;
+  --dark: #394758;
+  --blue: #2344A3;
+  --dark-blue: #152555;
+  --green: #0FB600;
+  --dark-green: #0B7402;
+
+  --silver: #F6F8FF;
+  --steel-blue: #BBC2DD;
+
+  --red: #CB2B1F;
+}
+
+@media screen and (max-width: 1025px) {
+  .main {
+    --header-height: 90px;
+  }
+}
+
+@media screen and (max-width: 481px) {
+  .main {
+    --header-height: 70px;
+  }
+}

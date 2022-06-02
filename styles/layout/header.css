@@ -1,0 +1,36 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 80;
+
+  width: 100%;
+  height: var(--header-height);
+
+  background-color: white;
+  border-bottom: 1px solid silver;
+}
+
+.header__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.header__logo {
+  display: block;
+  height: 70px;
+}
+
+.header__navigation-item {
+  margin-right: 25px;
+}
+
+.header__navigation-item_active {
+  color: var(--blue);
+}
+
+.header__navigation-item:last-child {
+  margin-right: 0;
+}

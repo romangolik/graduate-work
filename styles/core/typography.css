@@ -1,0 +1,110 @@
+*:not(h1, h2, h3, h4, h5, h6) {
+  font-size: 17px;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-family: sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.3;
+  font-weight: 700;
+  font-family: sans-serif;
+
+  color: black;
+}
+
+h1 {
+  font-size: 66px;
+}
+
+h2 {
+  font-size: 54px;
+}
+
+h3 {
+  font-size: 44px;
+}
+
+h4 {
+  font-size: 32px;
+}
+
+h5 {
+  font-size: 22px;
+}
+
+.large-text {
+  font-size: 22px;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size: 58px;
+  }
+
+  h2 {
+    font-size: 50px;
+  }
+}
+
+@media screen and (max-width: 481px) {
+  h1 {
+    font-size: 48px;
+  }
+
+  h2 {
+    font-size: 42px;
+  }
+
+  h3 {
+    font-size: 36px;
+  }
+
+  h4 {
+    font-size: 30px;
+  }
+
+  h5 {
+    font-size: 20px;
+  }
+
+  *:not(h1, h2, h3, h4, h5, h6) {
+    font-size: 15px;
+  }
+
+  button {
+    font-size: 16px;
+  }
+
+  .large-text {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 376px) {
+  h1 {
+    font-size: 38px;
+  }
+
+  h2 {
+    font-size: 34px;
+  }
+
+  h3 {
+    font-size: 28px;
+  }
+
+  h4 {
+    font-size: 24px;
+  }
+
+  h5 {
+    font-size: 18px;
+  }
+
+  .large-text {
+    font-size: 18px;
+  }
+}

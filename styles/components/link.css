@@ -1,0 +1,56 @@
+.link {
+  display: inline-flex;
+  align-items: center;
+
+  font-weight: 500;
+  text-align: left;
+
+  text-decoration: none;
+
+  transition: 0.3s ease color;
+}
+
+.link_basic {
+  color: var(--blue);
+}
+
+.link_basic:hover {
+  color: var(--green);
+}
+
+.link_primary {
+   color: var(--dark);
+}
+
+.link_primary:hover {
+  color: var(--blue);
+}
+
+.link_secondary {
+  color: var(--black);
+}
+
+.link_secondary:hover {
+  color: var(--blue);
+}
+
+.link_uppercase {
+  text-transform: uppercase;
+}
+
+.link__icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+
+  color: inherit;
+}
+
+.link__text {
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+
+  color: inherit;
+}
