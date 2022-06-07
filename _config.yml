@@ -1,5 +1,0 @@
-include:
-  - .htaccess
-  - assets
-  - js-files
-exclude: []
