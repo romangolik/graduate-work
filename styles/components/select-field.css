@@ -105,11 +105,11 @@
 }
 
 .select-field__option_selected {
-  color: #3f51b5;
+  color: var(--blue);
   background-color: rgba(0,0,0,.12);
 }
 
-.select-field__option:hover {
+.select-field__option:not(.select-field__option_selected):hover {
   background-color: rgba(0,0,0,.04);
 }
 

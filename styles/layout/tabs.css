@@ -1,0 +1,28 @@
+.tabs {
+  padding-top: 30px;
+
+  box-sizing: border-box;
+}
+
+.tabs__item {
+  flex: none;
+  width: 100%;
+  display: none;
+
+  animation: showTab .4s;
+}
+
+.tabs__item_show {
+  display: flex;
+}
+
+@keyframes showTab {
+  0% {
+    transform: translateY(15px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
