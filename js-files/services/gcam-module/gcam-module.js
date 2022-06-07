@@ -62,8 +62,6 @@ const offsetPolygon = (pts, offset, looped = false) => {
 
     let downPoints = [];
     let upperPoints = [];
-    let prevUpperPoint = {};
-    let prevDownPoint = {};
 
     for (let i = 1; i < pts.length; i++) {
         const prevPoint = pts[i - 1];
@@ -86,18 +84,20 @@ const offsetPolygon = (pts, offset, looped = false) => {
         const Yo2 = currentPoint.y - K * deltaX;
 
         if (i > 1) {
-            const lasDownPoint = downPoints[downPoints.length - 1];
+            const penultimateDownPoint = downPoints[downPoints.length - 2];
+            const penultimateUpperPoint = upperPoints[upperPoints.length - 2];
+            const lastDownPoint = downPoints[downPoints.length - 1];
             const lastUpperPoint = upperPoints[upperPoints.length - 1];
 
-            downPoints.push(findLineIntersection(
+            downPoints[downPoints.length - 1] = findLineIntersection(
                 {
                     from: {
-                        x: lasDownPoint.x,
-                        y: lasDownPoint.y
+                        x: lastDownPoint.x,
+                        y: lastDownPoint.y
                     },
                     to: {
-                        x: prevDownPoint.x,
-                        y: prevDownPoint.y
+                        x: penultimateDownPoint.x,
+                        y: penultimateDownPoint.y
                     }
                 },
                 {
@@ -110,16 +110,16 @@ const offsetPolygon = (pts, offset, looped = false) => {
                         y: Yg2
                     }
                 }
-            ));
-            upperPoints.push(findLineIntersection(
+            );
+            upperPoints[downPoints.length - 1] = findLineIntersection(
                 {
                     from: {
                         x: lastUpperPoint.x,
                         y: lastUpperPoint.y
                     },
                     to: {
-                        x: prevUpperPoint.x,
-                        y: prevUpperPoint.y
+                        x: penultimateUpperPoint.x,
+                        y: penultimateUpperPoint.y
                     }
                 },
                 {
@@ -132,37 +132,33 @@ const offsetPolygon = (pts, offset, looped = false) => {
                         y: Yo2
                     }
                 }
-            ))
+            );
+
+            downPoints.push( {
+                x: fixed(Xg2, 3),
+                y: fixed(Yg2, 3),
+            });
+            upperPoints.push({
+                x: fixed(Xo2, 3),
+                y: fixed(Yo2, 3),
+            });
         } else {
             downPoints.push({
                 x: fixed(Xg1, 3),
                 y: fixed(Yg1, 3)
+            }, {
+                x: fixed(Xg2, 3),
+                y: fixed(Yg2, 3),
             });
             upperPoints.push({
                 x: fixed(Xo1, 3),
                 y: fixed(Yo1, 3)
+            },{
+                x: fixed(Xo2, 3),
+                y: fixed(Yo2, 3),
             });
         }
-
-        prevDownPoint = {
-            x: Xg2,
-            y: Yg2
-        };
-        prevUpperPoint = {
-            x: Xo2,
-            y: Yo2
-        }
     }
-
-    downPoints.push({
-        x: fixed(prevDownPoint.x, 3),
-        y: fixed(prevDownPoint.y, 3),
-    });
-
-    upperPoints.push({
-        x: fixed(prevUpperPoint.x, 3),
-        y: fixed(prevUpperPoint.y, 3),
-    });
 
     if (looped) {
         return upperPoints;
