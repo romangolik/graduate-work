@@ -1,0 +1,4 @@
+export const MODAL_TYPES = {
+    SET_PCB_SIZE: 'SET_PCB_SIZE',
+    ERROR_MESSAGE: 'ERROR_MESSAGE'
+};

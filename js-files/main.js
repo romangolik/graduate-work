@@ -1,5 +1,10 @@
-const DEFAULT_SCALE = 1;
-const IMAGE_SIZE_MULTIPLICITY = 10;
+import { openModal } from "./components/modals/modals.js";
+import { txtConvertor } from "./services/convertors/txt-convertor/txt-convertor.js";
+import { initScrollOnGrab } from "./services/scroll-on-grab/scroll-on-grab.js";
+import { drawPrimitivesByType } from "./services/draw-pcb/draw-pcb.js";
+import { showProgressBar, hideProgressBar } from "./components/progress-bar/progress-bar.js";
+
+import { MODAL_TYPES } from "./components/modals/_data/modal-types.js";
 
 const TAB_ITEM = document.querySelector('.tabs__item');
 const TABS_WRAPPER = document.querySelector('.tabs__wrapper');
@@ -11,18 +16,26 @@ const UPLOAD_AREA = document.getElementById('upload-area');
 const SELECTED_FILE_SPAN = document.getElementById('file-name');
 const SCALING_SELECT = document.getElementById('scaling-select');
 
-let svgImage;
-let pcbWidth;
-let pcbHeight;
+const DEFAULT_SCALE = 1;
+const IMAGE_SIZE_MULTIPLICITY = 10;
+
 let activeTab = 0;
-let pcbObjects = [];
+
+const mainTabData = {
+    image: null,
+    size: {
+        width: null,
+        height: null
+    },
+    pcbPrimitives: []
+};
 
 initScrollOnGrab(PCB_WRAPPER);
 
 FILE_INPUT.addEventListener('change', event => {
     SELECTED_FILE_SPAN.textContent = event.target.files[0].name;
-    if (svgImage) {
-        svgImage.remove();
+    if (mainTabData.image) {
+        mainTabData.image.remove();
     }
     if (new RegExp('(' + FILE_INPUT.accept.split(',')
         .join('|') + ')$')
@@ -33,15 +46,15 @@ FILE_INPUT.addEventListener('change', event => {
             .then(data => data.text())
             .then(data => {
                 try {
-                    pcbObjects = getPCBObjects(data);
+                    mainTabData.pcbPrimitives = txtConvertor(data);
 
-                    drawPCB(pcbObjects, IMAGE_SIZE_MULTIPLICITY)
+                    drawPrimitivesByType(mainTabData.pcbPrimitives, IMAGE_SIZE_MULTIPLICITY)
                         .then(data => {
                             if (data) {
-                                svgImage = data.image;
-                                pcbWidth = data.size.width;
-                                pcbHeight = data.size.height;
-                                PCB_WRAPPER.appendChild(svgImage);
+                                mainTabData.image = data.image;
+                                mainTabData.size.width = data.size.width;
+                                mainTabData.size.height = data.size.height;
+                                PCB_WRAPPER.appendChild(mainTabData.image);
                                 SCALING_SELECT.value = DEFAULT_SCALE;
                             } else {
                                 FILE_INPUT.value = null;
@@ -51,7 +64,7 @@ FILE_INPUT.addEventListener('change', event => {
                         });
                 } catch (message) {
                     hideProgressBar();
-                    openModal(MODALS.ERROR_MESSAGE, {
+                    openModal(MODAL_TYPES.ERROR_MESSAGE, {
                         heading: 'Помилка конвертування',
                         text: `Дані файлу є пошкодженими: "${message}"`
                     }).then();
@@ -60,7 +73,7 @@ FILE_INPUT.addEventListener('change', event => {
     } else {
         FILE_INPUT.value = null;
         SELECTED_FILE_SPAN.textContent = 'Файл не обрано';
-        openModal(MODALS.ERROR_MESSAGE, {
+        openModal(MODAL_TYPES.ERROR_MESSAGE, {
             heading: 'Помилка формату файлу',
             text: `Обраний файл не відповідає не підтримується додатком. 
             Списко файлів котрі підтримує додаток: ${FILE_INPUT.accept}`
@@ -82,9 +95,9 @@ UPLOAD_AREA.addEventListener('drop', () => {
 
 SCALING_SELECT.addEventListener('change', event => {
     const value = +event.target.value;
-    const { width, height } = svgImage.viewBox.baseVal;
-    svgImage.setAttribute('width', `${width * value * IMAGE_SIZE_MULTIPLICITY}`);
-    svgImage.setAttribute('height', `${height * value * IMAGE_SIZE_MULTIPLICITY}`);
+    const { width, height } = mainTabData.size;
+    mainTabData.image.setAttribute('width', `${width * value * IMAGE_SIZE_MULTIPLICITY}`);
+    mainTabData.image.setAttribute('height', `${height * value * IMAGE_SIZE_MULTIPLICITY}`);
 });
 
 HEADER_LINKS.forEach((link, index) => {
@@ -100,3 +113,7 @@ HEADER_LINKS.forEach((link, index) => {
 window.addEventListener('resize', () => {
     TABS_WRAPPER.style.transform = `translateX(${-TAB_ITEM.getBoundingClientRect().width * activeTab}px)`;
 });
+
+export {
+    mainTabData,
+}

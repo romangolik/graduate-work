@@ -1,4 +1,4 @@
-const initScrollOnGrab = (imageWrapper) => {
+export const initScrollOnGrab = (imageWrapper) => {
     let startX;
     let startY;
     let isDown;

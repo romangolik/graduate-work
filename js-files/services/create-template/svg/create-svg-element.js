@@ -1,4 +1,4 @@
-const createElement = (elementName, attributes) => {
+export const createElement = (elementName, attributes) => {
     const setAttribute = (element, attributes) => {
         Object
             .entries(attributes)

@@ -1,6 +1,6 @@
 let progressBar;
 
-const showProgressBar = () => {
+export const showProgressBar = () => {
     const getProgressBarTemplate = () => {
         const getProgressBarHtml = () => (`
               <div class="progress-bar">
@@ -16,6 +16,6 @@ const showProgressBar = () => {
     document.querySelector('body').appendChild(progressBar);
 }
 
-const hideProgressBar = () => {
+export const hideProgressBar = () => {
     progressBar.remove();
 }
