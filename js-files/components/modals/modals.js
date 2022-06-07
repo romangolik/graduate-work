@@ -1,51 +1,11 @@
-import { MODAL_TYPES } from "./_data/modal-types.js";
+import { getImageSizeModalTemplate } from './image-size-modal/image-size-modal.js';
+import { getErrorMessageModalTemplate } from './error-message-modal/error-message-modal.js';
 
-const getPCBSizeModalTemplate = (submitHandler) => {
-    const getPCBSizeModalHtml = () => {
-        return `<div class="modal-window">
-              <form>
-                  <label>
-                    <span>Height, mm</span>
-                    <input type="number" name="height" value="0">
-                  </label>
-                  <label>
-                    <span>Width, mm</span>
-                    <input type="number" name="width" value="0">
-                  </label>
-                  <button type="submit">Set</button>
-              </form>
-            </div>`
-    }
-
-    const html = new DOMParser().parseFromString(getPCBSizeModalHtml(), 'text/html').body;
-    const modalWindow = html.querySelector('.modal-window');
-
-    modalWindow
-        .querySelector('form')
-        .addEventListener('submit', event => {
-            event.preventDefault();
-            const formData = new FormData(event.target);
-            submitHandler(Object.fromEntries(formData));
-        });
-
-    return modalWindow;
-}
-
-const getErrorMessageTemplate = (resolve, data) => {
-    const getErrorMessageHtml = (data) => {
-        return `<div class="modal-window">
-              <h2>${data.heading}</h2>
-              <p>${data.text}</p>
-            </div>`
-    }
-
-    const html = new DOMParser().parseFromString(getErrorMessageHtml(data), 'text/html').body;
-    return html.querySelector('.modal-window');
-}
+import { MODAL_TYPES } from './_data/modal-types.js';
 
 const MODAL_TYPE_TEMPLATES = {
-    [MODAL_TYPES.SET_PCB_SIZE]: getPCBSizeModalTemplate,
-    [MODAL_TYPES.ERROR_MESSAGE]: getErrorMessageTemplate
+    [MODAL_TYPES.SET_PCB_SIZE]: getImageSizeModalTemplate,
+    [MODAL_TYPES.ERROR_MESSAGE]: getErrorMessageModalTemplate
 }
 
 export const openModal = (type, data, props) => {

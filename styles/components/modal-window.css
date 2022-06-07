@@ -33,17 +33,57 @@
 }
 
 .modal-window {
+  position: relative;
+
   display: block;
   margin: 0 auto;
-  padding: 40px;
+  padding: 30px;
   max-width: 400px;
 
   border-radius: 10px;
   background-color: white;
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.05);
 
   transform: translateY(100vh);
 
   animation: popUp .4s ease .2s forwards;
+}
+
+.modal-window__close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+
+  padding: 15px;
+
+  border: none;
+  color: black;
+  border-radius: 0 10px;
+  box-sizing: border-box;
+  background-color: transparent;
+
+  transition: 0.4s ease background-color;
+
+  cursor: pointer;
+}
+
+.modal-window__close-button:hover {
+  color: white;
+  background-color: #f20000;
+}
+
+.modal-window__close-button:hover .modal-window__close-button-icon {
+  opacity: 1;
+}
+
+.modal-window__close-button-icon {
+  display: block;
+  width: 15px;
+  height: 15px;
+
+  opacity: 0.5;
+  color: inherit;
 }
 
 .modal-window label {

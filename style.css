@@ -44,21 +44,6 @@
   width: 600px;
 }
 
-.focusing-options {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.focusing-options__image {
-  display: block;
-  height: 200px;
-}
-
-.focusing-options {
-  margin-bottom: 20px;
-}
-
 .options-data__heading {
   margin-bottom: 10px;
 
@@ -69,13 +54,14 @@
   width: 60px;
   padding: 5px;
 
+  text-align: center;
   box-sizing: border-box;
 }
 
 .options-data__table-option {
   width: 100px;
 
-  text-align: center;
+  text-align: left;
 }
 
 .options-data__table-label {

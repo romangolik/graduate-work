@@ -1,0 +1,21 @@
+.error-message-modal {
+  width: 300px;
+}
+
+.error-message-modal__icon {
+  display: block;
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 10px;
+}
+
+.error-message-modal__heading {
+  margin-bottom: 10px;
+
+  font-size: 24px;
+  text-align: center;
+}
+
+.error-message-modal__paragraph {
+  text-align: center;
+}

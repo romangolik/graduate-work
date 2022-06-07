@@ -59,31 +59,6 @@
       </div>
       <div class="tabs__item tcam-settings">
         <div class="tcam-settings__panel">
-          <div class="focusing-options">
-            <div class="options-data">
-              <h3 class="options-data__heading">Базові параметри фокусування</h3>
-              <table class="options-data__table">
-                <tr class="options-data__table-row">
-                  <td class="options-data__table-cell options-data__table-option">висота</td>
-                  <td class="options-data__table-cell options-data__table-label">А</td>
-                  <td class="options-data__table-cell options-data__table-value">0.1</td>
-                  <td class="options-data__table-cell options-data__table-units">мм</td>
-                </tr>
-                <tr class="options-data__table-row">
-                  <td class="options-data__table-cell options-data__table-option">ширина</td>
-                  <td class="options-data__table-cell options-data__table-label">В</td>
-                  <td class="options-data__table-cell options-data__table-value">0.15</td>
-                  <td class="options-data__table-cell options-data__table-units">мм</td>
-                </tr>
-                <tr class="options-data__table-row">
-                  <td class="options-data__table-cell options-data__table-option">нахил</td>
-                  <td class="options-data__table-cell options-data__table-label">α</td>
-                  <td class="options-data__table-cell options-data__table-value">1.5</td>
-                  <td class="options-data__table-cell options-data__table-units">град</td>
-                </tr>
-              </table>
-            </div>
-          </div>
           <div class="technical-options">
             <h3 class="technical-options__heading">Технологічні параметри UV-PCB-tech</h3>
             <div class="technical-options__filling-density">
@@ -95,6 +70,12 @@
               <div class="options-data">
                 <h4 class="options-data__heading">UV-лазер</h4>
                 <table class="options-data__table">
+                  <tr class="options-data__table-row">
+                    <td class="options-data__table-cell options-data__table-option">апертура</td>
+                    <td class="options-data__table-cell options-data__table-label">D<sub>a</sub></td>
+                    <td class="options-data__table-cell options-data__table-value">0.1</td>
+                    <td class="options-data__table-cell options-data__table-units">мм</td>
+                  </tr>
                   <tr class="options-data__table-row">
                     <td class="options-data__table-cell options-data__table-option">потужність</td>
                     <td class="options-data__table-cell options-data__table-label">W</td>
@@ -152,6 +133,12 @@
                     <td class="options-data__table-cell options-data__table-value">0</td>
                     <td class="options-data__table-cell options-data__table-units">мм</td>
                   </tr>
+                  <tr class="options-data__table-row">
+                    <td class="options-data__table-cell options-data__table-option">пауза</td>
+                    <td class="options-data__table-cell options-data__table-label">P</td>
+                    <td class="options-data__table-cell options-data__table-value">1</td>
+                    <td class="options-data__table-cell options-data__table-units">с</td>
+                  </tr>
                 </table>
               </div>
             </div>
@@ -199,5 +186,12 @@
 <script src="js-files/main.js" type="module"></script>
 <script src="js-files/tcam-settings.js" type="module"></script>
 <script src="js-files/generate-cnc-tab.js" type="module"></script>
+<svg style="display: none">
+  <defs id="symbols">
+    <symbol viewBox="0 0 24 24" fill="none" id="delete-icon">
+      <path d="M3 3L20.9997 20.9997M20.9997 3L3 20.9997" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+</svg>
 </body>
 </html>
