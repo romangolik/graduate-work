@@ -1,6 +1,7 @@
 @import "core/normalize.css";
 @import "abstracts/variables.css";
 @import "components/link.css";
+@import "components/select-field.css";
 @import "components/range-slider.css";
 @import "components/modal-window.css";
 @import "components/progress-bar.css";

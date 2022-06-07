@@ -27,22 +27,33 @@
 .tabs {
   padding-top: 30px;
 
-  overflow: hidden;
-}
-
-.tabs__wrapper {
-  display: flex;
-
-  transition: 0.4s ease;
+  box-sizing: border-box;
 }
 
 .tabs__item {
   flex: none;
   width: 100%;
+  display: none;
+
+  animation: showTab .4s;
+}
+
+.tabs__item_show {
+  display: flex;
+}
+
+@keyframes showTab {
+  0% {
+    transform: translateY(15px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .main-tab {
-  display: flex;
   justify-content: space-between;
 }
 
@@ -50,11 +61,15 @@
   width: 400px;
 }
 
+.main-tab__heading {
+  margin-bottom: 20px;
+}
+
 .upload-area {
   position: relative;
 
-  margin-top: 14px;
   padding: 30px 20px;
+  margin-bottom: 20px;
 
   cursor: pointer;
   text-align: center;
@@ -81,6 +96,10 @@
 
 .upload-area__input:hover {
   cursor: pointer;
+}
+
+.scaling-select-field {
+  width: 100%;
 }
 
 .tcam-settings__panel {

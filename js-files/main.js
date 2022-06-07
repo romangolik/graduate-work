@@ -6,8 +6,7 @@ import { showProgressBar, hideProgressBar } from "./components/progress-bar/prog
 
 import { MODAL_TYPES } from "./components/modals/_data/modal-types.js";
 
-const TAB_ITEM = document.querySelector('.tabs__item');
-const TABS_WRAPPER = document.querySelector('.tabs__wrapper');
+const TAB_ITEMS = document.querySelectorAll('.tabs__item');
 const HEADER_LINKS = document.querySelectorAll('.header__navigation-item');
 
 const FILE_INPUT = document.getElementById('file');
@@ -94,26 +93,90 @@ UPLOAD_AREA.addEventListener('drop', () => {
 });
 
 SCALING_SELECT.addEventListener('change', event => {
-    const value = +event.target.value;
-    const { width, height } = mainTabData.size;
-    mainTabData.image.setAttribute('width', `${width * value * IMAGE_SIZE_MULTIPLICITY}`);
-    mainTabData.image.setAttribute('height', `${height * value * IMAGE_SIZE_MULTIPLICITY}`);
+    if (mainTabData.image) {
+        const value = +event.target.value;
+        const { width, height } = mainTabData.size;
+        mainTabData.image.setAttribute('width', `${width * value * IMAGE_SIZE_MULTIPLICITY}`);
+        mainTabData.image.setAttribute('height', `${height * value * IMAGE_SIZE_MULTIPLICITY}`);
+    }
 });
 
 HEADER_LINKS.forEach((link, index) => {
     link.addEventListener('click', event => {
         event.preventDefault();
         activeTab = index;
-        TABS_WRAPPER.style.transform = `translateX(${-TAB_ITEM.getBoundingClientRect().width * activeTab}px)`;
         HEADER_LINKS.forEach(item => item.classList.remove('header__navigation-item_active'));
+        TAB_ITEMS.forEach(item => item.classList.remove('tabs__item_show'))
         link.classList.add('header__navigation-item_active');
+        TAB_ITEMS[ activeTab ].classList.add('tabs__item_show');
     });
-});
-
-window.addEventListener('resize', () => {
-    TABS_WRAPPER.style.transform = `translateX(${-TAB_ITEM.getBoundingClientRect().width * activeTab}px)`;
 });
 
 export {
     mainTabData,
 }
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const selectFields = document.querySelectorAll('.select-field');
+selectFields.forEach(selectField => {
+    let isOpen = false;
+    const select = selectField.querySelector('select');
+
+    const closeDropDown = () => {
+        isOpen = false;
+        document.querySelector('.select-field__options').remove();
+        document.querySelector('.select-field__overlay').remove();
+    }
+
+    selectField.addEventListener('change', () => {
+        if (isOpen) {
+            closeDropDown();
+        }
+    });
+
+    select.addEventListener('mousedown', event => {
+        if (window.innerWidth >= 420) {
+            event.preventDefault();
+
+            if (!isOpen) {
+                isOpen = true;
+                selectField.classList.add('select-field_active');
+
+                const dropDown = document.createElement('ul');
+                dropDown.className = 'select-field__options';
+
+                const overlay = document.createElement('div');
+                overlay.className = 'select-field__overlay';
+
+                [ ...select.children ].forEach(option => {
+                    const dropDownOption = document.createElement('li');
+                    dropDownOption.textContent = option.textContent;
+                    dropDownOption.className = 'select-field__option';
+
+                    if (option.selected) {
+                        dropDownOption.classList.add('select-field__option_selected');
+                    }
+
+                    dropDownOption.addEventListener('mousedown', (e) => {
+                        e.stopPropagation();
+                        select.value = option.value;
+                        selectField.value = option.value;
+                        select.dispatchEvent(new Event('change'));
+                        selectField.dispatchEvent(new Event('change'));
+                        dropDown.remove();
+                    });
+
+                    dropDown.appendChild(dropDownOption);
+                });
+
+                overlay.addEventListener('click', () => closeDropDown());
+
+                selectField.appendChild(overlay);
+                selectField.querySelector('.select-field__wrapper').appendChild(dropDown);
+            } else {
+                closeDropDown();
+            }
+        }
+    });
+});

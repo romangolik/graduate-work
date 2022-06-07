@@ -1,0 +1,125 @@
+.select-field {
+  display: inline-block;
+}
+
+.select-field__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 81;
+
+  width: 100vw;
+  height: 100vh;
+
+  cursor: inherit;
+}
+
+.select-field__label {
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+.select-field__wrapper {
+  position: relative;
+
+  width: 100%;
+}
+
+.select-field__wrapper::after {
+  content: '';
+
+  position: absolute;
+  top: calc(50% + 3px);
+  right: 10px;
+
+  display: inline-block;
+
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent;
+  border-top-color: black;
+
+  transform: translateY(-50%);
+}
+
+.select-field select {
+  width: 100%;
+  padding: 10px;
+
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  border-radius: 4px;
+}
+
+.select-field__options {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  z-index: 82;
+
+  margin: 0;
+  max-height: 200px;
+  width: calc(100% - 10px);
+
+  color: black;
+  overflow: auto;
+  list-style: none;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px -1px #0003, 0 4px 5px #00000024, 0 1px 10px #0000001f;
+
+  transform-origin: 50% 24px 0;
+
+  animation: 0.15s ease showOptions forwards;
+}
+
+.select-field__options::-webkit-scrollbar {
+  width: 8px;
+}
+
+.select-field__options::-webkit-scrollbar-track {
+  border-radius: 20px;
+  background: #F5F5F5;
+}
+
+.select-field__options::-webkit-scrollbar-thumb {
+  cursor: pointer;
+  border-radius: 15px;
+  background: rgba(5, 10, 12, 0.15);
+}
+
+.select-field__options::-webkit-scrollbar-thumb:hover {
+  background: rgba(5, 10, 12, 0.4);
+}
+
+.select-field__option {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 15px;
+
+  cursor: pointer;
+
+  transition: background 0.3s ease;
+}
+
+.select-field__option_selected {
+  color: #3f51b5;
+  background-color: rgba(0,0,0,.12);
+}
+
+.select-field__option:hover {
+  background-color: rgba(0,0,0,.04);
+}
+
+@keyframes showOptions {
+  0% {
+    opacity: 0;
+    transform: scaleY(0.4);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}

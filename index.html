@@ -31,20 +31,20 @@
 <main class="main">
   <div class="container">
     <div class="tabs">
-      <div class="tabs__wrapper">
-        <div class="tabs__item main-tab">
-          <div class="main-tab__file-management">
-            <h1>Material Setup</h1>
-            <div class="upload-area" id="upload-area">
-              <h3 class="upload-area__heading">+ Select CAD files</h3>
-              <p class="upload-area__description">
-                CAD formats: <span class="js-cad-filetype">*.txt</span>
-              </p>
-              <p>Вибраний файл: <span id="file-name">Файл не обрано</span></p>
-              <input class="upload-area__input" id="file" type="file" accept=".txt">
-            </div>
-            <div>
-              <label for="scaling-select">Масштабування зображення:</label>
+      <div class="tabs__item main-tab tabs__item_show">
+        <div class="main-tab__file-management">
+          <h1 class="main-tab__heading">Управління файлом</h1>
+          <div class="upload-area" id="upload-area">
+            <h3 class="upload-area__heading">+ Select CAD files</h3>
+            <p class="upload-area__description">
+              CAD formats: <span class="js-cad-filetype">*.txt</span>
+            </p>
+            <p>Вибраний файл: <span id="file-name">Файл не обрано</span></p>
+            <input class="upload-area__input" id="file" type="file" accept=".txt">
+          </div>
+          <div class="select-field scaling-select-field">
+            <label class="select-field__label" for="scaling-select">Масштабування зображення:</label>
+            <div class="select-field__wrapper">
               <select name="zoom" id="scaling-select">
                 <option value="0.5">50%</option>
                 <option value="0.75">75%</option>
@@ -54,138 +54,138 @@
               </select>
             </div>
           </div>
-          <div class="pcb-wrapper" id="pcb"></div>
         </div>
-        <div class="tabs__item tcam-settings">
-          <div class="tcam-settings__panel">
-            <div class="focusing-options">
+        <div class="pcb-wrapper" id="pcb"></div>
+      </div>
+      <div class="tabs__item tcam-settings">
+        <div class="tcam-settings__panel">
+          <div class="focusing-options">
+            <div class="options-data">
+              <h3 class="options-data__heading">Базові параметри фокусування</h3>
+              <table class="options-data__table">
+                <tr class="options-data__table-row">
+                  <td class="options-data__table-cell options-data__table-option">висота</td>
+                  <td class="options-data__table-cell options-data__table-label">А</td>
+                  <td class="options-data__table-cell options-data__table-value">0.1</td>
+                  <td class="options-data__table-cell options-data__table-units">мм</td>
+                </tr>
+                <tr class="options-data__table-row">
+                  <td class="options-data__table-cell options-data__table-option">ширина</td>
+                  <td class="options-data__table-cell options-data__table-label">В</td>
+                  <td class="options-data__table-cell options-data__table-value">0.15</td>
+                  <td class="options-data__table-cell options-data__table-units">мм</td>
+                </tr>
+                <tr class="options-data__table-row">
+                  <td class="options-data__table-cell options-data__table-option">нахил</td>
+                  <td class="options-data__table-cell options-data__table-label">α</td>
+                  <td class="options-data__table-cell options-data__table-value">1.5</td>
+                  <td class="options-data__table-cell options-data__table-units">град</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="technical-options">
+            <h3 class="technical-options__heading">Технологічні параметри UV-PCB-tech</h3>
+            <div class="technical-options__filling-density">
+              <p class="technical-options__filling-density-text">Щільність заповнення</p>
+              <input class="range-slider technical-options__filling-density-range" id="range-slider" type="range" min="0" max="80" step="1" value="100">
+              <input type="number" id="range-input" class="technical-options__filling-density-input">
+            </div>
+            <div class="technical-options__tables">
               <div class="options-data">
-                <h3 class="options-data__heading">Базові параметри фокусування</h3>
+                <h4 class="options-data__heading">UV-лазер</h4>
                 <table class="options-data__table">
                   <tr class="options-data__table-row">
-                    <td class="options-data__table-cell options-data__table-option">висота</td>
-                    <td class="options-data__table-cell options-data__table-label">А</td>
-                    <td class="options-data__table-cell options-data__table-value">0.1</td>
+                    <td class="options-data__table-cell options-data__table-option">потужність</td>
+                    <td class="options-data__table-cell options-data__table-label">W</td>
+                    <td class="options-data__table-cell options-data__table-value">0.5</td>
+                    <td class="options-data__table-cell options-data__table-units">Вт</td>
+                  </tr>
+                  <tr class="options-data__table-row">
+                    <td class="options-data__table-cell options-data__table-option">модуляція</td>
+                    <td class="options-data__table-cell options-data__table-label">–</td>
+                    <td class="options-data__table-cell options-data__table-value">імпульс</td>
+                    <td class="options-data__table-cell options-data__table-units"></td>
+                  </tr>
+                  <tr class="options-data__table-row">
+                    <td class="options-data__table-cell options-data__table-option">частота</td>
+                    <td class="options-data__table-cell options-data__table-label">f</td>
+                    <td class="options-data__table-cell options-data__table-value">22</td>
+                    <td class="options-data__table-cell options-data__table-units">кГц</td>
+                  </tr>
+                  <tr class="options-data__table-row">
+                    <td class="options-data__table-cell options-data__table-option">сквапність</td>
+                    <td class="options-data__table-cell options-data__table-label">q</td>
+                    <td class="options-data__table-cell options-data__table-value">5</td>
+                    <td class="options-data__table-cell options-data__table-units"></td>
+                  </tr>
+                </table>
+              </div>
+              <div class="options-data">
+                <h4 class="options-data__heading">ЧПУ</h4>
+                <table class="options-data__table">
+                  <tr class="options-data__table-row">
+                    <td class="options-data__table-cell options-data__table-option">швид.засвітки</td>
+                    <td class="options-data__table-cell options-data__table-label">S</td>
+                    <td class="options-data__table-cell options-data__table-value">
+                      <input type="number" id="lightingSpeed">
+                    </td>
+                    <td class="options-data__table-cell options-data__table-units">мм/хв</td>
+                  </tr>
+                  <tr class="options-data__table-row">
+                    <td class="options-data__table-cell options-data__table-option">швид.позиц.</td>
+                    <td class="options-data__table-cell options-data__table-label">Y</td>
+                    <td class="options-data__table-cell options-data__table-value">
+                      <input type="number" id="positionSpeed">
+                    </td>
+                    <td class="options-data__table-cell options-data__table-units">мм/хв</td>
+                  </tr>
+                  <tr class="options-data__table-row">
+                    <td class="options-data__table-cell options-data__table-option">зміщ.X0</td>
+                    <td class="options-data__table-cell options-data__table-label">X0</td>
+                    <td class="options-data__table-cell options-data__table-value">0</td>
                     <td class="options-data__table-cell options-data__table-units">мм</td>
                   </tr>
                   <tr class="options-data__table-row">
-                    <td class="options-data__table-cell options-data__table-option">ширина</td>
-                    <td class="options-data__table-cell options-data__table-label">В</td>
-                    <td class="options-data__table-cell options-data__table-value">0.15</td>
+                    <td class="options-data__table-cell options-data__table-option">зміщ.Y0</td>
+                    <td class="options-data__table-cell options-data__table-label">Y0</td>
+                    <td class="options-data__table-cell options-data__table-value">0</td>
                     <td class="options-data__table-cell options-data__table-units">мм</td>
-                  </tr>
-                  <tr class="options-data__table-row">
-                    <td class="options-data__table-cell options-data__table-option">нахил</td>
-                    <td class="options-data__table-cell options-data__table-label">α</td>
-                    <td class="options-data__table-cell options-data__table-value">1.5</td>
-                    <td class="options-data__table-cell options-data__table-units">град</td>
                   </tr>
                 </table>
               </div>
             </div>
-            <div class="technical-options">
-              <h3 class="technical-options__heading">Технологічні параметри UV-PCB-tech</h3>
-              <div class="technical-options__filling-density">
-                <p class="technical-options__filling-density-text">Щільність заповнення</p>
-                <input class="range-slider technical-options__filling-density-range" id="range-slider" type="range" min="0" max="80" step="1" value="100">
-                <input type="number" id="range-input" class="technical-options__filling-density-input">
-              </div>
-              <div class="technical-options__tables">
-                <div class="options-data">
-                  <h4 class="options-data__heading">UV-лазер</h4>
-                  <table class="options-data__table">
-                    <tr class="options-data__table-row">
-                      <td class="options-data__table-cell options-data__table-option">потужність</td>
-                      <td class="options-data__table-cell options-data__table-label">W</td>
-                      <td class="options-data__table-cell options-data__table-value">0.5</td>
-                      <td class="options-data__table-cell options-data__table-units">Вт</td>
-                    </tr>
-                    <tr class="options-data__table-row">
-                      <td class="options-data__table-cell options-data__table-option">модуляція</td>
-                      <td class="options-data__table-cell options-data__table-label">–</td>
-                      <td class="options-data__table-cell options-data__table-value">імпульс</td>
-                      <td class="options-data__table-cell options-data__table-units"></td>
-                    </tr>
-                    <tr class="options-data__table-row">
-                      <td class="options-data__table-cell options-data__table-option">частота</td>
-                      <td class="options-data__table-cell options-data__table-label">f</td>
-                      <td class="options-data__table-cell options-data__table-value">22</td>
-                      <td class="options-data__table-cell options-data__table-units">кГц</td>
-                    </tr>
-                    <tr class="options-data__table-row">
-                      <td class="options-data__table-cell options-data__table-option">сквапність</td>
-                      <td class="options-data__table-cell options-data__table-label">q</td>
-                      <td class="options-data__table-cell options-data__table-value">5</td>
-                      <td class="options-data__table-cell options-data__table-units"></td>
-                    </tr>
-                  </table>
-                </div>
-                <div class="options-data">
-                  <h4 class="options-data__heading">ЧПУ</h4>
-                  <table class="options-data__table">
-                    <tr class="options-data__table-row">
-                      <td class="options-data__table-cell options-data__table-option">швид.засвітки</td>
-                      <td class="options-data__table-cell options-data__table-label">S</td>
-                      <td class="options-data__table-cell options-data__table-value">
-                        <input type="number" id="lightingSpeed">
-                      </td>
-                      <td class="options-data__table-cell options-data__table-units">мм/хв</td>
-                    </tr>
-                    <tr class="options-data__table-row">
-                      <td class="options-data__table-cell options-data__table-option">швид.позиц.</td>
-                      <td class="options-data__table-cell options-data__table-label">Y</td>
-                      <td class="options-data__table-cell options-data__table-value">
-                        <input type="number" id="positionSpeed">
-                      </td>
-                      <td class="options-data__table-cell options-data__table-units">мм/хв</td>
-                    </tr>
-                    <tr class="options-data__table-row">
-                      <td class="options-data__table-cell options-data__table-option">зміщ.X0</td>
-                      <td class="options-data__table-cell options-data__table-label">X0</td>
-                      <td class="options-data__table-cell options-data__table-value">0</td>
-                      <td class="options-data__table-cell options-data__table-units">мм</td>
-                    </tr>
-                    <tr class="options-data__table-row">
-                      <td class="options-data__table-cell options-data__table-option">зміщ.Y0</td>
-                      <td class="options-data__table-cell options-data__table-label">Y0</td>
-                      <td class="options-data__table-cell options-data__table-value">0</td>
-                      <td class="options-data__table-cell options-data__table-units">мм</td>
-                    </tr>
-                  </table>
-                </div>
-              </div>
-              <div class="technical-options__buttons">
-                <button class="technical-options__button">Зберегти налаштування</button>
-                <button class="technical-options__button">Завантажити режими</button>
-              </div>
+            <div class="technical-options__buttons">
+              <button class="technical-options__button">Зберегти налаштування</button>
+              <button class="technical-options__button">Завантажити режими</button>
             </div>
           </div>
         </div>
-        <div class="tabs__item generate-cnc-tab">
+      </div>
+      <div class="tabs__item generate-cnc-tab">
+        <div>
+          <select name="layer" id="psb-layer">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3" selected>3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+          </select>
+          <button id="generateCNC">Generate</button>
+          <button id="download">Download</button>
           <div>
-            <select name="layer" id="psb-layer">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3" selected>3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
+            <label for="scaling-select">Масштабування зображення:</label>
+            <select name="zoom" id="gcode-scaling-select">
+              <option value="0.5">50%</option>
+              <option value="0.75">75%</option>
+              <option value="1" selected>100%</option>
+              <option value="2">200%</option>
+              <option value="3">300%</option>
             </select>
-            <button id="generateCNC">Generate</button>
-            <button id="download">Download</button>
-            <div>
-              <label for="scaling-select">Масштабування зображення:</label>
-              <select name="zoom" id="gcode-scaling-select">
-                <option value="0.5">50%</option>
-                <option value="0.75">75%</option>
-                <option value="1" selected>100%</option>
-                <option value="2">200%</option>
-                <option value="3">300%</option>
-              </select>
-            </div>
           </div>
-          <div class="pcb-wrapper" id="gcode-pcb"></div>
         </div>
+        <div class="pcb-wrapper" id="gcode-pcb"></div>
       </div>
     </div>
   </div>
