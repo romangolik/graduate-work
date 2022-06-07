@@ -1,22 +1,46 @@
 const getImageSizeModalHtml = () => {
-    return `<div class="modal-window">
-              <div class="modal-window__inner">
+    return `<div class="modal-window image-size-modal">
+              <button
+                  class="modal-window__close-button">
+                  <svg class="modal-window__close-button-icon"><use xlink:href="#delete-icon"></use></svg>
+              </button>
+              <div class="modal-window__content">
                   <form>
-                      <label>
-                        <span>Height, mm</span>
-                        <input type="number" name="height" value="0">
-                      </label>
-                      <label>
-                        <span>Width, mm</span>
-                        <input type="number" name="width" value="0">
-                      </label>
-                      <button type="submit">Set</button>
+                      <div class="input-field">
+                          <label
+                            for="name"
+                            class="input-field__label">
+                            Height, mm
+                          </label>
+                          <div class="input-field__input-wrapper">
+                            <input
+                              type="number"
+                              name="height"
+                              class="input-field__input"
+                              required>
+                          </div>
+                      </div>
+                      <div class="input-field">
+                          <label
+                            for="name"
+                            class="input-field__label">
+                            Width, mm
+                          </label>
+                          <div class="input-field__input-wrapper">
+                            <input
+                              type="number"
+                              name="width"
+                              class="input-field__input"
+                              required>
+                          </div>
+                      </div>
+                      <button type="submit" class="image-size-modal__submit-button">Підтвердити</button>
                   </form>
               </div>
             </div>`
 }
 
-export const getImageSizeModalTemplate = submitHandler => {
+export const getImageSizeModalTemplate = resolve => {
     const html = new DOMParser().parseFromString(getImageSizeModalHtml(), 'text/html').body;
     const modalWindow = html.querySelector('.modal-window');
 
@@ -25,8 +49,11 @@ export const getImageSizeModalTemplate = submitHandler => {
         .addEventListener('submit', event => {
             event.preventDefault();
             const formData = new FormData(event.target);
-            submitHandler(Object.fromEntries(formData));
+            resolve(Object.fromEntries(formData));
         });
+
+    html.querySelector('.modal-window__close-button')
+        .addEventListener('click', () => resolve(null));
 
     return modalWindow;
 }

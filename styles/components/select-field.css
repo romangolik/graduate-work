@@ -52,6 +52,12 @@
   border-radius: 4px;
 }
 
+select:hover,
+select:focus {
+  border-color: var(--dark-blue);
+  box-shadow: inset 0 0 0 1px var(--dark-blue);
+}
+
 .select-field__options {
   position: absolute;
   left: 5px;

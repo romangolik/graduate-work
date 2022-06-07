@@ -38,7 +38,6 @@
   display: block;
   margin: 0 auto;
   padding: 30px;
-  max-width: 400px;
 
   border-radius: 10px;
   background-color: white;
@@ -84,15 +83,4 @@
 
   opacity: 0.5;
   color: inherit;
-}
-
-.modal-window label {
-  display: inline-block;
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-.modal-window input {
-  display: inline-block;
-  width: 100%;
 }

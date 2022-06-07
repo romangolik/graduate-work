@@ -1,0 +1,31 @@
+.image-size-modal {
+  width: 400px;
+  padding-top: 40px;
+}
+
+.image-size-modal .input-field {
+  margin-bottom: 10px;
+}
+
+.image-size-modal .input-field:last-of-type {
+  margin-bottom: 20px;
+}
+
+.image-size-modal__submit-button {
+  display: flex;
+  padding: 10px 20px;
+  margin-left: auto;
+
+  font-size: 18px;
+  line-height: 22px;
+
+  color: white;
+  border-radius: 10px;
+  box-sizing: border-box;
+  background-color: var(--blue);
+
+  outline: none;
+  border: none;
+
+  cursor: pointer;
+}
