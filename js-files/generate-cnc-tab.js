@@ -7,6 +7,7 @@ import { showProgressBar, hideProgressBar } from "./components/progress-bar/prog
 import { mainTabData } from "./main.js";
 import { MODAL_TYPES } from "./components/modals/_data/modal-types.js";
 
+const GCODE_VIEWER = document.getElementById('gcode-viewer');
 const GCODE_PCB_WRAPPER = document.getElementById('gcode-pcb');
 const GCODE_SCALING_SELECT = document.getElementById('gcode-scaling-select');
 
@@ -38,6 +39,7 @@ document.getElementById('generateCNC')
                         generateCNCTabData.image.remove();
                     }
                     generateCNCTabData.cncFile = data;
+                    GCODE_VIEWER.textContent = data;
                     drawPrimitivesByGCode(generateCNCTabData.cncFile, mainTabData.size, IMAGE_SIZE_MULTIPLICITY)
                         .then(data => {
                             generateCNCTabData.image = data;

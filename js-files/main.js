@@ -32,7 +32,10 @@ const mainTabData = {
 initScrollOnGrab(PCB_WRAPPER);
 
 FILE_INPUT.addEventListener('change', event => {
-    SELECTED_FILE_SPAN.textContent = event.target.files[0].name;
+    const fileName = event.target.files[0].name;
+    if (fileName) {
+        SELECTED_FILE_SPAN.textContent = fileName;
+    }
     if (mainTabData.image) {
         mainTabData.image.remove();
     }
