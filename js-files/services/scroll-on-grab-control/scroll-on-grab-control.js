@@ -1,4 +1,4 @@
-export const initScrollOnGrab = (imageWrapper) => {
+export const initScrollOnGrabControl = (imageWrapper) => {
     let startX;
     let startY;
     let isDown;
@@ -49,6 +49,5 @@ export const initScrollOnGrab = (imageWrapper) => {
 
     imageWrapper.addEventListener('touchstart', (e) => mouseIsDown(e, false));
     imageWrapper.addEventListener('touchend', () => mouseUp());
-    imageWrapper.addEventListener('touchcancel', (e) => mouseLeave(e));
     imageWrapper.addEventListener('touchmove', (e) => mouseMove(e, false));
 }

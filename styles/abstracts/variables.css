@@ -17,13 +17,13 @@
 }
 
 @media screen and (max-width: 1025px) {
-  .main {
+  :root {
     --header-height: 90px;
   }
 }
 
 @media screen and (max-width: 481px) {
-  .main {
+  :root {
     --header-height: 70px;
   }
 }

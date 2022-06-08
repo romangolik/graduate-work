@@ -13,7 +13,15 @@
       alt="logo"
       class="header__logo"
       src="assets/icons/logo.svg">
-    <nav class="header__navigation">
+    <button
+      id="burger"
+      class="control-button header__burger">
+        <span class="header__burger-inner">
+          <span class="header__burger-line"></span>
+          <span class="header__burger-line"></span>
+        </span>
+    </button>
+    <nav id="header-navigation" class="header__navigation">
       <a href="#"
          class="link link_secondary link_uppercase header__navigation-item header__navigation-item_active">
         Головна
@@ -29,6 +37,7 @@
     </nav>
   </div>
 </header>
+<div class="overlay"></div>
 <main class="main">
   <div class="container">
     <div class="tabs">
@@ -40,7 +49,7 @@
             <p class="upload-area__description">
               CAD formats: <span class="js-cad-filetype">*.txt</span>
             </p>
-            <p>Вибраний файл: <span id="file-name">Файл не обрано</span></p>
+            <p>Вибраний файл: <span class="upload-area__file-name">Файл не обрано</span></p>
             <input class="upload-area__input" id="file" type="file" accept=".txt">
           </div>
           <div class="select-field scaling-select-field">
@@ -64,7 +73,8 @@
             <h3 class="technical-options__heading">Технологічні параметри UV-PCB-tech</h3>
             <div class="technical-options__filling-density">
               <p class="technical-options__filling-density-text">Щільність заповнення</p>
-              <input class="range-slider technical-options__filling-density-range" id="range-slider" type="range" min="0" max="80" step="1" value="100">
+              <input class="range-slider technical-options__filling-density-range" id="range-slider" type="range"
+                     min="0" max="80" step="1" value="100">
               <input type="number" id="range-input" class="technical-options__filling-density-input">
             </div>
             <div class="technical-options__tables">
