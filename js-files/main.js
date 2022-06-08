@@ -86,7 +86,6 @@ SCALING_SELECT.addEventListener('change', event => {
     }
 });
 
-
 export {
     mainTabData,
 }

@@ -1,7 +1,7 @@
 import { openModal } from "./components/modals/modals.js";
 import { generateGCode } from "./services/gcode-generator/gcode-generator.js";
-import { initScrollOnGrabControl } from "js-files/services/scroll-on-grab-control/scroll-on-grab-control.js";
 import { drawPrimitivesByGCode } from "./services/draw-pcb/draw-pcb.js";
+import { initScrollOnGrabControl } from "./services/scroll-on-grab-control/scroll-on-grab-control.js";
 import { showProgressBar, hideProgressBar } from "./components/progress-bar/progress-bar.js";
 
 import { mainTabData } from "./main.js";
