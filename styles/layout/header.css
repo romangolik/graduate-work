@@ -35,9 +35,6 @@
   margin-right: 0;
 }
 
-
-
-
 .header__burger {
   display: none;
   align-items: center;
@@ -101,6 +98,28 @@
   bottom: 0;
 }
 
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 79;
+
+  width: 100vw;
+  height: 100vh;
+
+  opacity: 0;
+  visibility: hidden;
+  background-color: rgba(0, 0, 0, 0.3);
+
+  transition-delay: 0.2s;
+}
+
+.overlay_visible {
+  opacity: 1;
+  visibility: visible;
+
+  transition-delay: 0s;
+}
 
 @media screen and (max-width: 769px) {
   .header__navigation {
@@ -118,7 +137,7 @@
 
     transform: translateX(0);
 
-    transition: 0.5s ease transform;
+    transition: 0.4s ease transform;
   }
 
   .header__navigation-item {
