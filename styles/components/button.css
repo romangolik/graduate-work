@@ -1,0 +1,25 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 20px;
+
+  font-size: 18px;
+  line-height: 22px;
+
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.button_basic {
+  color: white;
+  background-color: var(--blue);
+}
+
+.button_basic:hover {
+  background-color: #1349d5;
+}

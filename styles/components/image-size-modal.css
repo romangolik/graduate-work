@@ -12,20 +12,5 @@
 }
 
 .image-size-modal__submit-button {
-  display: flex;
-  padding: 10px 20px;
   margin-left: auto;
-
-  font-size: 18px;
-  line-height: 22px;
-
-  color: white;
-  border-radius: 10px;
-  box-sizing: border-box;
-  background-color: var(--blue);
-
-  outline: none;
-  border: none;
-
-  cursor: pointer;
 }

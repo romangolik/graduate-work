@@ -5,11 +5,14 @@ export const initScrollOnGrab = (imageWrapper) => {
     let scrollTop;
     let scrollLeft;
 
-    const mouseIsDown = (event) => {
+    const mouseIsDown = (event, mouseEvent) => {
+        const pageY = mouseEvent ? event.pageY : event.touches[0].pageY;
+        const pageX = mouseEvent ? event.pageX : event.touches[0].pageX;
+
         isDown = true;
         imageWrapper.style.cursor = 'grabbing';
-        startY = event.pageY - imageWrapper.offsetTop;
-        startX = event.pageX - imageWrapper.offsetLeft;
+        startY = pageY - imageWrapper.offsetTop;
+        startX = pageX - imageWrapper.offsetLeft;
         scrollTop = imageWrapper.scrollTop;
         scrollLeft = imageWrapper.scrollLeft;
     }
@@ -24,11 +27,14 @@ export const initScrollOnGrab = (imageWrapper) => {
         imageWrapper.style.cursor = 'grab';
     }
 
-    const mouseMove = (event) => {
+    const mouseMove = (event, mouseEvent) => {
         if (isDown) {
             event.preventDefault();
-            const y = event.pageY - imageWrapper.offsetTop;
-            const x = event.pageX - imageWrapper.offsetLeft;
+            const pageY = mouseEvent ? event.pageY : event.touches[0].pageY;
+            const pageX = mouseEvent ? event.pageX : event.touches[0].pageX;
+
+            const y = pageY - imageWrapper.offsetTop;
+            const x = pageX - imageWrapper.offsetLeft;
             const walkY = y - startY;
             const walkX = x - startX;
             imageWrapper.scrollTop = scrollTop - walkY;
@@ -36,8 +42,13 @@ export const initScrollOnGrab = (imageWrapper) => {
         }
     }
 
-    imageWrapper.addEventListener("mousedown", (e) => mouseIsDown(e));
-    imageWrapper.addEventListener("mouseup", () => mouseUp());
-    imageWrapper.addEventListener("mouseleave", () => mouseLeave());
-    imageWrapper.addEventListener("mousemove", (e) => mouseMove(e));
+    imageWrapper.addEventListener('mousedown', (e) => mouseIsDown(e, true));
+    imageWrapper.addEventListener('mouseup', () => mouseUp());
+    imageWrapper.addEventListener('mouseleave', () => mouseLeave());
+    imageWrapper.addEventListener('mousemove', (e) => mouseMove(e, true));
+
+    imageWrapper.addEventListener('touchstart', (e) => mouseIsDown(e, false));
+    imageWrapper.addEventListener('touchend', () => mouseUp());
+    imageWrapper.addEventListener('touchcancel', (e) => mouseLeave(e));
+    imageWrapper.addEventListener('touchmove', (e) => mouseMove(e, false));
 }

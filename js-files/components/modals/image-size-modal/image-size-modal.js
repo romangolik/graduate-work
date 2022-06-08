@@ -34,7 +34,11 @@ const getImageSizeModalHtml = () => {
                               required>
                           </div>
                       </div>
-                      <button type="submit" class="image-size-modal__submit-button">Підтвердити</button>
+                      <button 
+                          type="submit" 
+                          class="button button_basic image-size-modal__submit-button">
+                          Підтвердити
+                      </button>
                   </form>
               </div>
             </div>`
