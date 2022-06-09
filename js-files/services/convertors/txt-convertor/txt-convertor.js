@@ -1,4 +1,4 @@
-import { PCB_PRIMITIVES } from "../_data/pcb-primitives.js";
+import { PCB_PRIMITIVES } from '../_data/pcb-primitives.js';
 
 const setLayer = (obj, value) => {
     const parsedValue = +value;
@@ -120,9 +120,12 @@ const getPCBObject = (string, index) => {
 };
 
 export const txtConvertor = data => {
-    return data
-        .replaceAll(/(\r\n|\n|\r)/gm, "")
-        .split(';')
-        .filter(item => item)
-        .map((item, index) => getPCBObject(item, index));
+    return new Promise(resolve => {
+        resolve(data
+            .replaceAll(/(\r\n|\n|\r)/gm, '')
+            .split(';')
+            .filter(item => item)
+            .map((item, index) => getPCBObject(item, index))
+        );
+    });
 }

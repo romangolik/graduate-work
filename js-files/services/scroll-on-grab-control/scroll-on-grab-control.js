@@ -1,53 +1,50 @@
 export const initScrollOnGrabControl = (imageWrapper) => {
-    let startX;
-    let startY;
-    let isDown;
-    let scrollTop;
-    let scrollLeft;
+    let isMouseEvent;
+    let pos = { top: 0, left: 0, x: 0, y: 0 };
 
-    const mouseIsDown = (event, mouseEvent) => {
-        const pageY = mouseEvent ? event.pageY : event.touches[0].pageY;
-        const pageX = mouseEvent ? event.pageX : event.touches[0].pageX;
-
-        isDown = true;
+    const mouseDownHandler = event => {
         imageWrapper.style.cursor = 'grabbing';
-        startY = pageY - imageWrapper.offsetTop;
-        startX = pageX - imageWrapper.offsetLeft;
-        scrollTop = imageWrapper.scrollTop;
-        scrollLeft = imageWrapper.scrollLeft;
-    }
+        imageWrapper.style.userSelect = 'none';
 
-    const mouseUp = () => {
-        isDown = false;
-        imageWrapper.style.cursor = 'grab';
-    }
+        isMouseEvent = event instanceof MouseEvent;
 
-    const mouseLeave = () => {
-        isDown = false;
-        imageWrapper.style.cursor = 'grab';
-    }
+        pos = {
+            left: imageWrapper.scrollLeft,
+            top: imageWrapper.scrollTop,
+            x: isMouseEvent ? event.clientX : event.touches[0].clientX,
+            y: isMouseEvent ? event.clientY : event.touches[0].clientY,
+        };
 
-    const mouseMove = (event, mouseEvent) => {
-        if (isDown) {
-            event.preventDefault();
-            const pageY = mouseEvent ? event.pageY : event.touches[0].pageY;
-            const pageX = mouseEvent ? event.pageX : event.touches[0].pageX;
-
-            const y = pageY - imageWrapper.offsetTop;
-            const x = pageX - imageWrapper.offsetLeft;
-            const walkY = y - startY;
-            const walkX = x - startX;
-            imageWrapper.scrollTop = scrollTop - walkY;
-            imageWrapper.scrollLeft = scrollLeft - walkX;
+        if (isMouseEvent) {
+            document.addEventListener('mousemove', mouseMoveHandler);
+            document.addEventListener('mouseup', mouseUpHandler);
+        } else {
+            document.addEventListener('touchmove', mouseMoveHandler);
+            document.addEventListener('touchend', mouseUpHandler);
         }
-    }
+    };
 
-    imageWrapper.addEventListener('mousedown', (e) => mouseIsDown(e, true));
-    imageWrapper.addEventListener('mouseup', () => mouseUp());
-    imageWrapper.addEventListener('mouseleave', () => mouseLeave());
-    imageWrapper.addEventListener('mousemove', (e) => mouseMove(e, true));
+    const mouseMoveHandler = event => {
+        const dx = (isMouseEvent ? event.clientX : event.touches[0].clientX) - pos.x;
+        const dy = (isMouseEvent ? event.clientY : event.touches[0].clientY) - pos.y;
 
-    imageWrapper.addEventListener('touchstart', (e) => mouseIsDown(e, false));
-    imageWrapper.addEventListener('touchend', () => mouseUp());
-    imageWrapper.addEventListener('touchmove', (e) => mouseMove(e, false));
+        imageWrapper.scrollTop = pos.top - dy;
+        imageWrapper.scrollLeft = pos.left - dx;
+    };
+
+    const mouseUpHandler = () => {
+        if (isMouseEvent) {
+            document.removeEventListener('mousemove', mouseMoveHandler);
+            document.removeEventListener('mouseup', mouseUpHandler);
+        } else {
+            document.removeEventListener('touchmove', mouseMoveHandler);
+            document.removeEventListener('touchend', mouseUpHandler);
+        }
+
+        imageWrapper.style.cursor = 'grab';
+        imageWrapper.style.removeProperty('user-select');
+    };
+
+    imageWrapper.addEventListener('mousedown', mouseDownHandler);
+    imageWrapper.addEventListener('touchstart', mouseDownHandler);
 }

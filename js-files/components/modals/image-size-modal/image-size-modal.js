@@ -16,6 +16,7 @@ const getImageSizeModalHtml = () => {
                             <input
                               type="number"
                               name="height"
+                              value="0"
                               class="input-field__input"
                               required>
                           </div>
@@ -30,6 +31,7 @@ const getImageSizeModalHtml = () => {
                             <input
                               type="number"
                               name="width"
+                              value="0"
                               class="input-field__input"
                               required>
                           </div>

@@ -247,8 +247,8 @@ export const drawPrimitivesByType = (pcbObjects, imageSizeMultiplicity) => {
             resolve({
                 image: SVG,
                 size: {
-                    height,
-                    width
+                    height: +height.toFixed(3),
+                    width: +width.toFixed(3)
                 }
             });
         } else {

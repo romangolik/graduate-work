@@ -44,6 +44,20 @@ body {
 
 .scaling-select-field {
   width: 100%;
+  margin-bottom: 20px;
+}
+
+.pcb-information p {
+  margin-bottom: 5px;
+}
+
+.pcb-information h2 {
+  margin-bottom: 10px;
+}
+
+.pcb-information h4 {
+  margin-bottom: 10px;
+  margin-top: 20px;
 }
 
 .tcam-settings__panel {
