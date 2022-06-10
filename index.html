@@ -35,38 +35,42 @@
     </a>
   </nav>
 </aside>
-<main class="main">
+<main>
   <div class="tabs">
     <div class="tabs__item main-tab tabs__item_show">
       <div class="main-tab__file-management">
         <h1 class="main-tab__heading">Управління файлом</h1>
-        <div class="upload-area" id="upload-area">
-          <h3 class="upload-area__heading">+ Select CAD files</h3>
-          <p class="upload-area__description">
-            CAD formats: <span class="js-cad-filetype">*.txt</span>
-          </p>
-          <p>Вибраний файл: <span class="upload-area__file-name">Файл не обрано</span></p>
-          <input class="upload-area__input" id="file" type="file" accept=".txt">
-        </div>
-        <div class="select-field scaling-select-field">
-          <label class="select-field__label" for="scaling-select">Масштаб зображення:</label>
-          <div class="select-field__wrapper">
-            <select name="zoom" id="scaling-select">
-              <option value="0.5">50%</option>
-              <option value="0.75">75%</option>
-              <option value="1" selected>100%</option>
-              <option value="2">200%</option>
-              <option value="3">300%</option>
-            </select>
+        <div class="main-tab__file-management-content">
+          <div class="main-tab__image-control">
+            <div class="upload-area" id="upload-area">
+              <h3 class="upload-area__heading">+ Select CAD files</h3>
+              <p class="upload-area__description">
+                CAD formats: <span class="js-cad-filetype">*.txt</span>
+              </p>
+              <p>Вибраний файл: <span class="upload-area__file-name">Файл не обрано</span></p>
+              <input class="upload-area__input" id="file" type="file" accept=".txt">
+            </div>
+            <div class="select-field scaling-select-field">
+              <label class="select-field__label" for="scaling-select">Масштаб зображення:</label>
+              <div class="select-field__wrapper">
+                <select name="zoom" id="scaling-select">
+                  <option value="0.5">50%</option>
+                  <option value="0.75">75%</option>
+                  <option value="1" selected>100%</option>
+                  <option value="2">200%</option>
+                  <option value="3">300%</option>
+                </select>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="pcb-information" id="pcb-information">
-          <h2>Інформація про плату</h2>
-          <p>Загальна кількість PCB-об'єктів: 0</p>
-          <h4>Плата містить такі шари:</h4>
-          <p>Файл не обрано</p>
-          <h4>Розмір плати:</h4>
-          <p>Файл не обрано</p>
+          <div class="main-tab__pcb-information" id="pcb-information">
+            <h2>Інформація про плату</h2>
+            <p>Загальна кількість PCB-об'єктів: 0</p>
+            <h4>Плата містить такі шари:</h4>
+            <p>Файл не обрано</p>
+            <h4>Розмір плати:</h4>
+            <p>Файл не обрано</p>
+          </div>
         </div>
       </div>
       <div class="pcb-wrapper" id="pcb"></div>

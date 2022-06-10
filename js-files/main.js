@@ -78,18 +78,18 @@ const getStatisticHtml = data => {
     if (data) {
         return `
             <h2>Інформація про плату</h2>
-            <p>Загальна кількість PCB-об'єктів: ${data.primitivesCount} шт.</p>
+            <p>Загальна кількість PCB-об'єктів: <b>${data.primitivesCount} шт.</b></p>
             <h4>Плата містить такі шари:</h4>
             ${Object.keys(data.layers)
-                .map(layer => `<p>Шар "${LAYER_NAMES[layer]}" (Містить PCB-об'єктів: ${data.layers[layer]} шт.)</p>`).join('')}  
+                .map(layer => `<p>Шар "${LAYER_NAMES[layer]}" (Містить PCB-об'єктів: <b>${data.layers[layer]} шт.</b>)</p>`).join('')}  
             <h4>Розмір плати:</h4>  
-            <p>Висота: ${data.size.height} мм</p>
-            <p>Ширина: ${data.size.width} мм</p>
+            <p>Висота: <b>${data.size.height} мм</b></p>
+            <p>Ширина: <b>${data.size.width} мм</b></p>
         `
     } else {
         return `
             <h2>Інформація про плату</h2>
-            <p>Загальна кількість PCB-об'єктів: None</p>
+            <p>Загальна кількість PCB-об'єктів: 0</p>
             <h4>Плата містить такі шари:</h4>
             <p>Файл не обрано</p> 
             <h4>Розмір плати:</h4>  
