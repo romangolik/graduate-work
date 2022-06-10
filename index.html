@@ -46,41 +46,43 @@
 <main>
   <div class="tabs">
     <div class="tabs__item main-tab tabs__item_show">
-      <div class="main-tab__left-part main-tab__file-management">
-        <h2 class="tabs__item-heading">Управління файлом</h2>
-        <div class="main-tab__file-management-content">
-          <div class="upload-area main-tab__upload-area" id="upload-area">
-            <h3 class="upload-area__heading">+ Select CAD files</h3>
-            <p class="upload-area__description">
-              CAD formats: <span class="js-cad-filetype">*.txt</span>
-            </p>
-            <p>Вибраний файл: <span class="upload-area__file-name">Файл не обрано</span></p>
-            <input class="upload-area__input" id="file" type="file" accept=".txt">
-          </div>
-          <div class="main-tab__pcb-information" id="pcb-information">
-            <h3>Інформація про плату</h3>
-            <p>Загальна кількість PCB-об'єктів: 0</p>
-            <h4>Плата містить такі шари:</h4>
-            <p>Файл не обрано</p>
-            <h4>Розмір плати:</h4>
-            <p>Файл не обрано</p>
-          </div>
-        </div>
-      </div>
-      <div class="main-tab__right-part">
-        <div class="select-field scaling-select-field">
-          <label class="select-field__label" for="scaling-select">Масштаб зображення:</label>
-          <div class="select-field__wrapper">
-            <select name="zoom" id="scaling-select">
-              <option value="0.5">50%</option>
-              <option value="0.75">75%</option>
-              <option value="1" selected>100%</option>
-              <option value="2">200%</option>
-              <option value="3">300%</option>
-            </select>
+      <h2 class="tabs__item-heading">Управління файлом</h2>
+      <div class="tabs__item-content">
+        <div class="main-tab__left-part main-tab__file-management">
+          <div class="main-tab__file-management-content">
+            <div class="upload-area main-tab__upload-area" id="upload-area">
+              <h3 class="upload-area__heading">+ Select CAD files</h3>
+              <p class="upload-area__description">
+                CAD formats: <span class="js-cad-filetype">*.txt</span>
+              </p>
+              <p>Вибраний файл: <span class="upload-area__file-name">Файл не обрано</span></p>
+              <input class="upload-area__input" id="file" type="file" accept=".txt">
+            </div>
+            <div class="main-tab__pcb-information" id="pcb-information">
+              <h3>Інформація про плату</h3>
+              <p>Загальна кількість PCB-об'єктів: 0</p>
+              <h4>Плата містить такі шари:</h4>
+              <p>Файл не обрано</p>
+              <h4>Розмір плати:</h4>
+              <p>Файл не обрано</p>
+            </div>
           </div>
         </div>
-        <div class="pcb-wrapper" id="pcb"></div>
+        <div class="main-tab__right-part">
+          <div class="select-field scaling-select-field">
+            <label class="select-field__label" for="scaling-select">Масштаб зображення:</label>
+            <div class="select-field__wrapper">
+              <select name="zoom" id="scaling-select">
+                <option value="0.5">50%</option>
+                <option value="0.75">75%</option>
+                <option value="1" selected>100%</option>
+                <option value="2">200%</option>
+                <option value="3">300%</option>
+              </select>
+            </div>
+          </div>
+          <div class="pcb-wrapper" id="pcb"></div>
+        </div>
       </div>
     </div>
     <div class="tabs__item tcam-settings">
@@ -177,35 +179,37 @@
       </div>
     </div>
     <div class="tabs__item verification-cnc-tab">
-      <div class="verification-cnc-tab__left-part">
-        <select name="layer" id="psb-layer">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3" selected>3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-        </select>
-        <button id="generateCNC">Generate</button>
-        <button id="download">Download</button>
-        <div class="select-field scaling-select-field">
-          <label class="select-field__label" for="gcode-scaling-select">Масштаб зображення:</label>
-          <div class="select-field__wrapper">
-            <select name="zoom" id="gcode-scaling-select">
-              <option value="0.5">50%</option>
-              <option value="0.75">75%</option>
-              <option value="1" selected>100%</option>
-              <option value="2">200%</option>
-              <option value="3">300%</option>
-            </select>
+      <div class="tabs__item-content">
+        <div class="verification-cnc-tab__left-part">
+          <select name="layer" id="psb-layer">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3" selected>3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+          </select>
+          <button id="generateCNC">Generate</button>
+          <button id="download">Download</button>
+          <div class="select-field scaling-select-field">
+            <label class="select-field__label" for="gcode-scaling-select">Масштаб зображення:</label>
+            <div class="select-field__wrapper">
+              <select name="zoom" id="gcode-scaling-select">
+                <option value="0.5">50%</option>
+                <option value="0.75">75%</option>
+                <option value="1" selected>100%</option>
+                <option value="2">200%</option>
+                <option value="3">300%</option>
+              </select>
+            </div>
           </div>
+          <textarea
+            readonly
+            id="gcode-viewer"
+            class="verification-cnc-tab__gcode-viewer"></textarea>
         </div>
-        <textarea
-          readonly
-          id="gcode-viewer"
-          class="verification-cnc-tab__gcode-viewer"></textarea>
+        <div class="pcb-wrapper" id="gcode-pcb"></div>
       </div>
-      <div class="pcb-wrapper" id="gcode-pcb"></div>
     </div>
     <div class="tabs__item cnc-control-tab">
       <h2 class="tabs__item-heading">CNC-управління</h2>
@@ -214,9 +218,113 @@
       </div>
     </div>
     <div class="tabs__item about-application-tab">
-      <h2 class="tabs__item-heading">Довідка</h2>
-      <div class="about-application-tab__content">
-        <p>Даний додаток призначений для ...</p>
+      <h2 class="tabs__item-heading">Довідка JS-Soft UV-PCB-tech</h2>
+      <div class="tabs__item-content">
+        <div class="about-application-tab__content">
+          <ol>
+            <li>Базові положення</li>
+            <li>Установка</li>
+            <li>Варіанти розгортання
+              <ol>
+                <li>Апаратно-серверне</li>
+                <li>Мережево-серверне</li>
+                <li>Локальне</li>
+              </ol>
+            </li>
+            <li>Особливості на рівні ОС
+              <ol>
+                <li>Microsoft Windows</li>
+                <li>Android</li>
+                <li>MACOS</li>
+              </ol>
+            </li>
+            <li>Опис використання</li>
+            <li>Головна закладка</li>
+            <li>Редагування технологічних параметрів</li>
+            <li>Верифікація CNC-файлу</li>
+            <li>CNC-управління</li>
+            <li>Конфігуратор</li>
+            <li>Про проект та авторів</li>
+          </ol>
+        </div>
+        <div class="description-block">
+          <h3 class="description-block__heading">Базові положення</h3>
+          <p class="description-block__paragraph">Проект JS-Soft генерування коду для UV-PCB-tech функціонально не є
+            самодостанім конвертором, оскільки отримання CNC-файлу лише за описом
+            геометрії обєктів PCB-файлів не можливе, оскільки проведення необхідних
+            геометричних трансформації базується на встановлення групи взаємоповязаних
+            технологічних параметрів, які задає користувач. Більш завершеною формою
+            програмного забезпечення генерування коду для UV-PCB-tech обробки, як
+            утиліти САМ-постпроцесора, є інтегруванням його у виробничу систему з
+            такими варіантами використання:
+          </p>
+          <ul class="description-block__list">
+            <li>Персональний верстат - користувач і є оператором;</li>
+            <li>UV-PCB-tech сервіс.</li>
+          </ul>
+        </div>
+        <div class="description-block">
+          <h3 class="description-block__heading">Установка</h3>
+          <p class="description-block__paragraph">Однією з переваг розробки програми на JS є підтримка його всіма
+            основними браузерами. FlatTCAM написано на Python, і для його роботи
+            потрібно додатково запускати інтерпритатор, що звужує область та вносить
+            незручності у використанні. Проект "JS-Soft генерування коду для UV-PCB-
+            tech" як браузерний додаток дозволяє досягти поліпрофільності та високу
+            гнучкість використання. Наприклад, він може бути використаний:
+          </p>
+          <ul class="description-block__list">
+            <li>як автономний TCAM конвертор, достатньо лише файли html, css, js та json розмістити у локальному сховищі
+              та запустити браузер;</li>
+            <li>як серверний додаток, достатньо лише залити на веб-пакет файлів на сервер та запускати дистанційно;</li>
+            <li>як вбудоване програмне забезпечення, що реалізується шляхом заливки веб-пакету файлів на Flash EEPROM
+              WIFI-модуля (зокрема ESP8266 чи ESP32 SPIFFS утилітою завантаження Flash DownLoad Tool, при прошивці
+              або OTA).</li>
+          </ul>
+        </div>
+        <div class="description-block">
+          <h3 class="description-block__heading">Варіанти розгортання</h3>
+          <h4 class="description-block__subheading">Апаратно-серверне</h4>
+          <h4 class="description-block__subheading">Серверне</h4>
+          <h4 class="description-block__subheading">Локальне</h4>
+        </div>
+        <div class="description-block">
+          <h3 class="description-block__heading">Особливості на рівні ОС</h3>
+          <h4 class="description-block__subheading">Microsoft Windows</h4>
+          <h4 class="description-block__subheading">Android</h4>
+          <h4 class="description-block__subheading">MACOS</h4>
+        </div>
+        <div class="description-block">
+          <h3 class="description-block__heading">Опис використання</h3>
+          <p class="description-block__paragraph">У варіанті використання "Персональний верстат" передбачаються такі
+            закладки: "Головна", "Параметри", "Контроль", "CNC-управління", "Конфігуратор", "Довідка".</p>
+        </div>
+        <div class="description-block">
+          <h3 class="description-block__heading">Головна закладка</h3>
+          <p class="description-block__paragraph">&quot;Головна&quot; – панель відкриття вхідних файлів та
+            верифікатор завантажень.</p>
+        </div>
+        <div class="description-block">
+          <h3 class="description-block__heading">Редагування технологічних параметрів</h3>
+          <p class="description-block__paragraph">&quot;Параметри&quot; – панель редагування технологічних
+            параметрів обробки.</p>
+        </div>
+        <div class="description-block">
+          <h3 class="description-block__heading">Верифікація CNC-файлу</h3>
+          <p class="description-block__paragraph">Ця панель надає користувачу доступ до віджетів створення CNC-файлів –
+            віртуальна кнопка «Generate» та верифікації отриманих результатів.</p>
+        </div>
+        <div class="description-block">
+          <h3 class="description-block__heading">CNC-управління</h3>
+          <p class="description-block__paragraph">&quot;CNC-управління&quot; – панель прямого управління верстатом.</p>
+        </div>
+        <div class="description-block">
+          <h3 class="description-block__heading">Конфігуратор</h3>
+          <p class="description-block__paragraph">&quot;Конфігуратор&quot; – панель візуалізації та редагування основних
+            параметрів системи json-файла.</p>
+        </div>
+        <div class="description-block">
+          <h3 class="description-block__heading">Про проект та авторів</h3>
+        </div>
       </div>
     </div>
   </div>

@@ -10,6 +10,7 @@
 @import "components/error-message-modal.css";
 @import "components/progress-bar.css";
 @import "components/upload-area.css";
+@import "components/description-block.css";
 @import "layout/container.css";
 @import "layout/sidebar.css";
 @import "layout/tabs.css";

@@ -34,8 +34,14 @@ hr {
   overflow: visible;
 }
 
-ul, ol {
+ol {
   list-style: none;
+  counter-reset: li;
+}
+
+ol li:before {
+  counter-increment: li;
+  content: counters(li, ".") ". ";
 }
 
 pre {

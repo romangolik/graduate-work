@@ -1,0 +1,28 @@
+.description-block__heading {
+  margin-bottom: 20px;
+
+  font-size: 26px;
+}
+
+.description-block__subheading {
+  font-size: 20px;
+}
+
+.description-block__list,
+.description-block__paragraph {
+  font-size: 17px;
+}
+
+.description-block__list,
+.description-block__paragraph,
+.description-block__subheading {
+  margin-bottom: 10px;
+}
+
+.description-block__list {
+  list-style-position: inside;
+}
+
+.description-block__list li {
+  margin-bottom: 10px;
+}

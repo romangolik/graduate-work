@@ -12,6 +12,8 @@
 
 .tabs__item-heading {
   margin-bottom: 20px;
+
+  font-size: 30px;
 }
 
 @keyframes showTab {

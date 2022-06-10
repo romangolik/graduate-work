@@ -32,11 +32,11 @@ main {
   margin: auto;
 }
 
-.tabs__item_show.main-tab {
+.tabs__item_show.main-tab .tabs__item-content {
   display: flex;
 }
 
-.main-tab {
+.main-tab .tabs__item-content {
   justify-content: space-between;
 }
 
@@ -140,11 +140,11 @@ main {
   max-width: calc(50% - 15px);
 }
 
-.tabs__item_show.verification-cnc-tab {
+.tabs__item_show.verification-cnc-tab .tabs__item-content {
   display: flex;
 }
 
-.verification-cnc-tab {
+.verification-cnc-tab .tabs__item-content {
   justify-content: space-between;
 }
 
@@ -183,8 +183,35 @@ main {
   background: rgba(5, 10, 12, 0.4);
 }
 
+.about-application-tab .tabs__item-content {
+  max-width: 820px;
+}
+
+.about-application-tab__content {
+  margin-bottom: 40px;
+
+  font-size: 17px;
+}
+
+.about-application-tab__content ol li {
+  margin-bottom: 10px;
+}
+
+.about-application-tab__content ol ol {
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.about-application-tab .description-block {
+  margin-bottom: 40px;
+}
+
+.about-application-tab .description-block:last-of-type {
+  margin-bottom: 0;
+}
+
 @media screen and (max-width: 1441px) {
-  .main-tab {
+  .main-tab .tabs__item-content {
     flex-wrap: wrap;
   }
 
