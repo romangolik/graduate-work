@@ -7,7 +7,11 @@
 }
 
 .tabs__item_show {
-  display: flex;
+  display: block;
+}
+
+.tabs__item-heading {
+  margin-bottom: 20px;
 }
 
 @keyframes showTab {

@@ -3,6 +3,7 @@ import {
     getOctagonVertices,
     getPolygonVertices
 } from "../get-figures-vertices/get-figures-vertices.js";
+
 import { PCB_PRIMITIVES } from "../convertors/_data/pcb-primitives.js";
 
 const fixed = (number, a) => {
@@ -30,10 +31,6 @@ const findLineIntersection = (line1, line2) => {
     const y4 = line2.to.y;
 
     const den = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
-
-    if (den === 0) {
-        return null;
-    }
 
     return {
         x: fixed(((x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2) * (x3 * y4 - y3 * x4)) / den, 3),
@@ -111,6 +108,7 @@ const offsetPolygon = (pts, offset, looped = false) => {
                     }
                 }
             );
+
             upperPoints[downPoints.length - 1] = findLineIntersection(
                 {
                     from: {
@@ -197,11 +195,11 @@ const offsetSMDPad = (primitiveData, offsetValue) => {
 }
 
 const offsetPolyline = (primitiveData, offsetValue) => {
-    return offsetPolygon(primitiveData.pos, primitiveData.properties.width / 2 + offsetValue)
+    return offsetPolygon([...primitiveData.pos], primitiveData.properties.width / 2 + offsetValue)
 }
 
 const offsetZone = (primitiveData, offsetValue) => {
-    return offsetPolygon(primitiveData.pos, offsetValue, true);
+    return offsetPolygon([...primitiveData.pos], offsetValue, true);
 }
 
 const offsetPrimitiveFunc = {
@@ -212,10 +210,13 @@ const offsetPrimitiveFunc = {
 };
 
 export const getOffsetPrimitives = (primitives, offsetValue) => {
-    return primitives.map(primitive => ({
-        type: primitive.type,
-        pos: primitive.pos,
-        properties: primitive.properties,
-        points: offsetPrimitiveFunc[primitive.type](primitive, offsetValue / 2)
-    }));
+    return new Promise(resolve => {
+       const result = primitives.map(primitive => ({
+           type: primitive.type,
+           pos: primitive.pos,
+           properties: primitive.properties,
+           points: offsetPrimitiveFunc[primitive.type](primitive, offsetValue / 2)
+       }));
+       resolve(result);
+    });
 }

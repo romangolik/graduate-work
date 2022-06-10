@@ -2,19 +2,14 @@ import { openModal } from './components/modals/modals.js';
 import { txtConvertor } from './services/convertors/txt-convertor/txt-convertor.js';
 import { initSidebarControl } from './services/sidebar-control/sidebar-control.js';
 import { drawPrimitivesByType } from './services/draw-pcb/draw-pcb.js';
+import { initZoomImageControl } from './services/zoom-image-control/zoom-image-control.js';
 import { initUploadAreaControl } from './services/upload-area-contorl/upload-area-control.js';
 import { initSelectFieldsControl } from './services/select-fields-control/select-fields-control.js';
-import { initScrollOnGrabControl } from './services/scroll-on-grab-control/scroll-on-grab-control.js';
 import { showProgressBar, hideProgressBar } from './components/progress-bar/progress-bar.js';
 
 import { MODAL_TYPES } from './components/modals/_data/modal-types.js';
 
-const PCB_WRAPPER = document.getElementById('pcb');
 const PCB_INFORMATION = document.getElementById('pcb-information');
-const SCALING_SELECT = document.getElementById('scaling-select');
-
-const DEFAULT_SCALE = 1;
-const IMAGE_SIZE_MULTIPLICITY = 10;
 
 const mainTabData = {
     image: null,
@@ -28,7 +23,19 @@ const mainTabData = {
 
 initSidebarControl();
 initSelectFieldsControl();
-initScrollOnGrabControl(PCB_WRAPPER);
+const { IMAGE_WRAPPER, resetScalingSelectValue } =
+    initZoomImageControl(
+        'pcb',
+        'scaling-select',
+        (event, imageSizeMultiplicity) => {
+            if (mainTabData.image) {
+                const value = +event.target.value;
+                const { width, height } = mainTabData.size;
+                mainTabData.image.setAttribute('width', `${width * value * imageSizeMultiplicity}`);
+                mainTabData.image.setAttribute('height', `${height * value * imageSizeMultiplicity}`);
+            }
+        }
+    );
 const { FILE_INPUT, resetFileName } = initUploadAreaControl('upload-area');
 
 const getPCBInformation = (primitives, size) => {
@@ -117,14 +124,14 @@ FILE_INPUT.addEventListener('change', event => {
                     txtConvertor(data).then(convertedData => {
                         mainTabData.pcbPrimitives = convertedData;
 
-                        drawPrimitivesByType(mainTabData.pcbPrimitives, IMAGE_SIZE_MULTIPLICITY)
+                        drawPrimitivesByType(mainTabData.pcbPrimitives)
                             .then(data => {
                                 if (data) {
                                     mainTabData.image = data.image;
                                     mainTabData.size.width = data.size.width;
                                     mainTabData.size.height = data.size.height;
-                                    PCB_WRAPPER.appendChild(mainTabData.image);
-                                    SCALING_SELECT.value = DEFAULT_SCALE;
+                                    IMAGE_WRAPPER.appendChild(mainTabData.image);
+                                    resetScalingSelectValue();
                                 } else {
                                     FILE_INPUT.value = null;
                                     resetFileName();
@@ -153,15 +160,6 @@ FILE_INPUT.addEventListener('change', event => {
             text: `Обраний файл не відповідає не підтримується додатком. 
             Списко файлів котрі підтримує додаток: ${FILE_INPUT.accept}`
         }).then();
-    }
-});
-
-SCALING_SELECT.addEventListener('change', event => {
-    if (mainTabData.image) {
-        const value = +event.target.value;
-        const { width, height } = mainTabData.size;
-        mainTabData.image.setAttribute('width', `${width * value * IMAGE_SIZE_MULTIPLICITY}`);
-        mainTabData.image.setAttribute('height', `${height * value * IMAGE_SIZE_MULTIPLICITY}`);
     }
 });
 

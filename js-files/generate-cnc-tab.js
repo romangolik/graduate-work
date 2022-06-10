@@ -1,18 +1,13 @@
 import { openModal } from "./components/modals/modals.js";
 import { generateGCode } from "./services/gcode-generator/gcode-generator.js";
+import { initZoomImageControl } from './services/zoom-image-control/zoom-image-control.js';
 import { drawPrimitivesByGCode } from "./services/draw-pcb/draw-pcb.js";
-import { initScrollOnGrabControl } from "./services/scroll-on-grab-control/scroll-on-grab-control.js";
 import { showProgressBar, hideProgressBar } from "./components/progress-bar/progress-bar.js";
 
 import { mainTabData } from "./main.js";
 import { MODAL_TYPES } from "./components/modals/_data/modal-types.js";
 
 const GCODE_VIEWER = document.getElementById('gcode-viewer');
-const GCODE_PCB_WRAPPER = document.getElementById('gcode-pcb');
-const GCODE_SCALING_SELECT = document.getElementById('gcode-scaling-select');
-
-const DEFAULT_SCALE = 1;
-const IMAGE_SIZE_MULTIPLICITY = 10;
 
 const generateCNCTabData = {
     image: null,
@@ -21,7 +16,18 @@ const generateCNCTabData = {
 
 let selectedLayer = 3;
 
-initScrollOnGrabControl(GCODE_PCB_WRAPPER);
+const { IMAGE_WRAPPER, resetScalingSelectValue } = initZoomImageControl(
+    'gcode-pcb',
+    'gcode-scaling-select',
+    (event, imageSizeMultiplicity) => {
+        if (generateCNCTabData.image) {
+            const value = +event.target.value;
+            const { width, height } = mainTabData.size;
+            generateCNCTabData.image.setAttribute('width', `${width * value * imageSizeMultiplicity}`);
+            generateCNCTabData.image.setAttribute('height', `${height * value * imageSizeMultiplicity}`);
+        }
+    }
+);
 
 document.getElementById('psb-layer')
     .addEventListener('change', event => {
@@ -31,7 +37,7 @@ document.getElementById('psb-layer')
 document.getElementById('generateCNC')
     .addEventListener('click', () => {
         showProgressBar();
-        const primitives = mainTabData.pcbPrimitives.filter(primitive => primitive.layer === selectedLayer);
+        const primitives = [ ...mainTabData.pcbPrimitives].filter(primitive => primitive.layer === selectedLayer);
         if (primitives.length) {
             generateGCode(primitives)
                 .then(data => {
@@ -40,13 +46,14 @@ document.getElementById('generateCNC')
                     }
                     generateCNCTabData.cncFile = data;
                     GCODE_VIEWER.textContent = data;
-                    drawPrimitivesByGCode(generateCNCTabData.cncFile, mainTabData.size, IMAGE_SIZE_MULTIPLICITY)
+
+                    drawPrimitivesByGCode(generateCNCTabData.cncFile, mainTabData.size)
                         .then(data => {
                             generateCNCTabData.image = data;
-                            GCODE_PCB_WRAPPER.appendChild(generateCNCTabData.image);
+                            IMAGE_WRAPPER.appendChild(generateCNCTabData.image);
+                            resetScalingSelectValue();
+                            hideProgressBar();
                         });
-                    GCODE_SCALING_SELECT.value = DEFAULT_SCALE;
-                    hideProgressBar();
                 });
         } else {
             openModal(MODAL_TYPES.ERROR_MESSAGE, {
@@ -72,10 +79,3 @@ document.getElementById('download')
             generateCNCTabData.cncFile = null;
         }
     });
-
-GCODE_SCALING_SELECT.addEventListener('change', event => {
-    const value = +event.target.value;
-    const { width, height } = mainTabData.size;
-    generateCNCTabData.image.setAttribute('width', `${width * value * IMAGE_SIZE_MULTIPLICITY}`);
-    generateCNCTabData.image.setAttribute('height', `${height * value * IMAGE_SIZE_MULTIPLICITY}`);
-});

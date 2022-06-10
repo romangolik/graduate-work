@@ -152,9 +152,9 @@ const createPCBObject = (pcbObjectTemplates, pcbObject, createFunction) => {
     return pcbObjectTemplates;
 }
 
-const setSvgSize = (svg, height, width, imageSizeMultiplicity) => {
-    svg.setAttribute('height', (height * imageSizeMultiplicity).toString());
-    svg.setAttribute('width', (width * imageSizeMultiplicity).toString());
+const setSvgSize = (svg, height, width) => {
+    svg.setAttribute('height', height);
+    svg.setAttribute('width', width.toString());
     svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
 }
 
@@ -180,7 +180,7 @@ const calculateSvgSize = (outline) => {
     }
 }
 
-export const drawPrimitivesByType = (pcbObjects, imageSizeMultiplicity) => {
+export const drawPrimitivesByType = pcbObjects => {
     let drills = [];
 
     const PCB_OBJECTS_TEMPLATE_FUNCTIONS = {
@@ -242,7 +242,7 @@ export const drawPrimitivesByType = (pcbObjects, imageSizeMultiplicity) => {
             SVG.appendChild(pcbOutline);
 
             const { height, width } = calculateSvgSize(pcbOutline);
-            setSvgSize(SVG, height, width, imageSizeMultiplicity);
+            setSvgSize(SVG, height, width);
 
             resolve({
                 image: SVG,
@@ -256,7 +256,7 @@ export const drawPrimitivesByType = (pcbObjects, imageSizeMultiplicity) => {
                 .then(data => {
                     if (data) {
                         const { height, width } = data;
-                        setSvgSize(SVG, height, width, imageSizeMultiplicity);
+                        setSvgSize(SVG, height, width);
 
                         resolve({
                             image: SVG,
@@ -273,7 +273,7 @@ export const drawPrimitivesByType = (pcbObjects, imageSizeMultiplicity) => {
     });
 }
 
-export const drawPrimitivesByGCode = (gCodeStr, size, imageSizeMultiplicity) => {
+export const drawPrimitivesByGCode = (gCodeStr, size) => {
     const fillProps = (obj, str, code, value) => {
         obj[code.toUpperCase()] = value.length ? parseFloat(value) : true;
         return '';
@@ -290,7 +290,7 @@ export const drawPrimitivesByGCode = (gCodeStr, size, imageSizeMultiplicity) => 
         const SVG = createElement('svg', {
             'style': 'background-color: black'
         });
-        setSvgSize(SVG, size.height, size.width, imageSizeMultiplicity);
+        setSvgSize(SVG, size.height, size.width);
 
         const result = (gCodeStr || '').toString()
             .replace('\r', '')

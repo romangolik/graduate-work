@@ -27,11 +27,19 @@
     </a>
     <a href="#"
        class="link link_uppercase sidebar__navigation-item">
-      Управління параметрами
+      Параметри
     </a>
     <a href="#"
        class="link link_uppercase sidebar__navigation-item">
-      Верифікація CNC-файлу
+      Контроль
+    </a>
+    <a href="#"
+       class="link link_uppercase sidebar__navigation-item">
+      CNC-управління
+    </a>
+    <a href="#"
+       class="link link_uppercase sidebar__navigation-item">
+      Довідка
     </a>
   </nav>
 </aside>
@@ -39,7 +47,7 @@
   <div class="tabs">
     <div class="tabs__item main-tab tabs__item_show">
       <div class="main-tab__file-management">
-        <h1 class="main-tab__heading">Управління файлом</h1>
+        <h2 class="tabs__item-heading">Управління файлом</h2>
         <div class="main-tab__file-management-content">
           <div class="main-tab__image-control">
             <div class="upload-area" id="upload-area">
@@ -64,7 +72,7 @@
             </div>
           </div>
           <div class="main-tab__pcb-information" id="pcb-information">
-            <h2>Інформація про плату</h2>
+            <h3>Інформація про плату</h3>
             <p>Загальна кількість PCB-об'єктів: 0</p>
             <h4>Плата містить такі шари:</h4>
             <p>Файл не обрано</p>
@@ -198,6 +206,18 @@
           class="verification-cnc-tab__gcode-viewer"></textarea>
       </div>
       <div class="pcb-wrapper" id="gcode-pcb"></div>
+    </div>
+    <div class="tabs__item cnc-control-tab">
+      <h2 class="tabs__item-heading">CNC-управління</h2>
+      <div class="about-application-tab__content">
+        <p>Даний додаток призначений для ...</p>
+      </div>
+    </div>
+    <div class="tabs__item about-application-tab">
+      <h2 class="tabs__item-heading">Довідка</h2>
+      <div class="about-application-tab__content">
+        <p>Даний додаток призначений для ...</p>
+      </div>
     </div>
   </div>
 </main>
