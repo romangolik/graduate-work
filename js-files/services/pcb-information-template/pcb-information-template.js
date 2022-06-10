@@ -11,19 +11,15 @@ const getPCBInformation = (primitives, size) => {
         };
 
         primitives.reduce((result, current) => {
-            if (current.layer !== 7) {
-                result.layersCount.add(current.layer);
-
-                result.primitivesCount += 1;
-
-                result.layers[current.layer] = (result.layers[current.layer] || 0) + 1
-            }
+            result.layersCount.add(current.layer);
+            result.primitivesCount += 1;
+            result.layers[current.layer] = (result.layers[current.layer] || 0) + 1;
 
             return result;
         }, statisticsData);
 
         statisticsData.layersCount = statisticsData.layersCount.size;
-        statisticsData.size = size;
+        statisticsData.size = { ...size };
 
         return statisticsData;
     } else {

@@ -6,6 +6,7 @@
 
   cursor: pointer;
   text-align: center;
+  box-sizing: border-box;
   border: 2px dashed rgba(0, 0, 0, 0.13);
 
   transition: background-color 0.3s;
