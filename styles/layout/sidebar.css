@@ -1,0 +1,167 @@
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 80;
+
+  padding: 20px;
+  height: 100vh;
+  width: var(--sidebar-width);
+
+  box-sizing: border-box;
+  background-color: #061136;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+}
+
+.sidebar__logo {
+  display: block;
+  height: 80px;
+  width: 100%;
+  margin: 0 auto 20px;
+  padding-bottom: 20px;
+
+  border-bottom: 2px solid white;
+}
+
+.sidebar__navigation {
+  position: relative;
+  z-index: 1;
+}
+
+.sidebar__navigation-item {
+  display: inline-flex;
+  padding: 15px 0;
+  width: 100%;
+
+  color: white;
+}
+
+.sidebar__navigation-item_active {
+  color: #34ab00;
+}
+
+.sidebar__navigation-mark {
+  position: absolute;
+  top: 0;
+  left: -10px;
+  z-index: -1;
+
+  display: block;
+  height: 70px;
+  width: calc(100% + 20px);
+
+  border-radius: 8px;
+  background-color: red;
+
+  transition: 0.4s ease transform;
+}
+
+.sidebar__burger {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 80;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex: none;
+
+  width: 42px;
+  height: 42px;
+
+  border: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  background-color: #061136;
+
+  transform: translateX(100%);
+}
+
+.sidebar__burger_active .sidebar__burger-line:first-of-type {
+  top: 4px;
+
+  transform: rotate(45deg);
+}
+
+.sidebar__burger_active .sidebar__burger-line:last-of-type {
+  bottom: 4px;
+
+  transform: rotate(-45deg);
+}
+
+.sidebar__burger-inner {
+  position: relative;
+
+  display: block;
+  height: 10px;
+  width: 16px;
+}
+
+.sidebar__burger-line {
+  position: absolute;
+
+  display: block;
+  height: 2px;
+  width: 100%;
+
+  border-radius: 10px;
+  background-color: white;
+
+  transition: 0.3s ease width,
+  0.4s ease transform,
+  0.4s ease top,
+  0.4s ease bottom;
+}
+
+.sidebar__burger-line:first-of-type {
+  top: 0;
+
+  margin-bottom: 6px;
+}
+
+.sidebar__burger-line:last-of-type {
+  bottom: 0;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 79;
+
+  width: 100vw;
+  height: 100vh;
+
+  visibility: hidden;
+  background-color: rgba(0, 0, 0, 0.3);
+
+  transition-delay: 0.2s;
+}
+
+.overlay_visible {
+  visibility: visible;
+
+  transition-delay: 0s;
+}
+
+@media screen and (max-width: 961px) {
+  .sidebar {
+    left: calc(var(--sidebar-width) * -1);
+
+    box-shadow: none;
+
+    transform: translateX(0);
+
+    transition: 0.4s ease transform;
+  }
+
+  .sidebar_visible {
+    transform: translateX(100%);
+  }
+
+  .sidebar__burger {
+    display: flex;
+  }
+}

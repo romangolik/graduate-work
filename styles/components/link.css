@@ -5,33 +5,14 @@
   font-weight: 500;
   text-align: left;
 
+  color: var(--black);
   text-decoration: none;
 
   transition: 0.3s ease color;
 }
 
-.link_basic {
-  color: var(--blue);
-}
-
-.link_basic:hover {
-  color: var(--green);
-}
-
-.link_primary {
-   color: var(--dark);
-}
-
-.link_primary:hover {
-  color: var(--blue);
-}
-
-.link_secondary {
-  color: var(--black);
-}
-
-.link_secondary:hover {
-  color: var(--blue);
+.link:hover {
+  color: #34ab00;
 }
 
 .link_uppercase {

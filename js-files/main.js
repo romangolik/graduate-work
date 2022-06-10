@@ -1,6 +1,6 @@
 import { openModal } from './components/modals/modals.js';
 import { txtConvertor } from './services/convertors/txt-convertor/txt-convertor.js';
-import { initHeaderControl } from './services/header-control/header-control.js';
+import { initSidebarControl } from './services/sidebar-control/sidebar-control.js';
 import { drawPrimitivesByType } from './services/draw-pcb/draw-pcb.js';
 import { initUploadAreaControl } from './services/upload-area-contorl/upload-area-control.js';
 import { initSelectFieldsControl } from './services/select-fields-control/select-fields-control.js';
@@ -26,7 +26,7 @@ const mainTabData = {
     pcbPrimitives: []
 };
 
-initHeaderControl();
+initSidebarControl();
 initSelectFieldsControl();
 initScrollOnGrabControl(PCB_WRAPPER);
 const { FILE_INPUT, resetFileName } = initUploadAreaControl('upload-area');

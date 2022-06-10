@@ -1,33 +1,33 @@
-export const initHeaderControl = () => {
+export const initSidebarControl = () => {
     const BURGER = document.getElementById('burger');
     const OVERLAY = document.getElementById('overlay');
     const TAB_ITEMS = document.querySelectorAll('.tabs__item');
-    const HEADER_NAVIGATION = document.getElementById('header-navigation');
-    const HEADER_LINKS = document.querySelectorAll('.header__navigation-item');
+    const SIDEBAR = document.getElementById('sidebar');
+    const SIDEBAR_LINKS = document.querySelectorAll('.sidebar__navigation-item');
 
     let activeTab = 0;
 
     const closeNavigationMenu = () => {
         OVERLAY.classList.remove('overlay_visible');
-        BURGER.classList.remove('header__burger_active');
-        HEADER_NAVIGATION.classList.remove('header__navigation_visible');
+        BURGER.classList.remove('sidebar__burger_active');
+        SIDEBAR.classList.remove('sidebar_visible');
     }
 
     const openNavigationMenu = () => {
         OVERLAY.classList.add('overlay_visible');
-        BURGER.classList.add('header__burger_active');
-        HEADER_NAVIGATION.classList.add('header__navigation_visible');
+        BURGER.classList.add('sidebar__burger_active');
+        SIDEBAR.classList.add('sidebar_visible');
     }
 
-    HEADER_LINKS.forEach((link, index) => {
+    SIDEBAR_LINKS.forEach((link, index) => {
         link.addEventListener('click', event => {
             event.preventDefault();
 
             activeTab = index;
             TAB_ITEMS.forEach(item => item.classList.remove('tabs__item_show'));
-            HEADER_LINKS.forEach(item => item.classList.remove('header__navigation-item_active'));
+            SIDEBAR_LINKS.forEach(item => item.classList.remove('sidebar__navigation-item_active'));
 
-            link.classList.add('header__navigation-item_active');
+            link.classList.add('sidebar__navigation-item_active');
             TAB_ITEMS[activeTab].classList.add('tabs__item_show');
 
             closeNavigationMenu();
@@ -35,7 +35,7 @@ export const initHeaderControl = () => {
     });
 
     BURGER.addEventListener('click', () => {
-        if (BURGER.classList.contains('header__burger_active')) {
+        if (BURGER.classList.contains('sidebar__burger_active')) {
             closeNavigationMenu();
         } else {
             openNavigationMenu();
@@ -45,7 +45,7 @@ export const initHeaderControl = () => {
     OVERLAY.addEventListener('click', () => closeNavigationMenu());
 
     window.addEventListener('resize', () => {
-        if (window.innerWidth > 768) {
+        if (window.innerWidth > 960) {
             closeNavigationMenu();
         }
     });

@@ -1,5 +1,5 @@
 :root {
-  --header-height: 100px;
+  --sidebar-width: 320px;
 
   //Colors
   --white: #FFFFFF;
@@ -16,14 +16,8 @@
   --red: #CB2B1F;
 }
 
-@media screen and (max-width: 1025px) {
+@media screen and (max-width: 361px) {
   :root {
-    --header-height: 90px;
-  }
-}
-
-@media screen and (max-width: 481px) {
-  :root {
-    --header-height: 80px;
+    --sidebar-width: 278px;
   }
 }

@@ -1,22 +1,25 @@
 @import "styles/index.css";
 
 body {
-  padding-top: var(--header-height);
+  padding-left: var(--sidebar-width);
+
+  overflow-anchor: none;
 }
 
 .main {
-  padding: 30px 0;
+  padding: 30px 20px;
 
   box-sizing: border-box;
 }
 
 .pcb-wrapper {
   display: flex;
-  height: 450px;
+  min-height: 450px;
   width: calc(100% - 430px);
   padding: 20px;
 
   overflow: hidden;
+  aspect-ratio: 16/9;
   border-radius: 10px;
   box-sizing: border-box;
   border: 1px solid silver;
@@ -188,5 +191,15 @@ body {
     min-height: 400px;
 
     aspect-ratio: 16 / 9;
+  }
+}
+
+@media screen and (max-width: 961px) {
+  body {
+    padding-left: 0;
+  }
+
+  .main {
+    padding-top: 52px;
   }
 }
