@@ -199,10 +199,15 @@ main {
   margin-bottom: 40px;
 
   font-size: 17px;
+  font-weight: bold;
 }
 
 .about-application-tab__content ol li {
   margin-bottom: 10px;
+}
+
+.about-application-tab__content ol li .link {
+  font-weight: inherit;
 }
 
 .about-application-tab__content ol ol {
