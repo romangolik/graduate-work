@@ -30,6 +30,9 @@ export const initSidebarControl = () => {
             link.classList.add('sidebar__navigation-item_active');
             TAB_ITEMS[activeTab].classList.add('tabs__item_show');
 
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+
             closeNavigationMenu();
         });
     });

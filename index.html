@@ -220,7 +220,7 @@
     <div class="tabs__item about-application-tab">
       <h2 class="tabs__item-heading">Довідка JS-Soft UV-PCB-tech</h2>
       <div class="tabs__item-content">
-        <div class="about-application-tab__content">
+        <div id="about-application-content" class="about-application-tab__content">
           <ol>
             <li><a href="#basic-provisions" class="link">Базові положення</a></li>
             <li><a href="#installation" class="link">Установка</a></li>
@@ -328,6 +328,9 @@
           <h3 class="description-block__heading">Про проект та авторів</h3>
         </div>
       </div>
+      <button id="scroll-to-top" class="scroll-to-top-button" hidden>
+        <svg class="scroll-to-top-button__icon"><use xlink:href="#scroll-to-top-icon"></use></svg>
+      </button>
     </div>
   </div>
 </main>
@@ -339,6 +342,10 @@
   <defs id="symbols">
     <symbol viewBox="0 0 24 24" fill="none" id="delete-icon">
       <path d="M3 3L20.9997 20.9997M20.9997 3L3 20.9997" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+    <symbol viewBox="0 0 32 32" id="scroll-to-top-icon">
+      <path d="m16.71 15.29a1 1 0 0 0 -1.42 0l-10 10a1 1 0 0 0 1.42 1.42l9.29-9.3 9.29 9.3a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42z" fill="currentColor"></path>
+      <path d="m6.71 16.71 9.29-9.3 9.29 9.3a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-10-10a1 1 0 0 0 -1.42 0l-10 10a1 1 0 0 0 1.42 1.42z" fill="currentColor"></path>
     </symbol>
   </defs>
 </svg>
