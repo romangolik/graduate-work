@@ -249,6 +249,183 @@ main {
   color: inherit;
 }
 
+.cnc-control-tab__control-panel {
+  max-width: 300px;
+  padding: 10px;
+
+  box-sizing: border-box;
+  border: 1px solid silver;
+}
+
+.cnc-control-tab__axes-control-panel,
+.cnc-control-tab__manual-control-panel,
+.cnc-control-tab__parameters-control-panel {
+  padding: 10px 0;
+
+  box-sizing: border-box;
+}
+
+.cnc-control-tab__manual-control-panel {
+  padding: 10px 5px;
+
+  border: 1px solid silver;
+}
+
+.cnc-control-tab__file-button {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+
+  font-size: 17px;
+
+  cursor: pointer;
+  border: 1px solid #031021;
+  background-color: transparent;
+}
+
+.cnc-control-tab__absolute-coordinates {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+
+  font-size: 17px;
+
+  text-align: center;
+  box-sizing: border-box;
+  border: 1px solid #031021;
+}
+
+.cnc-control-tab__buttons {
+  display: grid;
+  grid-gap: 10px;
+}
+
+.cnc-control-tab__buttons-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.cnc-control-tab__buttons-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.cnc-control-tab__buttons button {
+  height: 35px;
+
+  font-size: 18px;
+  font-weight: bold;
+
+  color: #968000;
+  cursor: pointer;
+  box-sizing: border-box;
+  border: 1px solid #cdcdcd;
+  background-color: #e1e1e1;
+}
+
+.cnc-control-tab__axes-control-panel {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 1fr 55px;
+}
+
+.cnc-control-tab__axes-view {
+  font-size: 25px;
+
+  border: 1px solid silver;
+}
+
+.cnc-control-tab__axes-view-row {
+  color: #008080;
+
+  text-align: center;
+}
+
+.cnc-control-tab__axes-view-row td {
+  padding: 5px;
+}
+
+.cnc-control-tab__axes-control-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.cnc-control-tab__axes-control-buttons button {
+  width: 55px;
+  height: 55px;
+
+  font-size: 18px;
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+.cnc-control-tab__axes-control-buttons button:first-of-type {
+  margin-bottom: auto;
+}
+
+.cnc-control-tab__parameters-control-panel {
+
+}
+
+.cnc-control-tab__parameters-control-buttons {
+  margin-bottom: 10px;
+}
+
+.cnc-control-tab__parameters-control-tab {
+
+}
+
+.cnc-control-tab__trackbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.cnc-control-tab__trackbar-label {
+  margin-right: 10px;
+
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.cnc-control-tab__trackbar-input {
+  width: 60px;
+  margin-left: 10px;
+
+  box-sizing: border-box;
+  border: 1px solid #031021;
+}
+
+.cnc-control-tab__move-command {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.cnc-control-tab__move-command-input {
+  width: calc(100% - 70px);
+  padding: 0 5px;
+
+  font-size: 20px;
+
+  box-sizing: border-box;
+  border: 1px solid #031021;
+}
+
+.cnc-control-tab__move-command-button {
+  width: 60px;
+  height: 40px;
+
+  font-size: 18px;
+  font-weight: bold;
+
+  color: #968000;
+  cursor: pointer;
+  box-sizing: border-box;
+  border: 1px solid #cdcdcd;
+  background-color: #e1e1e1;
+}
+
 @media screen and (max-width: 1441px) {
   .main-tab .tabs__item-content {
     flex-wrap: wrap;

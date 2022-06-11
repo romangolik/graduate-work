@@ -213,8 +213,122 @@
     </div>
     <div class="tabs__item cnc-control-tab">
       <h2 class="tabs__item-heading">CNC-управління</h2>
-      <div class="about-application-tab__content">
-        <p>Даний додаток призначений для ...</p>
+      <div class="tabs__item-content">
+        <div id="manual-control-panel" class="cnc-control-tab__control-panel">
+          <div class="cnc-control-tab__manual-control-panel">
+            <button class="cnc-control-tab__file-button">Файл не обрано</button>
+            <input class="cnc-control-tab__absolute-coordinates" type="text" value="X50.0 Y100.0 Z-20.5">
+            <div class="cnc-control-tab__buttons cnc-control-tab__buttons-4">
+              <button>M</button>
+              <button>OOO</button>
+              <button>PCS</button>
+              <button id="to-auto-control-panel">Auto</button>
+            </div>
+          </div>
+          <div class="cnc-control-tab__axes-control-panel">
+            <table class="cnc-control-tab__axes-view">
+              <tr class="cnc-control-tab__axes-view-row">
+                <td class="cnc-control-tab__axes-view-name">X</td>
+                <td class="cnc-control-tab__axes-view-value">999.99</td>
+              </tr>
+              <tr class="cnc-control-tab__axes-view-row">
+                <td class="cnc-control-tab__axes-view-name">Y</td>
+                <td class="cnc-control-tab__axes-view-value">999.99</td>
+              </tr>
+              <tr class="cnc-control-tab__axes-view-row">
+                <td class="cnc-control-tab__axes-view-name">Z</td>
+                <td class="cnc-control-tab__axes-view-value">999.99</td>
+              </tr>
+            </table>
+            <div class="cnc-control-tab__axes-control-buttons">
+              <button>+</button>
+              <button>–</button>
+            </div>
+          </div>
+          <div class="cnc-control-tab__parameters-control-panel">
+            <div class="cnc-control-tab__parameters-control-buttons">
+              <button>Move Parameters</button>
+              <button>Laser Parameters</button>
+            </div>
+            <div class="cnc-control-tab__parameters-control-tab">
+              <div class="cnc-control-tab__trackbar">
+                <p class="cnc-control-tab__trackbar-label">F</p>
+                <input class="range-slider cnc-control-tab__trackbar-range" type="range"
+                       min="0" max="80" step="1" value="100">
+                <input type="number" class="cnc-control-tab__trackbar-input">
+              </div>
+              <div class="cnc-control-tab__trackbar">
+                <p class="cnc-control-tab__trackbar-label">S</p>
+                <input class="range-slider cnc-control-tab__trackbar-range" type="range"
+                       min="0" max="80" step="1" value="100">
+                <input type="number" class="cnc-control-tab__trackbar-input">
+              </div>
+              <div class="cnc-control-tab__move-command">
+                <input class="cnc-control-tab__move-command-input" type="text" value="G1 X50 Y40.5">
+                <button class="cnc-control-tab__move-command-button">CR</button>
+              </div>
+              <p>Link-Error; CNC-Slack;</p>
+            </div>
+          </div>
+        </div>
+        <div id="auto-control-panel" class="cnc-control-tab__control-panel" hidden>
+          <div class="cnc-control-tab__manual-control-panel">
+            <button class="cnc-control-tab__file-button">Файл не обрано</button>
+            <input class="cnc-control-tab__absolute-coordinates" type="text" value="#12345 - 42%">
+            <div class="cnc-control-tab__buttons cnc-control-tab__buttons-3">
+              <button>View</button>
+              <button>Keep</button>
+              <button id="to-manual-control-panel">Manual</button>
+            </div>
+          </div>
+          <div class="cnc-control-tab__axes-control-panel">
+            <table class="cnc-control-tab__axes-view">
+              <tr class="cnc-control-tab__axes-view-row">
+                <td class="cnc-control-tab__axes-view-name">X</td>
+                <td class="cnc-control-tab__axes-view-value">999.99</td>
+              </tr>
+              <tr class="cnc-control-tab__axes-view-row">
+                <td class="cnc-control-tab__axes-view-name">Y</td>
+                <td class="cnc-control-tab__axes-view-value">999.99</td>
+              </tr>
+              <tr class="cnc-control-tab__axes-view-row">
+                <td class="cnc-control-tab__axes-view-name">Z</td>
+                <td class="cnc-control-tab__axes-view-value">999.99</td>
+              </tr>
+            </table>
+            <div class="cnc-control-tab__axes-control-buttons">
+              <button>Start</button>
+              <button>Stop</button>
+            </div>
+          </div>
+          <div class="cnc-control-tab__parameters-control-panel">
+            <div class="cnc-control-tab__parameters-control-buttons">
+              <button>Move Parameters</button>
+              <button>Laser Parameters</button>
+            </div>
+            <div class="cnc-control-tab__parameters-control-tab">
+              <div class="cnc-control-tab__trackbar">
+                <p class="cnc-control-tab__trackbar-label">F0</p>
+                <input class="range-slider cnc-control-tab__trackbar-range" type="range"
+                       min="0" max="80" step="1" value="100">
+                <input type="number" class="cnc-control-tab__trackbar-input">
+              </div>
+              <div class="cnc-control-tab__trackbar">
+                <p class="cnc-control-tab__trackbar-label">F1</p>
+                <input class="range-slider cnc-control-tab__trackbar-range" type="range"
+                       min="0" max="80" step="1" value="100">
+                <input type="number" class="cnc-control-tab__trackbar-input">
+              </div>
+              <div class="cnc-control-tab__trackbar">
+                <p class="cnc-control-tab__trackbar-label">SP</p>
+                <input class="range-slider cnc-control-tab__trackbar-range" type="range"
+                       min="0" max="80" step="1" value="100">
+                <input type="number" class="cnc-control-tab__trackbar-input">
+              </div>
+              <p>Link-Error; CNC-Slack;</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="tabs__item about-application-tab">

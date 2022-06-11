@@ -28,6 +28,11 @@ export const generateGCode = (primitives) => {
         readSettings();
         addStartFile();
 
+        /*primitives = primitives.map(primitive => ({
+            ...primitive,
+            pos: primitive.pos.map(({x, y}) => ({ x: 16 + (x * -1), y}))
+        }));*/
+
         getOffsetPrimitives(primitives, 0.2).then(data => {
             data.forEach(primitive => {
                 primitive.points.forEach(({x, y}, index) => {
