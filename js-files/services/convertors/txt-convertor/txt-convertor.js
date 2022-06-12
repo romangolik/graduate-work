@@ -63,7 +63,6 @@ const PARSING_FUNCTIONS = {
         }
         return Boolean(value);
     },
-    [PARSING_TYPES.TEXT]: (value, propertyName) => value.replaceAll('|', ''),
     [PARSING_TYPES.SIZE]: (value, propertyName) => parseNumber(value, propertyName) / 10000,
 }
 
@@ -78,11 +77,7 @@ const PCB_OBJECT_CONVERTORS = new Map([
     [ 'SIZE_X', (...args) => setProperties(...args, 'size_x', PARSING_TYPES.SIZE) ],
     [ 'SIZE_Y', (...args) => setProperties(...args, 'size_y', PARSING_TYPES.SIZE) ],
     [ 'VIA', (...args) => setProperties(...args, 'via', PARSING_TYPES.BOOLEAN) ],
-    [ 'MIRROR_HORZ', (...args) => setProperties(...args, 'mirror_horz', PARSING_TYPES.BOOLEAN) ],
-    [ 'MIRROR_VERT', (...args) => setProperties(...args, 'mirror_vert', PARSING_TYPES.BOOLEAN) ],
-    [ 'TEXT', (...args) => setProperties(...args, 'text', PARSING_TYPES.TEXT) ],
-    [ 'ROTATION', (...args) => setProperties(...args, 'rotation', PARSING_TYPES.NUMBER) ],
-    [ 'SOLDERMASK', (...args) => setProperties(...args, 'soldermas', PARSING_TYPES.BOOLEAN) ]
+    [ 'SOLDERMASK', (...args) => setProperties(...args, 'soldermask', PARSING_TYPES.BOOLEAN) ]
 ]);
 
 const getPCBObject = (string, index) => {
@@ -113,7 +108,7 @@ const getPCBObject = (string, index) => {
             throw `${errorMessage} в рядку №${index}`
         }
     } else {
-        throw `Некоректний тип примітиву в рядку №${index + 1}`;
+        return null;
     }
 
     return obj;
@@ -126,6 +121,7 @@ export const txtConvertor = data => {
             .split(';')
             .filter(item => item)
             .map((item, index) => getPCBObject(item, index))
+            .filter(item => item)
         );
     });
 }

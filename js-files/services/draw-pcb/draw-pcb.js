@@ -112,28 +112,6 @@ const createZONETemplate = data => {
     return ZONE;
 }
 
-const createTextTemplate = data => {
-    let { x, y } = data.pos[0];
-    let transformValue = 'scale(1, 1)';
-
-    if (data.properties.mirror_horz) {
-        x = x * -1;
-        transformValue = 'scale(-1, 1)';
-    } else if (data.properties.mirror_vert) {
-        y = y * -1;
-        transformValue = 'scale(1, -1)';
-    }
-
-    return createElement('text', {
-        'textContent': data.properties.text,
-        x,
-        y,
-        'font-size': data.properties.height,
-        'fill': `${LAYER_COLORS[data.layer]}`,
-        'transform': transformValue
-    });
-}
-
 const createPCBObject = (pcbObjectTemplates, pcbObject, createFunction) => {
     let dataByLayer = pcbObjectTemplates[pcbObject.layer];
     if (dataByLayer) {
@@ -187,16 +165,14 @@ export const drawPrimitivesByType = pcbObjects => {
         [PCB_PRIMITIVES.PAD]: (data) => createPadTemplate(data, drills),
         [PCB_PRIMITIVES.TRACK]: createPolylineTemplate,
         [PCB_PRIMITIVES.SMDPAD]: createSMDPadTemplate,
-        [PCB_PRIMITIVES.ZONE]: createZONETemplate,
-        [PCB_PRIMITIVES.TEXT]: createTextTemplate
+        [PCB_PRIMITIVES.ZONE]: createZONETemplate
     }
 
     const PCB_OBJECTS_ORDER = [
         PCB_PRIMITIVES.TRACK,
         PCB_PRIMITIVES.ZONE,
         PCB_PRIMITIVES.PAD,
-        PCB_PRIMITIVES.SMDPAD,
-        PCB_PRIMITIVES.TEXT
+        PCB_PRIMITIVES.SMDPAD
     ];
 
     return new Promise(resolve => {
