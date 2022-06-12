@@ -15,7 +15,8 @@
 
 .description-block__list,
 .description-block__paragraph,
-.description-block__subheading {
+.description-block__subheading,
+.description-block__image-wrapper {
   margin-bottom: 10px;
 }
 
@@ -25,4 +26,37 @@
 
 .description-block__list li {
   margin-bottom: 10px;
+}
+
+.description-block__list_outside li {
+  position: relative;
+
+  padding-left: 20px;
+}
+
+.description-block__list_outside li:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.description-block__image-wrapper {
+  width: min(500px, 100%);
+  margin: 0 auto;
+}
+
+.description-block__image {
+  width: 100%;
+  max-height: 500px;
+  margin-bottom: 5px;
+
+  object-fit: contain;
+}
+
+.description-block__image-name {
+  text-align: center;
+}
+
+.description-block__mark {
+  font-weight: bold;
 }
