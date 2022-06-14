@@ -15,8 +15,8 @@ export const generateGCode = (primitives) => {
     }
 
     const readSettings = () => {
-        lightingSpeed = document.getElementById('lightingSpeed').value;
-        positionSpeed = document.getElementById('positionSpeed').value;
+        lightingSpeed = 400;
+        positionSpeed = 2000;
     }
 
     const addEnd = () => {

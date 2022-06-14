@@ -46,3 +46,19 @@
   border-color: var(--dark-blue);
   box-shadow: inset 0 0 0 1px var(--dark-blue);
 }
+
+.input-field_inline-label {
+  display: inline-flex;
+  align-items: center;
+}
+
+.input-field_inline-label .input-field__label {
+  margin-bottom: 0;
+  margin-right: 10px;
+}
+
+.input-field[data-suffix]:after {
+  content: attr(data-suffix);
+
+  margin-left: 5px;
+}

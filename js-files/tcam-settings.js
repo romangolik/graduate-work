@@ -1,3 +1,4 @@
+/*
 const RANGE_INPUT = document.getElementById('range-input');
 const RANGE_SLIDER = document.getElementById('range-slider');
 
@@ -17,3 +18,4 @@ RANGE_INPUT.addEventListener('input', event => {
         RANGE_INPUT.value = RANGE_SLIDER.value;
     }, 500);
 });
+*/

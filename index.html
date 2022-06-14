@@ -46,7 +46,7 @@
 <main>
   <div class="tabs">
     <div class="tabs__item main-tab tabs__item_show">
-      <h2 class="tabs__item-heading">Управління файлом</h2>
+      <h2 class="tabs__item-heading">Головна</h2>
       <div class="tabs__item-content">
         <div class="main-tab__left-part main-tab__file-management">
           <div class="main-tab__file-management-content">
@@ -86,94 +86,185 @@
       </div>
     </div>
     <div class="tabs__item tcam-settings">
-      <div class="tcam-settings__panel">
-        <div class="technical-options">
-          <h3 class="technical-options__heading">Технологічні параметри UV-PCB-tech</h3>
-          <div class="technical-options__filling-density">
-            <p class="technical-options__filling-density-text">Щільність заповнення</p>
-            <input class="range-slider technical-options__filling-density-range" id="range-slider" type="range"
-                   min="0" max="80" step="1" value="100">
-            <input type="number" id="range-input" class="technical-options__filling-density-input">
+      <h2 class="tabs__item-heading">Параметри</h2>
+      <div class="tabs__item-content">
+        <div class="tcam-settings__panel">
+          <div class="tcam-settings__segment technical-scheme">
+            <h3 class="tcam-settings__segment-heading">Технологічна схема</h3>
+            <div class="technical-scheme__zones">
+              <div class="select-field">
+                <label class="select-field__label">Зона з ліва:</label>
+                <div class="select-field__wrapper">
+                  <select name="left-zone">
+                    <option value="none">none</option>
+                    <option value="top">top</option>
+                    <option value="bottom" selected>bottom</option>
+                  </select>
+                </div>
+              </div>
+              <button class="technical-scheme__reflection-button">
+                <img
+                  alt="Reflection"
+                  src="assets/images/reflection.png">
+              </button>
+              <div class="select-field">
+                <label class="select-field__label">Зона з права:</label>
+                <div class="select-field__wrapper">
+                  <select name="left-zone">
+                    <option value="none" selected>none</option>
+                    <option value="top">top</option>
+                    <option value="bottom">bottom</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="technical-scheme__checkboxes">
+              <label class="checkbox">
+                <span class="checkbox__mark-wrapper">
+                  <input
+                    class="checkbox__input"
+                    type="checkbox"
+                    name="accept-rules">
+                    <svg class="checkbox__mark" viewBox="0 0 21 21">
+                      <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
+                    </svg>
+                </span>
+                <span class="checkbox__text">PCB-габарит</span>
+              </label>
+              <label class="checkbox">
+                <span class="checkbox__mark-wrapper">
+                  <input
+                    class="checkbox__input"
+                    type="checkbox"
+                    name="accept-rules">
+                    <svg class="checkbox__mark" viewBox="0 0 21 21">
+                      <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
+                    </svg>
+                </span>
+                <span class="checkbox__text">Огляд PCB</span>
+              </label>
+            </div>
           </div>
-          <div class="technical-options__tables">
-            <div class="options-data">
-              <h4 class="options-data__heading">UV-лазер</h4>
-              <table class="options-data__table">
-                <tr class="options-data__table-row">
-                  <td class="options-data__table-cell options-data__table-option">апертура</td>
-                  <td class="options-data__table-cell options-data__table-label">D<sub>a</sub></td>
-                  <td class="options-data__table-cell options-data__table-value">0.1</td>
-                  <td class="options-data__table-cell options-data__table-units">мм</td>
+          <div class="tcam-settings__segment manufacturing-params">
+            <h3 class="tcam-settings__segment-heading">Параметри виготовлення</h3>
+            <div class="select-field select-field_inline-label">
+              <label class="select-field__label" for="material">Матеріал:</label>
+              <div class="select-field__wrapper">
+                <select name="material" id="material">
+                  <option value="sf-2-35_1.6mm" selected>СФ-2-35 1.6 мм</option>
+                </select>
+              </div>
+            </div>
+            <div class="tcam-settings__table-wrapper">
+              <table class="tcam-settings__table">
+                <tr class="tcam-settings__table-row">
+                  <td class="tcam-settings__table-cell tcam-settings__table-option">протяжність</td>
+                  <td class="tcam-settings__table-cell tcam-settings__table-value">10.2</td>
+                  <td class="tcam-settings__table-cell tcam-settings__table-units">м</td>
                 </tr>
-                <tr class="options-data__table-row">
-                  <td class="options-data__table-cell options-data__table-option">потужність</td>
-                  <td class="options-data__table-cell options-data__table-label">W</td>
-                  <td class="options-data__table-cell options-data__table-value">0.5</td>
-                  <td class="options-data__table-cell options-data__table-units">Вт</td>
+                <tr class="tcam-settings__table-row">
+                  <td class="tcam-settings__table-cell tcam-settings__table-option">час обробки</td>
+                  <td class="tcam-settings__table-cell tcam-settings__table-value">275</td>
+                  <td class="tcam-settings__table-cell tcam-settings__table-units">с</td>
                 </tr>
-                <tr class="options-data__table-row">
-                  <td class="options-data__table-cell options-data__table-option">модуляція</td>
-                  <td class="options-data__table-cell options-data__table-label">–</td>
-                  <td class="options-data__table-cell options-data__table-value">імпульс</td>
-                  <td class="options-data__table-cell options-data__table-units"></td>
+                <tr class="tcam-settings__table-row">
+                  <td class="tcam-settings__table-cell tcam-settings__table-option">вартість друку</td>
+                  <td class="tcam-settings__table-cell tcam-settings__table-value">34.5</td>
+                  <td class="tcam-settings__table-cell tcam-settings__table-units">грн</td>
                 </tr>
-                <tr class="options-data__table-row">
-                  <td class="options-data__table-cell options-data__table-option">частота</td>
-                  <td class="options-data__table-cell options-data__table-label">f</td>
-                  <td class="options-data__table-cell options-data__table-value">22</td>
-                  <td class="options-data__table-cell options-data__table-units">кГц</td>
+                <tr class="tcam-settings__table-row">
+                  <td class="tcam-settings__table-cell tcam-settings__table-option">податкові сплати</td>
+                  <td class="tcam-settings__table-cell tcam-settings__table-value">11.8</td>
+                  <td class="tcam-settings__table-cell tcam-settings__table-units">грн</td>
                 </tr>
-                <tr class="options-data__table-row">
-                  <td class="options-data__table-cell options-data__table-option">сквапність</td>
-                  <td class="options-data__table-cell options-data__table-label">q</td>
-                  <td class="options-data__table-cell options-data__table-value">5</td>
-                  <td class="options-data__table-cell options-data__table-units"></td>
+                <tr class="tcam-settings__table-row">
+                  <td class="tcam-settings__table-cell tcam-settings__table-option">Загал.вартість</td>
+                  <td class="tcam-settings__table-cell tcam-settings__table-value">52</td>
+                  <td class="tcam-settings__table-cell tcam-settings__table-units">грн</td>
                 </tr>
               </table>
             </div>
-            <div class="options-data">
-              <h4 class="options-data__heading">ЧПУ</h4>
-              <table class="options-data__table">
-                <tr class="options-data__table-row">
-                  <td class="options-data__table-cell options-data__table-option">швид.засвітки</td>
-                  <td class="options-data__table-cell options-data__table-label">S</td>
-                  <td class="options-data__table-cell options-data__table-value">
-                    <input type="number" id="lightingSpeed">
-                  </td>
-                  <td class="options-data__table-cell options-data__table-units">мм/хв</td>
-                </tr>
-                <tr class="options-data__table-row">
-                  <td class="options-data__table-cell options-data__table-option">швид.позиц.</td>
-                  <td class="options-data__table-cell options-data__table-label">Y</td>
-                  <td class="options-data__table-cell options-data__table-value">
-                    <input type="number" id="positionSpeed">
-                  </td>
-                  <td class="options-data__table-cell options-data__table-units">мм/хв</td>
-                </tr>
-                <tr class="options-data__table-row">
-                  <td class="options-data__table-cell options-data__table-option">зміщ.X0</td>
-                  <td class="options-data__table-cell options-data__table-label">X0</td>
-                  <td class="options-data__table-cell options-data__table-value">0</td>
-                  <td class="options-data__table-cell options-data__table-units">мм</td>
-                </tr>
-                <tr class="options-data__table-row">
-                  <td class="options-data__table-cell options-data__table-option">зміщ.Y0</td>
-                  <td class="options-data__table-cell options-data__table-label">Y0</td>
-                  <td class="options-data__table-cell options-data__table-value">0</td>
-                  <td class="options-data__table-cell options-data__table-units">мм</td>
-                </tr>
-                <tr class="options-data__table-row">
-                  <td class="options-data__table-cell options-data__table-option">пауза</td>
-                  <td class="options-data__table-cell options-data__table-label">P</td>
-                  <td class="options-data__table-cell options-data__table-value">1</td>
-                  <td class="options-data__table-cell options-data__table-units">с</td>
-                </tr>
-              </table>
+          </div>
+          <div class="tcam-settings__segment process-params">
+            <div class="process-params__heading-wrapper">
+              <h3 class="tcam-settings__segment-heading">Параметри UV-PCB-tech процесу</h3>
+              <div class="input-field input-field_inline-label" data-suffix="%">
+                <label
+                  for="quality"
+                  class="input-field__label">
+                  Якість:
+                </label>
+                <div class="input-field__input-wrapper">
+                  <input
+                    id="quality"
+                    type="number"
+                    name="quality"
+                    value="100"
+                    class="input-field__input"
+                    required>
+                </div>
+              </div>
+            </div>
+            <div class="process-params__tables">
+              <div class="tcam-settings__table-wrapper">
+                <h4 class="tcam-settings__table-heading">UV-лазер:</h4>
+                <table class="tcam-settings__table">
+                  <tr class="tcam-settings__table-row">
+                    <td class="tcam-settings__table-cell tcam-settings__table-option">апертура</td>
+                    <td class="tcam-settings__table-cell tcam-settings__table-label">D<sub>a</sub></td>
+                    <td class="tcam-settings__table-cell tcam-settings__table-value">0.25</td>
+                    <td class="tcam-settings__table-cell tcam-settings__table-units">мм</td>
+                  </tr>
+                  <tr class="tcam-settings__table-row">
+                    <td class="tcam-settings__table-cell tcam-settings__table-option">потужність</td>
+                    <td class="tcam-settings__table-cell tcam-settings__table-label">W</td>
+                    <td class="tcam-settings__table-cell tcam-settings__table-value">2.0</td>
+                    <td class="tcam-settings__table-cell tcam-settings__table-units">Вт</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="tcam-settings__table-wrapper">
+                <h4 class="tcam-settings__table-heading">ЧПУ:</h4>
+                <table class="tcam-settings__table">
+                  <tr class="tcam-settings__table-row">
+                    <td class="tcam-settings__table-cell tcam-settings__table-option">швид.засвітки</td>
+                    <td class="tcam-settings__table-cell tcam-settings__table-label">F1</td>
+                    <td class="tcam-settings__table-cell tcam-settings__table-value">400</td>
+                    <td class="tcam-settings__table-cell tcam-settings__table-units">мм/хв</td>
+                  </tr>
+                  <tr class="tcam-settings__table-row">
+                    <td class="tcam-settings__table-cell tcam-settings__table-option">швид.позиц.</td>
+                    <td class="tcam-settings__table-cell tcam-settings__table-label">F0</td>
+                    <td class="tcam-settings__table-cell tcam-settings__table-value">2000</td>
+                    <td class="tcam-settings__table-cell tcam-settings__table-units">мм/хв</td>
+                  </tr>
+                  <tr class="tcam-settings__table-row">
+                    <td class="tcam-settings__table-cell tcam-settings__table-option">пауза</td>
+                    <td class="tcam-settings__table-cell tcam-settings__table-label">P</td>
+                    <td class="tcam-settings__table-cell tcam-settings__table-value">1</td>
+                    <td class="tcam-settings__table-cell tcam-settings__table-units">c</td>
+                  </tr>
+                </table>
+              </div>
             </div>
           </div>
-          <div class="technical-options__buttons">
-            <button class="technical-options__button">Зберегти налаштування</button>
-            <button class="technical-options__button">Завантажити режими</button>
+          <div class="tcam-settings__panel-bottom">
+            <label class="checkbox">
+              <span class="checkbox__mark-wrapper">
+                <input
+                  class="checkbox__input"
+                  type="checkbox"
+                  name="accept-rules">
+                <svg class="checkbox__mark" viewBox="0 0 21 21">
+                  <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
+                </svg>
+              </span>
+              <span class="checkbox__text">Зв’язати з PCB</span>
+            </label>
+            <div class="tcam-settings__buttons">
+              <button>Завантажити режими</button>
+              <button>Зберегти режими</button>
+            </div>
           </div>
         </div>
       </div>
@@ -365,7 +456,10 @@
         </div>
         <div class="description-block" id="basic-provisions">
           <h3 class="description-block__heading">Базові положення</h3>
-          <p class="description-block__paragraph">Проект JS-Soft генерування коду для UV-PCB-tech функціонально не є
+          <p class="description-block__paragraph">Дана реалізація є альва-версією програмного продукту JS-Soft UV-PCB-tech.
+            Основне призначення поточної реалізації – використання в якості забезпечення навчального процесу за курсами:
+            "Комп'ютерна схемотехніка", "Людинно-машинний інтерфейс", "Веб-технології".
+            Поточна реалізація проекту "JS-Soft генерування коду для UV-PCB-tech" функціонально не є
             самодостанім конвертором, оскільки отримання CNC-файлу лише за описом
             геометрії обєктів PCB-файлів не можливе, оскільки проведення необхідних
             геометричних трансформації базується на встановлення групи взаємоповязаних
@@ -524,13 +618,25 @@
         </div>
         <div class="description-block" id="about-project">
           <h3 class="description-block__heading">Про проект та авторів</h3>
-          <p class="description-block__paragraph">JS-Soft UV-PCB-tech – web-додаток, який дає змогу перетворити первинний
-            опис, сформований CAD-системами, у код технологічної програми для керування виконавчим пристроєм за
-            технологією UV-PCB-tech.</p>
-          <p class="description-block__paragraph">Даний web-додаток розроблено в межах виконання квалівікаційної роботи
-            "JS-Soft генерування коду для UV-PCB-tech"</p>
-          <p class="description-block__paragraph"><b>Виконав:</b> студент 4 курсу Голик Роман Романович.</p>
-          <p class="description-block__paragraph"><b>Керівник:</b> кандитад технічних наук, доцент Ярмілко Андрій Васильович.</p>
+          <p class="description-block__paragraph">Web-додаток розроблено в межах виконання квалівікаційної роботи
+            "JS-Soft генерування коду для UV-PCB-tech" по здобутті рівня бакалавр за спеціальністю 121 – інженерія
+            програмного забезпечення, на каферді програмного забезпечення автоматизованих систем (ПЗАС) факультету
+            обчислювальної техніки, інтелектуальних та управляючих систем (ФОТІУС). Початок проектних робіт з 01.12.2021,
+            активна фаза розробки з 06.03.2022 по 15.05.2022.</p>
+          <p class="description-block__paragraph" style="margin: 0"><b>Розробник:</b> студент 4 курсу Голик Роман Романович академічної групи КС-18.</p>
+          <p class="description-block__paragraph">Прикладні та наукові інтереси: веб-технології, система і засоби управління
+            виробничими процесами.</p>
+          <p class="description-block__paragraph" style="margin: 0"><b>Керівник:</b> кандидат технічних наук, доцент Ярмілко Андрій Васильович.</p>
+          <p class="description-block__paragraph">Прикладні та наукові інтереси: інтелектуальні системи і засоби
+            управління та діагностики, самоорганізація багатоагентних систем, комп'ютерний зір.</p>
+          <p class="description-block__paragraph">Додаток містить базовий функціонал генерації CNC-файлів для технології
+            UV-PCB-tech, тому в подальшому його можна розбудовувати шляхом
+            нарощування та вдосконалення можливостей. Доцільним буде створення бота
+            для обслуговування бізнес-процесів у технологічних ланцюжках виробництва
+            друкованих плат та розширення кола підтримуваних форматів первинного
+            опису PCB з метою охоплення більш широкого кола користувачів. Такі
+            вдосконалення даного програмного забезпечення сприятимуть його інтеграції у
+            сучасні комп’ютеризовані виробничі процеси.</p>
         </div>
       </div>
       <button id="scroll-to-top" class="scroll-to-top-button" hidden>
