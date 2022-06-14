@@ -10,6 +10,10 @@
   color: #34ab00;
 }
 
+.link_primary {
+  color: #1349d5;
+}
+
 .link_uppercase {
   text-transform: uppercase;
 }

@@ -16,6 +16,9 @@
   position: relative;
   width: 100%;
 
+  display: flex;
+  align-items: center;
+
   z-index: 1;
   box-sizing: border-box;
   background-color: white;
@@ -57,8 +60,6 @@
   margin-right: 10px;
 }
 
-.input-field[data-suffix]:after {
-  content: attr(data-suffix);
-
-  margin-left: 5px;
+.input-field__suffix {
+  margin-left: 10px;
 }

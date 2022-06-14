@@ -20,6 +20,16 @@
   margin-bottom: 10px;
 }
 
+.description-block__paragraph_margin_none {
+  margin: 0;
+}
+
+.description-block__warning {
+  font-weight: bold;
+
+  color: red;
+}
+
 .description-block__list {
   list-style-position: inside;
 }
@@ -28,12 +38,17 @@
   margin-bottom: 10px;
 }
 
+.description-block__list li img {
+  height: 40px;
+}
+
 .description-block__list_outside li {
   position: relative;
 
   padding-left: 20px;
 }
 
+.description-block__list_outside li::marker,
 .description-block__list_outside li:before {
   position: absolute;
   top: 0;
@@ -41,7 +56,7 @@
 }
 
 .description-block__image-wrapper {
-  width: min(500px, 100%);
+  width: 100%;
   margin: 0 auto;
 }
 
