@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
-  width: 840px;
+  max-width: 840px;
 }
 
 .tcam-settings__segment {
@@ -10,7 +10,6 @@
   flex-direction: column;
 
   padding: 20px;
-  flex: 1 1 calc(50% - 15px);
 
   border-radius: 25px;
   box-sizing: border-box;
@@ -22,14 +21,18 @@
 }
 
 .technical-scheme__zones {
+  display: flex;
+  align-items: flex-end;
   margin-bottom: 20px;
 }
 
 .technical-scheme .select-field {
-  width: min(150px, 100%);
+  width: 100%;
 }
 
 .technical-scheme__reflection-button {
+  flex: none;
+
   width: 40px;
   height: 40px;
   padding: 0;
@@ -37,7 +40,6 @@
 
   border: none;
   outline: none;
-  vertical-align: bottom;
   background-color: transparent;
 }
 
@@ -134,4 +136,70 @@
 
 .tcam-settings__table-value input {
   width: 100%;
+}
+
+@media screen and (max-width: 641px) {
+  .tcam-settings__panel {
+    grid-template-columns: 1fr;
+  }
+
+  .process-params, .tcam-settings__panel-bottom {
+    grid-column: initial;
+  }
+}
+
+@media screen and (max-width: 541px) {
+  .process-params__heading-wrapper {
+    flex-wrap: wrap;
+  }
+
+  .process-params__heading-wrapper h3,
+  .process-params__heading-wrapper .input-field {
+    width: 100%;
+  }
+
+  .process-params__tables {
+    flex-wrap: wrap;
+  }
+
+  .process-params__tables .tcam-settings__table-wrapper {
+    width: 100%;
+  }
+
+  .process-params__tables .tcam-settings__table-wrapper:first-of-type {
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 481px) {
+  .tcam-settings__panel-bottom {
+    flex-wrap: wrap;
+  }
+
+  .tcam-settings__panel-bottom .checkbox,
+  .tcam-settings__panel-bottom .tcam-settings__buttons {
+    width: 100%;
+  }
+
+  .tcam-settings__panel-bottom .checkbox {
+    margin-bottom: 20px;
+  }
+
+  .tcam-settings__buttons button {
+    width: calc(50% - 15px);
+  }
+
+  .tcam-settings__buttons button:first-of-type {
+    margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 376px) {
+  .tcam-settings__buttons button {
+    width: 100%;
+  }
+
+  .tcam-settings__buttons button:first-of-type {
+    margin-bottom: 10px;
+  }
 }

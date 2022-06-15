@@ -110,6 +110,10 @@ select:focus {
   transition: background 0.3s ease;
 }
 
+.select-field__option:before {
+  display: none;
+}
+
 .select-field__option_selected {
   color: var(--blue);
   background-color: rgba(0,0,0,.12);
