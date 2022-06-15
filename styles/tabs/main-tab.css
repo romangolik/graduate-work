@@ -1,0 +1,85 @@
+.tabs__item_show.main-tab .tabs__item-content {
+  display: flex;
+}
+
+.main-tab .tabs__item-content {
+  justify-content: space-between;
+}
+
+.main-tab__left-part {
+  width: 400px;
+}
+
+.main-tab__right-part {
+  width: calc(100% - 430px);
+}
+
+.main-tab .scaling-select-field {
+  width: min(440px, 100%);
+  margin-bottom: 20px;
+}
+
+.main-tab__pcb-information p {
+  margin-bottom: 5px;
+}
+
+.main-tab__pcb-information b {
+  color: #0FB600;
+  font-size: 120%;
+}
+
+.main-tab__pcb-information h2 {
+  margin-bottom: 10px;
+}
+
+.main-tab__pcb-information h4 {
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 1441px) {
+  .main-tab .tabs__item-content {
+    flex-wrap: wrap;
+  }
+
+  .main-tab__left-part,
+  .main-tab__right-part {
+    width: 100%;
+  }
+
+  .main-tab__left-part {
+    margin-bottom: 20px;
+  }
+
+  .main-tab__upload-area {
+    height: 100%;
+  }
+
+  .main-tab .pcb-wrapper {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1025px) {
+  .main-tab .pcb-wrapper {
+    height: auto;
+    min-height: 400px;
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .main-tab .pcb-wrapper {
+    aspect-ratio: unset;
+  }
+}
+
+@media screen and (max-width: 541px) {
+  .main-tab__image-control {
+    margin-bottom: 20px;
+  }
+
+  .main-tab .pcb-wrapper {
+    height: 350px;
+    min-height: initial;
+  }
+}

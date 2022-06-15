@@ -1,0 +1,63 @@
+.about-application-tab .tabs__item-content {
+  max-width: 820px;
+}
+
+.about-application-tab__content {
+  margin-bottom: 40px;
+
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.about-application-tab__content ol li {
+  margin-bottom: 10px;
+}
+
+.about-application-tab__content ol li .link {
+  font-weight: inherit;
+}
+
+.about-application-tab__content ol ol {
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.about-application-tab .description-block {
+  margin-bottom: 40px;
+}
+
+.about-application-tab .description-block:last-of-type {
+  margin-bottom: 0;
+}
+
+.scroll-to-top-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+
+  display: flex;
+  height: 40px;
+  width: 40px;
+
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #031021;
+}
+
+.scroll-to-top-button__icon {
+  display: block;
+  height: 80%;
+  width: 80%;
+  margin: auto;
+
+  color: inherit;
+}
+
+@media screen and (max-width: 1025px) {
+  .about-application-tab .tabs__item-content {
+    margin-bottom: 50px;
+  }
+}

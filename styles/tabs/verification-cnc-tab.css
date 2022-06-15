@@ -1,0 +1,42 @@
+.tabs__item_show.verification-cnc-tab .tabs__item-content {
+  display: flex;
+}
+
+.verification-cnc-tab .tabs__item-content {
+  justify-content: space-between;
+}
+
+.verification-cnc-tab__left-part {
+  width: 400px;
+}
+
+.verification-cnc-tab__gcode-viewer {
+  width: 100%;
+  height: 350px;
+  padding: 10px;
+
+  resize: none;
+  outline: none;
+  border-radius: 6px;
+  box-sizing: border-box;
+  border: 1px solid silver;
+}
+
+.verification-cnc-tab__gcode-viewer::-webkit-scrollbar {
+  width: 8px;
+}
+
+.verification-cnc-tab__gcode-viewer::-webkit-scrollbar-track {
+  border-radius: 20px;
+  background: #F5F5F5;
+}
+
+.verification-cnc-tab__gcode-viewer::-webkit-scrollbar-thumb {
+  cursor: pointer;
+  border-radius: 15px;
+  background: rgba(5, 10, 12, 0.15);
+}
+
+.verification-cnc-tab__gcode-viewer::-webkit-scrollbar-thumb:hover {
+  background: rgba(5, 10, 12, 0.4);
+}
