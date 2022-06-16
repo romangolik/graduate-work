@@ -1,6 +1,6 @@
 const getConfigData = async () => {
     let configData;
-    await fetch('../../../core/webAppConfig.json')
+    await fetch('../../../webAppConfig.json')
         .then(data => data.json())
         .then(data => configData = data);
     return configData;
