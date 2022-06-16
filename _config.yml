@@ -1,4 +1,4 @@
-data_dir: program
-includes_dir: program
+data_dir: .
+includes_dir: .
 include: [".nojekyll", "webAppConfig.json"]
 exclude: []
