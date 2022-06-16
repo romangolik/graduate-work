@@ -1,14 +1,7 @@
-const getConfigData = async () => {
-    let configData;
-    await fetch('../../_data/webAppConfig.json')
-        .then(data => data.json())
-        .then(data => configData = data);
-    return configData;
-};
+import ConfigData from '../../../webAppConfig.json' assert { type: 'json' };
 
-const getTechnicalSettingsData = async () => {
-    const configData = await getConfigData();
-    const technicalSettingsData = configData.technical_settings;
+const getTechnicalSettingsData = () => {
+    const technicalSettingsData = ConfigData.technical_settings;
 
     technicalSettingsData.materials = technicalSettingsData.materials.map(material => ({
         ...material,
@@ -24,9 +17,8 @@ const getTechnicalSettingsData = async () => {
     return technicalSettingsData;
 };
 
-const getEconomicCalculationsData = async () => {
-    const configData = await getConfigData();
-    const economicCalculationsData = configData.economic_calculations;
+const getEconomicCalculationsData = () => {
+    const economicCalculationsData = ConfigData.economic_calculations;
 
     Object
         .keys(economicCalculationsData.coefficients)
@@ -73,10 +65,10 @@ const getNcMachineTableInnerHtml = data => (`
     </tr>
 `);
 
-export const initMaterialSelect = async () => {
+export const initMaterialSelect = () => {
     const materialsSelect = document.getElementById('material');
 
-    const technicalSettingsData = await getTechnicalSettingsData();
+    const technicalSettingsData = getTechnicalSettingsData();
 
     const html = technicalSettingsData.materials.map(material => (`
         <option value="${material}">${material.type}</option>
@@ -85,12 +77,12 @@ export const initMaterialSelect = async () => {
     materialsSelect.innerHTML = `<option value="none" selected>none</option>` + html;
 };
 
-export const initTechModeData = async () => {
+export const initTechModeData = () => {
     const qualityInput = document.getElementById('quality');
     const uvLaserTable = document.getElementById('uv-laser-table');
     const ncMachineTable = document.getElementById('nc-machine-table');
 
-    const technicalSettingsData = await getTechnicalSettingsData();
+    const technicalSettingsData = getTechnicalSettingsData();
     const techModeData = technicalSettingsData.tech_mode;
 
     qualityInput.value = techModeData.quality;
