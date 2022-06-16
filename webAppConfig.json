@@ -1,0 +1,63 @@
+{
+  "cnc_control_options": {
+    "__UV_PCB_tech_Type__": "Вид розгортання: PCB_CAM_CNC-станочний; PCB_OrderTable-стіл замовлень.",
+    "UV_PCB_tech_Type": "PCB_CAM_CNC",
+    "CNC_Server_IP_address": "192:168:00:01"
+  },
+  "technical_settings": {
+    "materials": [
+      {
+        "type": "FR4-1-TG150-Cu35-S1.5 мм",
+        "cost": "18.30"
+      },
+      {
+        "type": "FR4-2-TG150-Cu25-S1.5 мм",
+        "cost": "24.20"
+      },
+      {
+        "type": "FR4-2-TG150-Cu35-S1.0 мм",
+        "cost": "27.50"
+      },
+      {
+        "type": "FR4-2-TG150-Cu35-S1.2 мм",
+        "cost": "32.25"
+      },
+      {
+        "type": "FR4-2-TG150-Cu35-S1.5 мм",
+        "cost": "34.60"
+      },
+      {
+        "type": "FR4-2-TG180-Cu35-S1.0 мм",
+        "cost": "32.50"
+      },
+      {
+        "type": "FR4-2-TG180-Cu35-S1.2 мм",
+        "cost": "37.25"
+      },
+      {
+        "type": "FR4-2-TG180-Cu35-S1.5 мм",
+        "cost": "39.60"
+      }
+    ],
+    "tech_mode": {
+      "F0": "2000",
+      "F1": "400",
+      "spon_aperture": "0.2",
+      "emission_power": "1.5",
+      "wait_run": "1.0",
+      "quality": "80"
+    },
+    "inset_to_cnc_options": {
+      "transfer_to_PCB": true,
+      "limits_PCB": true,
+      "view_PCB": true
+    }
+  },
+  "economic_calculations": {
+    "coefficients": {
+      "tax_payments": "0.25",
+      "depreciation_of_equipment": "0.15",
+      "operator_pay": "0.2"
+    }
+  }
+}

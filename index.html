@@ -209,43 +209,11 @@
             <div class="process-params__tables">
               <div class="tcam-settings__table-wrapper">
                 <h4 class="tcam-settings__table-heading">UV-лазер:</h4>
-                <table class="tcam-settings__table">
-                  <tr class="tcam-settings__table-row">
-                    <td class="tcam-settings__table-cell tcam-settings__table-option">апертура</td>
-                    <td class="tcam-settings__table-cell tcam-settings__table-label">D<sub>a</sub></td>
-                    <td class="tcam-settings__table-cell tcam-settings__table-value">0.25</td>
-                    <td class="tcam-settings__table-cell tcam-settings__table-units">мм</td>
-                  </tr>
-                  <tr class="tcam-settings__table-row">
-                    <td class="tcam-settings__table-cell tcam-settings__table-option">потужність</td>
-                    <td class="tcam-settings__table-cell tcam-settings__table-label">W</td>
-                    <td class="tcam-settings__table-cell tcam-settings__table-value">2.0</td>
-                    <td class="tcam-settings__table-cell tcam-settings__table-units">Вт</td>
-                  </tr>
-                </table>
+                <table class="tcam-settings__table" id="uv-laser-table"></table>
               </div>
               <div class="tcam-settings__table-wrapper">
                 <h4 class="tcam-settings__table-heading">ЧПУ:</h4>
-                <table class="tcam-settings__table">
-                  <tr class="tcam-settings__table-row">
-                    <td class="tcam-settings__table-cell tcam-settings__table-option">швид.засвітки</td>
-                    <td class="tcam-settings__table-cell tcam-settings__table-label">F1</td>
-                    <td class="tcam-settings__table-cell tcam-settings__table-value">400</td>
-                    <td class="tcam-settings__table-cell tcam-settings__table-units">мм/хв</td>
-                  </tr>
-                  <tr class="tcam-settings__table-row">
-                    <td class="tcam-settings__table-cell tcam-settings__table-option">швид.позиц.</td>
-                    <td class="tcam-settings__table-cell tcam-settings__table-label">F0</td>
-                    <td class="tcam-settings__table-cell tcam-settings__table-value">2000</td>
-                    <td class="tcam-settings__table-cell tcam-settings__table-units">мм/хв</td>
-                  </tr>
-                  <tr class="tcam-settings__table-row">
-                    <td class="tcam-settings__table-cell tcam-settings__table-option">пауза</td>
-                    <td class="tcam-settings__table-cell tcam-settings__table-label">P</td>
-                    <td class="tcam-settings__table-cell tcam-settings__table-value">1</td>
-                    <td class="tcam-settings__table-cell tcam-settings__table-units">c</td>
-                  </tr>
-                </table>
+                <table class="tcam-settings__table" id="nc-machine-table"></table>
               </div>
             </div>
           </div>
@@ -271,9 +239,10 @@
       </div>
     </div>
     <div class="tabs__item verification-cnc-tab">
+      <h2 class="tabs__item-heading">Контроль</h2>
       <div class="tabs__item-content">
         <div class="verification-cnc-tab__left-part">
-          <select name="layer" id="psb-layer">
+          <select style="display: none" name="layer" id="psb-layer">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3" selected>3</option>
@@ -281,8 +250,18 @@
             <option value="5">5</option>
             <option value="6">6</option>
           </select>
-          <button id="generateCNC">Generate</button>
-          <button id="download">Download</button>
+          <div class="verification-cnc-tab__buttons">
+            <button id="generateCNC">Generate</button>
+            <button id="download">Download</button>
+          </div>
+          <div class="verification-cnc-tab__gcode-viewer">
+            <h4>Згенерований G-code</h4>
+            <textarea
+              readonly
+              id="gcode-viewer"></textarea>
+          </div>
+        </div>
+        <div class="verification-cnc-tab__right-part">
           <div class="select-field scaling-select-field">
             <label class="select-field__label" for="gcode-scaling-select">Масштаб зображення:</label>
             <div class="select-field__wrapper">
@@ -295,12 +274,8 @@
               </select>
             </div>
           </div>
-          <textarea
-            readonly
-            id="gcode-viewer"
-            class="verification-cnc-tab__gcode-viewer"></textarea>
+          <div class="pcb-wrapper" id="gcode-pcb"></div>
         </div>
-        <div class="pcb-wrapper" id="gcode-pcb"></div>
       </div>
     </div>
     <div class="tabs__item cnc-control-tab">
