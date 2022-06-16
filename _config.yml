@@ -1,2 +1,2 @@
-include: [".nojekyll", "webAppConfig"]
+include: [".nojekyll", "./webAppConfig.json"]
 exclude: []
