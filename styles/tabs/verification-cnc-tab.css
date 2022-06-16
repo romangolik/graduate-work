@@ -38,20 +38,8 @@
   margin-bottom: 20px;
 }
 
-.verification-cnc-tab__buttons button {
-  padding: 8px 12px;
+.verification-cnc-tab__buttons .button {
   width: calc(50% - 10px);
-
-  color: white;
-  border: none;
-  outline: none;
-  border-radius: 4px;
-  background-color: var(--blue);
-}
-
-.verification-cnc-tab__buttons button:hover {
-  cursor: pointer;
-  background-color: #1749d3;
 }
 
 .verification-cnc-tab__gcode-viewer textarea {

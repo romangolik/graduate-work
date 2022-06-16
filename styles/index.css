@@ -5,6 +5,7 @@
 @import "components/input-field.css";
 @import "components/select-field.css";
 @import "components/checkbox.css";
+@import "components/radio-button.css";
 @import "components/range-slider.css";
 @import "components/modal-window.css";
 @import "components/image-size-modal.css";

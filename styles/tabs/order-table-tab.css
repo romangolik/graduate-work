@@ -1,0 +1,31 @@
+.order-table-tab {
+  max-width: 350px;
+}
+
+.order-table-tab__delivery,
+.order-table-tab__paragraph {
+  margin-bottom: 10px;
+}
+
+.order-table-tab__paragraph-value {
+  font-size: 18px;
+  font-weight: bold;
+
+  color: #0FB600;
+}
+
+.order-table-tab__delivery-heading {
+  margin-bottom: 10px;
+}
+
+.order-table-tab__delivery-radio-buttons .radio-button {
+  margin-bottom: 10px;
+}
+
+.order-table-tab__delivery-radio-buttons .radio-button:last-of-type {
+  margin-bottom: 0;
+}
+
+.order-table-tab__form .input-field {
+  margin-bottom: 10px;
+}

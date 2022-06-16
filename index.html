@@ -239,8 +239,8 @@
               <span class="checkbox__text">Зв’язати з PCB</span>
             </label>
             <div class="tcam-settings__buttons">
-              <button>Завантажити режими</button>
-              <button>Зберегти режими</button>
+              <button class="button">Завантажити режими</button>
+              <button class="button">Зберегти режими</button>
             </div>
           </div>
         </div>
@@ -259,8 +259,8 @@
             <option value="6">6</option>
           </select>
           <div class="verification-cnc-tab__buttons">
-            <button id="generateCNC">Generate</button>
-            <button id="download">Download</button>
+            <button class="button" id="generateCNC">Generate</button>
+            <button class="button" id="download">Download</button>
           </div>
           <div class="verification-cnc-tab__gcode-viewer">
             <h4>Згенерований G-code</h4>
@@ -409,21 +409,46 @@
     <div class="tabs__item order-table-tab">
       <h2 class="tabs__item-heading">Стіл замовлень</h2>
       <div class="tabs__item-content">
-        <p><b>Матеріал:</b> FR4-1-TG150-Cu35-S1.5 мм</p>
-        <p><b>Вартість:</b> 52 грн.</p>
-        <p><b>Кількість:</b> <input type="number" value="1" step="1"></p>
-        <p>Спосіб доставки:</p>
-        <div>
-          <p>
-            <input type="radio" name="delivery" id="nova-poshta" value="nova-poshta" checked>
-            <label for="nova-poshta">Нова пошта</label>
-          </p>
-          <p>
-            <input type="radio" name="delivery" id="express-delivery" value="express-delivery">
-            <label for="express-delivery">Експрес доставка</label>
-          </p>
-        </div>
-        <form>
+        <p class="order-table-tab__paragraph">
+          <b>Матеріал:</b> <span class="order-table-tab__paragraph-value">FR4-1-TG150-Cu35-S1.5 мм</span>
+        </p>
+        <p class="order-table-tab__paragraph">
+          <b>Вартість:</b> <span class="order-table-tab__paragraph-value">52 грн.</span>
+        </p>
+        <form class="order-table-tab__form">
+          <div class="order-table-tab__delivery">
+            <p class="order-table-tab__delivery-heading">Спосіб доставки:</p>
+            <div class="order-table-tab__delivery-radio-buttons">
+              <label class="radio-button">
+                <input type="radio" name="delivery" id="nova-poshta" value="nova-poshta" checked>
+                <span class="radio-button__text">
+              <span class="radio-button__text__value">Нова пошта</span>
+            </span>
+              </label>
+              <label class="radio-button">
+                <input type="radio" name="delivery" id="express-delivery" value="express-delivery">
+                <span class="radio-button__text">
+              <span class="radio-button__text__value">Експрес доставка</span>
+            </span>
+              </label>
+            </div>
+          </div>
+          <div class="input-field">
+            <label
+              for="quantity"
+              class="input-field__label">
+              Кількість:
+            </label>
+            <div class="input-field__input-wrapper">
+              <input
+                id="quantity"
+                type="number"
+                name="quantity"
+                class="input-field__input"
+                required
+                value="1">
+            </div>
+          </div>
           <div class="input-field">
             <label
               for="department"
@@ -494,12 +519,12 @@
               <input
                 id="phone"
                 type="tel"
-                name="middle-name"
+                name="phone"
                 class="input-field__input"
                 required>
             </div>
           </div>
-          <button>Замовити</button>
+          <button class="button button_basic">Замовити</button>
         </form>
       </div>
     </div>

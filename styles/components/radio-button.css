@@ -1,0 +1,91 @@
+.radio-button {
+  position: relative;
+  display: flex;
+  cursor: pointer;
+}
+
+.radio-button input {
+  flex: none;
+  height: 24px;
+  width: 24px;
+  display: block;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  position: relative;
+  outline: none;
+  background: white;
+  border: none;
+  margin: 0 12px auto 0;
+  padding: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: box-shadow .3s;
+  box-shadow: inset 0 0 0 1px rgba(5, 10, 12, 0.4);
+}
+
+.radio-button input:after {
+  content: '';
+  display: block;
+  width: 20%;
+  height: 20%;
+  opacity: 0;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+  background-color: rgba(5, 10, 12, 0.4);
+
+  transition: height .3s, width .3s, opacity .3s, background-color .3s;
+}
+
+.radio-button input:hover:after {
+  width: 50%;
+  height: 50%;
+  opacity: 1;
+}
+
+.radio-button input:checked {
+  box-shadow: inset 0 0 0 2px var(--dark-blue);
+}
+
+.radio-button input:checked:after {
+  width: 50%;
+  height: 50%;
+  opacity: 1;
+  background-color: var(--dark-blue);
+  animation: markBounce 0.5s linear forwards;
+}
+
+.radio-button__text {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2px;
+}
+
+.radio-button__text-value {
+  color: black;
+}
+
+@keyframes markBounce {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  75% {
+    transform: translate(-50%, -50%) scale(.9);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .radio-button__text {
+    margin-top: 2px;
+  }
+}

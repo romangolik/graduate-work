@@ -90,22 +90,12 @@
   justify-content: space-between;
 }
 
-.tcam-settings__buttons button {
-  padding: 8px 12px;
-
-  color: white;
-  border: none;
-  outline: none;
-  border-radius: 4px;
-  background-color: var(--blue);
+.tcam-settings__buttons {
+  display: flex;
+  align-items: center;
 }
 
-.tcam-settings__buttons button:hover {
-  cursor: pointer;
-  background-color: #1749d3;
-}
-
-.tcam-settings__buttons button:first-of-type {
+.tcam-settings__buttons .button:first-of-type {
   margin-right: 10px;
 }
 
