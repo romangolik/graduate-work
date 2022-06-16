@@ -408,7 +408,100 @@
     </div>
     <div class="tabs__item order-table-tab">
       <h2 class="tabs__item-heading">Стіл замовлень</h2>
-      <div class="tabs__item-content"></div>
+      <div class="tabs__item-content">
+        <p><b>Матеріал:</b> FR4-1-TG150-Cu35-S1.5 мм</p>
+        <p><b>Вартість:</b> 52 грн.</p>
+        <p><b>Кількість:</b> <input type="number" value="1" step="1"></p>
+        <p>Спосіб доставки:</p>
+        <div>
+          <p>
+            <input type="radio" name="delivery" id="nova-poshta" value="nova-poshta" checked>
+            <label for="nova-poshta">Нова пошта</label>
+          </p>
+          <p>
+            <input type="radio" name="delivery" id="express-delivery" value="express-delivery">
+            <label for="express-delivery">Експрес доставка</label>
+          </p>
+        </div>
+        <form>
+          <div class="input-field">
+            <label
+              for="department"
+              class="input-field__label">
+              Відділення:
+            </label>
+            <div class="input-field__input-wrapper">
+              <input
+                id="department"
+                type="text"
+                name="department"
+                class="input-field__input"
+                required>
+            </div>
+          </div>
+          <div class="input-field">
+            <label
+              for="surname"
+              class="input-field__label">
+              Прізвище:
+            </label>
+            <div class="input-field__input-wrapper">
+              <input
+                id="surname"
+                type="text"
+                name="surname"
+                class="input-field__input"
+                required>
+            </div>
+          </div>
+          <div class="input-field">
+            <label
+              for="name"
+              class="input-field__label">
+              Ім'я:
+            </label>
+            <div class="input-field__input-wrapper">
+              <input
+                id="name"
+                type="text"
+                name="name"
+                class="input-field__input"
+                required>
+            </div>
+          </div>
+          <div class="input-field">
+            <label
+              for="middle-name"
+              class="input-field__label">
+              По батькові:
+            </label>
+            <div class="input-field__input-wrapper">
+              <input
+                id="middle-name"
+                type="text"
+                name="middle-name"
+                class="input-field__input"
+                required>
+            </div>
+          </div>
+          <div class="input-field">
+            <label
+              for="phone"
+              class="input-field__label">
+              Номер телефону:
+            </label>
+            <div class="input-field__input-wrapper">
+              <input
+                id="phone"
+                type="tel"
+                name="middle-name"
+                class="input-field__input"
+                required>
+            </div>
+          </div>
+          <button>Замовити</button>
+        </form>
+      </div>
     </div>
     <div class="tabs__item about-application-tab">
       <h2 class="tabs__item-heading">Довідка JS-Soft UV-PCB-tech</h2>
