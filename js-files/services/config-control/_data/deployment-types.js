@@ -1,0 +1,4 @@
+export const DEPLOYMENT_TYPES = {
+    'PCB_CAM_CNC': 'PCB_CAM_CNC',
+    'PCB_ORDER_TABLE': 'PCB_ORDER_TABLE'
+}

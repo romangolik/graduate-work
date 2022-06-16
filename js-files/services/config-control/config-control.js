@@ -1,5 +1,9 @@
 import ConfigData from '../../../webAppConfig.json' assert { type: 'json' };
 
+const getDeploymentSettingsData = () => {
+    return ConfigData.deployment_settings;
+}
+
 const getTechnicalSettingsData = () => {
     const technicalSettingsData = ConfigData.technical_settings;
 
@@ -99,3 +103,19 @@ export const initTechModeData = () => {
     uvLaserTable.innerHTML = getUvLaserTableInnerHtml(techModeData);
     ncMachineTable.innerHTML = getNcMachineTableInnerHtml(techModeData);
 };
+
+const showTabByDeploymentType = data => {
+    document.querySelectorAll('.sidebar__navigation-item')
+        .forEach(link => {
+            const value = link.getAttribute('data-show-by-type');
+            if (value) {
+                if (value === data) {
+                    link.removeAttribute('hidden');
+                } else {
+                    link.setAttribute('hidden', '');
+                }
+            }
+        });
+}
+
+showTabByDeploymentType(getDeploymentSettingsData().deployment_type);
