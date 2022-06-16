@@ -33,13 +33,17 @@ const getUvLaserTableInnerHtml = data => (`
     <tr class="tcam-settings__table-row">
       <td class="tcam-settings__table-cell tcam-settings__table-option">апертура</td>
       <td class="tcam-settings__table-cell tcam-settings__table-label">D<sub>a</sub></td>
-      <td class="tcam-settings__table-cell tcam-settings__table-value">${data.spon_aperture}</td>
+      <td class="tcam-settings__table-cell tcam-settings__table-value">
+        <input type="number" value="${data.spon_aperture}" step="0.05">
+      </td>
       <td class="tcam-settings__table-cell tcam-settings__table-units">мм</td>
     </tr>
     <tr class="tcam-settings__table-row">
       <td class="tcam-settings__table-cell tcam-settings__table-option">потужність</td>
       <td class="tcam-settings__table-cell tcam-settings__table-label">W</td>
-      <td class="tcam-settings__table-cell tcam-settings__table-value">${data.emission_power}</td>
+      <td class="tcam-settings__table-cell tcam-settings__table-value">
+        <input type="number" value="${data.emission_power}" step="0.05">
+      </td>
       <td class="tcam-settings__table-cell tcam-settings__table-units">Вт</td>
     </tr>
 `);
@@ -48,19 +52,25 @@ const getNcMachineTableInnerHtml = data => (`
     <tr class="tcam-settings__table-row">
       <td class="tcam-settings__table-cell tcam-settings__table-option">швид.засвітки</td>
       <td class="tcam-settings__table-cell tcam-settings__table-label">F1</td>
-      <td class="tcam-settings__table-cell tcam-settings__table-value">${data.F1}</td>
+      <td class="tcam-settings__table-cell tcam-settings__table-value">
+        <input type="number" value="${data.F1}" step="100">
+      </td>
       <td class="tcam-settings__table-cell tcam-settings__table-units">мм/хв</td>
     </tr>
     <tr class="tcam-settings__table-row">
       <td class="tcam-settings__table-cell tcam-settings__table-option">швид.позиц.</td>
       <td class="tcam-settings__table-cell tcam-settings__table-label">F0</td>
-      <td class="tcam-settings__table-cell tcam-settings__table-value">${data.F0}</td>
+      <td class="tcam-settings__table-cell tcam-settings__table-value">
+        <input type="number" value="${data.F0}" step="100">
+      </td>
       <td class="tcam-settings__table-cell tcam-settings__table-units">мм/хв</td>
     </tr>
     <tr class="tcam-settings__table-row">
       <td class="tcam-settings__table-cell tcam-settings__table-option">пауза</td>
       <td class="tcam-settings__table-cell tcam-settings__table-label">P</td>
-      <td class="tcam-settings__table-cell tcam-settings__table-value">${data.wait_run}</td>
+      <td class="tcam-settings__table-cell tcam-settings__table-value">
+        <input type="number" value="${data.wait_run}" step="0.05">
+      </td>
       <td class="tcam-settings__table-cell tcam-settings__table-units">c</td>
     </tr>
 `);

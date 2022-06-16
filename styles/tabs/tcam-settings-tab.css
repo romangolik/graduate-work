@@ -136,6 +136,7 @@
 
 .tcam-settings__table-value input {
   width: 100%;
+  text-align: center;
 }
 
 @media screen and (max-width: 641px) {
