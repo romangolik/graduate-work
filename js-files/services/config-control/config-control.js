@@ -4,7 +4,7 @@ const getDeploymentSettingsData = () => {
     return ConfigData.deployment_settings;
 }
 
-const getTechnicalSettingsData = () => {
+export const getTechnicalSettingsData = () => {
     const technicalSettingsData = ConfigData.technical_settings;
 
     technicalSettingsData.materials = technicalSettingsData.materials.map(material => ({
@@ -21,7 +21,7 @@ const getTechnicalSettingsData = () => {
     return technicalSettingsData;
 };
 
-const getEconomicCalculationsData = () => {
+export const getEconomicCalculationsData = () => {
     const economicCalculationsData = ConfigData.economic_calculations;
 
     Object
@@ -38,7 +38,7 @@ const getUvLaserTableInnerHtml = data => (`
       <td class="tcam-settings__table-cell tcam-settings__table-option">апертура</td>
       <td class="tcam-settings__table-cell tcam-settings__table-label">D<sub>a</sub></td>
       <td class="tcam-settings__table-cell tcam-settings__table-value">
-        <input type="number" value="${data.spon_aperture}" step="0.05">
+        <input type="number" id="spon-aperture" value="${data.spon_aperture}" step="0.05" min="0.05" max="0.5">
       </td>
       <td class="tcam-settings__table-cell tcam-settings__table-units">мм</td>
     </tr>
@@ -57,7 +57,7 @@ const getNcMachineTableInnerHtml = data => (`
       <td class="tcam-settings__table-cell tcam-settings__table-option">швид.засвітки</td>
       <td class="tcam-settings__table-cell tcam-settings__table-label">F1</td>
       <td class="tcam-settings__table-cell tcam-settings__table-value">
-        <input type="number" value="${data.F1}" step="100">
+        <input type="number" id="illumination-speed" min="100" max="5000" value="${data.F1}" step="100">
       </td>
       <td class="tcam-settings__table-cell tcam-settings__table-units">мм/хв</td>
     </tr>
@@ -65,7 +65,7 @@ const getNcMachineTableInnerHtml = data => (`
       <td class="tcam-settings__table-cell tcam-settings__table-option">швид.позиц.</td>
       <td class="tcam-settings__table-cell tcam-settings__table-label">F0</td>
       <td class="tcam-settings__table-cell tcam-settings__table-value">
-        <input type="number" value="${data.F0}" step="100">
+        <input type="number" id="positioning-speed" min="100" max="5000" value="${data.F0}" step="100">
       </td>
       <td class="tcam-settings__table-cell tcam-settings__table-units">мм/хв</td>
     </tr>
@@ -73,7 +73,7 @@ const getNcMachineTableInnerHtml = data => (`
       <td class="tcam-settings__table-cell tcam-settings__table-option">пауза</td>
       <td class="tcam-settings__table-cell tcam-settings__table-label">P</td>
       <td class="tcam-settings__table-cell tcam-settings__table-value">
-        <input type="number" value="${data.wait_run}" step="0.05">
+        <input type="number" id="pause" min="0.5" max="5" value="${data.wait_run}" step="0.05">
       </td>
       <td class="tcam-settings__table-cell tcam-settings__table-units">c</td>
     </tr>
@@ -84,11 +84,11 @@ export const initMaterialSelect = () => {
 
     const technicalSettingsData = getTechnicalSettingsData();
 
-    const html = technicalSettingsData.materials.map(material => (`
-        <option value="${material}">${material.type}</option>
-    `)).join('');
-
-    materialsSelect.innerHTML = `<option value="none" selected>none</option>` + html;
+    materialsSelect.innerHTML = technicalSettingsData.materials.map((material, index) => {
+        return index === 0 ?
+            `<option value="${material.type}" selected>${material.type}</option>` :
+            `<option value="${material.type}">${material.type}</option>`
+    }).join('');
 };
 
 export const initTechModeData = () => {
