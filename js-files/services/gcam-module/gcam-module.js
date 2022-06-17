@@ -209,7 +209,7 @@ const offsetPrimitiveFunc = {
     [PCB_PRIMITIVES.ZONE]: offsetZone
 };
 
-export const getOffsetPrimitives = (primitives, offsetValue) => {
+export const getOffsetPrimitives = async (primitives, offsetValue) => {
     return new Promise(resolve => {
        const result = primitives.map(primitive => ({
            type: primitive.type,

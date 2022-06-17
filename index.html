@@ -104,9 +104,9 @@
                 <label class="select-field__label">Зона з ліва:</label>
                 <div class="select-field__wrapper">
                   <select name="left-zone">
-                    <option value="none">none</option>
+                    <option value="none" selected>none</option>
                     <option value="top">top</option>
-                    <option value="bottom" selected>bottom</option>
+                    <option value="bottom">bottom</option>
                   </select>
                 </div>
               </div>
@@ -158,36 +158,34 @@
             <div class="select-field select-field_inline-label">
               <label class="select-field__label" for="material">Матеріал:</label>
               <div class="select-field__wrapper">
-                <select name="material" id="material">
-                  <option value="sf-2-35_1.6mm" selected>СФ-2-35 1.6 мм</option>
-                </select>
+                <select name="material" id="material"></select>
               </div>
             </div>
             <div class="tcam-settings__table-wrapper">
-              <table class="tcam-settings__table">
+              <table class="tcam-settings__table" id="manufacturing-params-table">
                 <tr class="tcam-settings__table-row">
                   <td class="tcam-settings__table-cell tcam-settings__table-option">протяжність</td>
-                  <td class="tcam-settings__table-cell tcam-settings__table-value">10.2</td>
+                  <td class="tcam-settings__table-cell tcam-settings__table-value" id="length-cell">0</td>
                   <td class="tcam-settings__table-cell tcam-settings__table-units">м</td>
                 </tr>
                 <tr class="tcam-settings__table-row">
                   <td class="tcam-settings__table-cell tcam-settings__table-option">час обробки</td>
-                  <td class="tcam-settings__table-cell tcam-settings__table-value">275</td>
+                  <td class="tcam-settings__table-cell tcam-settings__table-value" id="time-cell">0</td>
                   <td class="tcam-settings__table-cell tcam-settings__table-units">с</td>
                 </tr>
                 <tr class="tcam-settings__table-row">
                   <td class="tcam-settings__table-cell tcam-settings__table-option">вартість друку</td>
-                  <td class="tcam-settings__table-cell tcam-settings__table-value">34.5</td>
+                  <td class="tcam-settings__table-cell tcam-settings__table-value" id="printing-cost-cell">0</td>
                   <td class="tcam-settings__table-cell tcam-settings__table-units">грн</td>
                 </tr>
                 <tr class="tcam-settings__table-row">
                   <td class="tcam-settings__table-cell tcam-settings__table-option">податкові сплати</td>
-                  <td class="tcam-settings__table-cell tcam-settings__table-value">11.8</td>
+                  <td class="tcam-settings__table-cell tcam-settings__table-value" id="tax-payments-cell">0</td>
                   <td class="tcam-settings__table-cell tcam-settings__table-units">грн</td>
                 </tr>
                 <tr class="tcam-settings__table-row">
                   <td class="tcam-settings__table-cell tcam-settings__table-option">Загал.вартість</td>
-                  <td class="tcam-settings__table-cell tcam-settings__table-value">52</td>
+                  <td class="tcam-settings__table-cell tcam-settings__table-value" id="total-cost-cell">0</td>
                   <td class="tcam-settings__table-cell tcam-settings__table-units">грн</td>
                 </tr>
               </table>
@@ -207,7 +205,8 @@
                     id="quality"
                     type="number"
                     name="quality"
-                    value="100"
+                    min="20"
+                    max="100"
                     class="input-field__input"
                     required>
                   <span class="input-field__suffix">%</span>

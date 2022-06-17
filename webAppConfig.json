@@ -56,8 +56,11 @@
   "economic_calculations": {
     "coefficients": {
       "tax_payments": "0.25",
-      "depreciation_of_equipment": "0.15",
-      "operator_pay": "0.2"
+      "depreciation_of_equipment": "64",
+      "operator_pay": "115",
+      "k_ic":"0.25",
+      "vat":"0.2",
+      "management":"0.3"
     }
   }
 }

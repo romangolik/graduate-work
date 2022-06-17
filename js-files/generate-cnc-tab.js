@@ -6,6 +6,7 @@ import { showProgressBar, hideProgressBar } from "./components/progress-bar/prog
 
 import { mainTabData } from "./main.js";
 import { MODAL_TYPES } from "./components/modals/_data/modal-types.js";
+import { offsetPrimitives } from './tcam-settings.js';
 
 const GCODE_VIEWER = document.getElementById('gcode-viewer');
 
@@ -37,9 +38,8 @@ document.getElementById('psb-layer')
 document.getElementById('generateCNC')
     .addEventListener('click', () => {
         showProgressBar();
-        const primitives = [ ...mainTabData.pcbPrimitives].filter(primitive => primitive.layer === selectedLayer);
-        if (primitives.length) {
-            generateGCode(primitives)
+        if (offsetPrimitives.length) {
+            generateGCode(offsetPrimitives)
                 .then(data => {
                     if (generateCNCTabData.image) {
                         generateCNCTabData.image.remove();
