@@ -74,3 +74,18 @@
 .verification-cnc-tab__gcode-viewer textarea::-webkit-scrollbar-thumb:hover {
   background: rgba(5, 10, 12, 0.4);
 }
+
+@media screen and (max-width: 1441px) {
+  .verification-cnc-tab .tabs__item-content {
+    flex-wrap: wrap;
+  }
+
+  .verification-cnc-tab__left-part,
+  .verification-cnc-tab__right-part {
+    width: 100%;
+  }
+
+  .verification-cnc-tab__left-part {
+    margin-bottom: 20px;
+  }
+}

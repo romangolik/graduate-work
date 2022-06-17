@@ -54,32 +54,4 @@
   .main-tab__upload-area {
     height: 100%;
   }
-
-  .main-tab .pcb-wrapper {
-    width: 100%;
-  }
-}
-
-@media screen and (max-width: 1025px) {
-  .main-tab .pcb-wrapper {
-    height: auto;
-    min-height: 400px;
-  }
-}
-
-@media screen and (max-width: 769px) {
-  .main-tab .pcb-wrapper {
-    aspect-ratio: unset;
-  }
-}
-
-@media screen and (max-width: 541px) {
-  .main-tab__image-control {
-    margin-bottom: 20px;
-  }
-
-  .main-tab .pcb-wrapper {
-    height: 350px;
-    min-height: initial;
-  }
 }

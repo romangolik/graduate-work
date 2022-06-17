@@ -40,6 +40,19 @@ main {
   margin: auto;
 }
 
+@media screen and (max-width: 1441px) {
+  .pcb-wrapper {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1025px) {
+  .pcb-wrapper {
+    height: auto;
+    min-height: 400px;
+  }
+}
+
 @media screen and (max-width: 961px) {
   body {
     padding-left: 0;
@@ -47,5 +60,18 @@ main {
 
   main {
     padding-top: 52px;
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .pcb-wrapper {
+    aspect-ratio: unset;
+  }
+}
+
+@media screen and (max-width: 541px) {
+  .pcb-wrapper {
+    height: 350px;
+    min-height: initial;
   }
 }

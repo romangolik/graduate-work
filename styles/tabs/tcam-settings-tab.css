@@ -172,25 +172,34 @@
     width: 100%;
   }
 
+  .tcam-settings__panel-bottom .tcam-settings__buttons {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
   .tcam-settings__panel-bottom .checkbox {
     margin-bottom: 20px;
   }
 
-  .tcam-settings__buttons button {
-    width: calc(50% - 15px);
+  .tcam-settings__buttons .button {
+    width: calc(50% - 10px);
   }
 
-  .tcam-settings__buttons button:first-of-type {
+  .tcam-settings__buttons .button:first-of-type {
     margin-right: 0;
   }
 }
 
 @media screen and (max-width: 376px) {
-  .tcam-settings__buttons button {
+  .tcam-settings__buttons .button {
     width: 100%;
   }
 
   .tcam-settings__buttons button:first-of-type {
     margin-bottom: 10px;
+  }
+
+  .tcam-settings__table-option {
+    width: 70px;
   }
 }
