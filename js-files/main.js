@@ -3,6 +3,7 @@ import { txtConvertor } from './services/convertors/txt-convertor/txt-convertor.
 import { initSidebarControl } from './services/sidebar-control/sidebar-control.js';
 import { drawPrimitivesByType } from './services/draw-pcb/draw-pcb.js';
 import { initZoomImageControl } from './services/zoom-image-control/zoom-image-control.js';
+import { resetTcamSettingsData } from './tcam-settings-data.js';
 import { initUploadAreaControl } from './services/upload-area-contorl/upload-area-control.js';
 import { getPCBInformationHtml } from './services/pcb-information-template/pcb-information-template.js';
 import { initSelectFieldsControl } from './services/select-fields-control/select-fields-control.js';
@@ -77,11 +78,13 @@ FILE_INPUT.addEventListener('change', event => {
                                         null
                                     );
 
+                                    resetTcamSettingsData();
                                     hideProgressBar();
                                 });
                         });
                     } catch (message) {
                         hideProgressBar();
+                        resetTcamSettingsData();
                         openModal(MODAL_TYPES.ERROR_MESSAGE, {
                             heading: 'Помилка конвертування',
                             text: `Дані файлу є пошкодженими: "${message}"`
@@ -91,6 +94,7 @@ FILE_INPUT.addEventListener('change', event => {
         } else {
             FILE_INPUT.value = null;
             resetFileName();
+            resetTcamSettingsData();
             openModal(MODAL_TYPES.ERROR_MESSAGE, {
                 heading: 'Помилка формату файлу',
                 text: `Обраний файл не відповідає не підтримується додатком. 

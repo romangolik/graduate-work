@@ -36,7 +36,7 @@ const LAYERS = {
     'top': 1
 }
 
-const tcamSettingsData = {
+const DEFAULT_TCAM_SETTINGS_DATA = {
     size: {
         height: 0,
         width: 0
@@ -46,7 +46,9 @@ const tcamSettingsData = {
     rightZoneValue: 'none',
     reflection: true,
     selectedMaterial: getTechnicalSettingsData().materials[0]
-}
+};
+
+let tcamSettingsData = { ...DEFAULT_TCAM_SETTINGS_DATA };
 
 const setCostsData = () => {
     const { totalCost, taxPaymentsCost, printingCost } = calcTotalSum(
@@ -61,8 +63,6 @@ const setCostsData = () => {
 };
 
 const calcTimeAndLength = (primitives) => {
-    console.log(primitives)
-
     const contourCount = 3;
 
     let time = 0;
@@ -176,6 +176,28 @@ initInputDebounce(ILLUMINATION_SPEED_INPUT, setManufacturingTableData);
 initInputDebounce(POSITIONING_SPEED_INPUT, setManufacturingTableData);
 initInputDebounce(PAUSE_INPUT, setManufacturingTableData);
 
+const resetTechnologicalScheme = () => {
+    tcamSettingsData = { ...DEFAULT_TCAM_SETTINGS_DATA };
+    LEFT_ZONE_SELECT.value = tcamSettingsData.leftZoneValue;
+    RIGHT_ZONE_SELECT.value = tcamSettingsData.rightZoneValue;
+    REFLECTION_BUTTON.classList.toggle('technical-scheme__reflection-button_disabled', !tcamSettingsData.reflection);
+}
+
+const resetManufacturingData = () => {
+    MATERIAL_SELECT.value = tcamSettingsData.selectedMaterial.type;
+    LENGTH_CELL.textContent = 0;
+    TIME_CELL.textContent = 0;
+    PRINTING_COST_CELL.textContent = 0;
+    TAX_PAYMENTS_CELL.textContent = 0;
+    TOTAL_COST_CELL.textContent = 0;
+}
+
+const resetTcamSettingsData = () => {
+    resetTechnologicalScheme();
+    resetManufacturingData();
+}
+
 export {
-    tcamSettingsData
+    tcamSettingsData,
+    resetTcamSettingsData
 }
