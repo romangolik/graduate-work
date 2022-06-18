@@ -31,6 +31,9 @@ const findLineIntersection = (line1, line2) => {
     const y4 = line2.to.y;
 
     const den = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
+    if (den === 0) {
+        return null;
+    }
 
     return {
         x: fixed(((x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2) * (x3 * y4 - y3 * x4)) / den, 3),
@@ -86,7 +89,7 @@ const offsetPolygon = (pts, offset, looped = false) => {
             const lastDownPoint = downPoints[downPoints.length - 1];
             const lastUpperPoint = upperPoints[upperPoints.length - 1];
 
-            downPoints[downPoints.length - 1] = findLineIntersection(
+            const downPointsIntersection = findLineIntersection(
                 {
                     from: {
                         x: lastDownPoint.x,
@@ -109,7 +112,13 @@ const offsetPolygon = (pts, offset, looped = false) => {
                 }
             );
 
-            upperPoints[downPoints.length - 1] = findLineIntersection(
+            if (downPointsIntersection) {
+                downPoints[downPoints.length - 1] = downPointsIntersection;
+            } else {
+                downPoints.splice(downPoints.length - 1, 1);
+            }
+
+            const upperPointsIntersection = findLineIntersection(
                 {
                     from: {
                         x: lastUpperPoint.x,
@@ -131,6 +140,12 @@ const offsetPolygon = (pts, offset, looped = false) => {
                     }
                 }
             );
+
+            if (upperPointsIntersection) {
+                upperPoints[upperPoints.length - 1] = upperPointsIntersection;
+            } else {
+                upperPoints.splice(upperPoints.length - 1, 1);
+            }
 
             downPoints.push( {
                 x: fixed(Xg2, 3),
@@ -199,7 +214,7 @@ const offsetPolyline = (primitiveData, offsetValue) => {
 }
 
 const offsetZone = (primitiveData, offsetValue) => {
-    return offsetPolygon([...primitiveData.pos], offsetValue, true);
+    return offsetPolygon([...primitiveData.pos], +offsetValue, true);
 }
 
 const offsetPrimitiveFunc = {

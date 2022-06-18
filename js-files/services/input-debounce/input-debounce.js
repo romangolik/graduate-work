@@ -17,12 +17,12 @@ export const initInputDebounce = (input, handler, debounceTime = 500) => {
             const minValue = input.getAttribute('min');
             const maxValue = input.getAttribute('max');
 
-            if (minValue && value < minValue) {
+            if (minValue && +value < +minValue) {
                 input.value = minValue
-            } else if (maxValue && value > maxValue) {
+            } else if (maxValue && +value > +maxValue) {
                 input.value = maxValue;
             } else {
-                input.value = event.target.value;
+                input.value = value;
             }
 
             if (handler) {

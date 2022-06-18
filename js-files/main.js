@@ -6,7 +6,6 @@ import { initZoomImageControl } from './services/zoom-image-control/zoom-image-c
 import { initUploadAreaControl } from './services/upload-area-contorl/upload-area-control.js';
 import { getPCBInformationHtml } from './services/pcb-information-template/pcb-information-template.js';
 import { initSelectFieldsControl } from './services/select-fields-control/select-fields-control.js';
-import { recalculateManufacturingData } from './tcam-settings.js';
 import { showProgressBar, hideProgressBar } from './components/progress-bar/progress-bar.js';
 
 import { MODAL_TYPES } from './components/modals/_data/modal-types.js';
@@ -78,7 +77,6 @@ FILE_INPUT.addEventListener('change', event => {
                                         null
                                     );
 
-                                    recalculateManufacturingData();
                                     hideProgressBar();
                                 });
                         });

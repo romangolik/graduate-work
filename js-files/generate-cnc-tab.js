@@ -4,9 +4,8 @@ import { initZoomImageControl } from './services/zoom-image-control/zoom-image-c
 import { drawPrimitivesByGCode } from "./services/draw-pcb/draw-pcb.js";
 import { showProgressBar, hideProgressBar } from "./components/progress-bar/progress-bar.js";
 
-import { mainTabData } from "./main.js";
+import { tcamSettingsData } from "./tcam-settings-data.js";
 import { MODAL_TYPES } from "./components/modals/_data/modal-types.js";
-import { offsetPrimitives } from './tcam-settings.js';
 
 const GCODE_VIEWER = document.getElementById('gcode-viewer');
 
@@ -23,7 +22,7 @@ const { IMAGE_WRAPPER, resetScalingSelectValue } = initZoomImageControl(
     (event, imageSizeMultiplicity) => {
         if (generateCNCTabData.image) {
             const value = +event.target.value;
-            const { width, height } = mainTabData.size;
+            const { width, height } = tcamSettingsData.size;
             generateCNCTabData.image.setAttribute('width', `${width * value * imageSizeMultiplicity}`);
             generateCNCTabData.image.setAttribute('height', `${height * value * imageSizeMultiplicity}`);
         }
@@ -38,8 +37,8 @@ document.getElementById('psb-layer')
 document.getElementById('generateCNC')
     .addEventListener('click', () => {
         showProgressBar();
-        if (offsetPrimitives.length) {
-            generateGCode(offsetPrimitives)
+        if (tcamSettingsData.offsetPrimitives.length) {
+            generateGCode(tcamSettingsData.offsetPrimitives)
                 .then(data => {
                     if (generateCNCTabData.image) {
                         generateCNCTabData.image.remove();
@@ -47,7 +46,7 @@ document.getElementById('generateCNC')
                     generateCNCTabData.cncFile = data;
                     GCODE_VIEWER.textContent = data;
 
-                    drawPrimitivesByGCode(generateCNCTabData.cncFile, mainTabData.size)
+                    drawPrimitivesByGCode(generateCNCTabData.cncFile, tcamSettingsData.size)
                         .then(data => {
                             generateCNCTabData.image = data;
                             IMAGE_WRAPPER.appendChild(generateCNCTabData.image);

@@ -103,14 +103,14 @@
               <div class="select-field">
                 <label class="select-field__label">Зона з ліва:</label>
                 <div class="select-field__wrapper">
-                  <select name="left-zone">
+                  <select name="left-zone" id="left-zone">
                     <option value="none" selected>none</option>
                     <option value="top">top</option>
                     <option value="bottom">bottom</option>
                   </select>
                 </div>
               </div>
-              <button class="technical-scheme__reflection-button">
+              <button class="technical-scheme__reflection-button" id="reflection-button">
                 <img
                   alt="Reflection"
                   src="assets/images/reflection.png">
@@ -118,7 +118,7 @@
               <div class="select-field">
                 <label class="select-field__label">Зона з права:</label>
                 <div class="select-field__wrapper">
-                  <select name="left-zone">
+                  <select name="left-zone" id="right-zone">
                     <option value="none" selected>none</option>
                     <option value="top">top</option>
                     <option value="bottom">bottom</option>
@@ -881,7 +881,7 @@
 <div id="overlay" class="overlay"></div>
 <script src="js-files/services/config-control/config-control.js" type="module"></script>
 <script src="js-files/main.js" type="module"></script>
-<script src="js-files/tcam-settings.js" type="module"></script>
+<script src="js-files/tcam-settings-data.js" type="module"></script>
 <script src="js-files/generate-cnc-tab.js" type="module"></script>
 <svg style="display: none">
   <defs id="symbols">

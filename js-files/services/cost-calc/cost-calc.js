@@ -9,8 +9,8 @@ const {
     depreciation_of_equipment,
 } = getEconomicCalculationsData().coefficients;
 
-const calcMaterialCosts = (width, height, materialCost) => {
-    const workpieceCost = ((height * width) / 10000) * materialCost;
+const calcMaterialCosts = (size, materialCost) => {
+    const workpieceCost = ((size.height * size.width) / 10000) * materialCost;
     return workpieceCost * (1 + k_ic);
 }
 
@@ -24,8 +24,8 @@ const calcTaxFul = time => {
     return +((t_pcb * operator_pay + calcProcessingCost(time) * (1 + management)) * (tax_payments + vat)).toFixed(2);
 }
 
-export const calcTotalSum = (width, height, materialCost, time) => {
-    const materialCosts = calcMaterialCosts(width, height, materialCost);
+export const calcTotalSum = (size, materialCost, time) => {
+    const materialCosts = calcMaterialCosts(size, materialCost);
     const processingCost = calcProcessingCost(time);
     const taxPaymentsCost = calcTaxFul(time);
 

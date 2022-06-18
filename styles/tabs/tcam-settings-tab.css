@@ -31,6 +31,8 @@
 }
 
 .technical-scheme__reflection-button {
+  position: relative;
+
   flex: none;
 
   width: 40px;
@@ -40,6 +42,7 @@
 
   border: none;
   outline: none;
+  cursor: pointer;
   background-color: transparent;
 }
 
@@ -47,6 +50,26 @@
   display: block;
   height: 100%;
   width: 100%;
+}
+
+.technical-scheme__reflection-button_disabled img {
+  opacity: 0.6;
+}
+
+.technical-scheme__reflection-button_disabled:after {
+  content: '';
+
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+
+  background-image: linear-gradient(to top right, rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0) calc(50% - 0.8px),
+    rgba(0, 0, 0, 1) 50%,
+    rgba(0, 0, 0, 0) calc(50% + 0.8px),
+    rgba(0, 0, 0, 0) 100%);
 }
 
 .technical-scheme__checkboxes {
