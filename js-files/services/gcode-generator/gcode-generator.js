@@ -3,6 +3,7 @@ export const generateGCode = (tcamSettingData) => {
     const {
         leftZone,
         rightZone,
+        viewPcb
     } = tcamSettingData.technologicalScheme;
     const {
         material,
@@ -30,6 +31,10 @@ export const generateGCode = (tcamSettingData) => {
             lines.push(`;@ протяжність гравіровки L = ${length} м`);
             lines.push(`;@ очікуваний час обробки T = ${time} с`);
             lines.push(`;@ вартість замовлення з ПДВ ${totalCost} грн`);
+        }
+
+        if (viewPcb) {
+            lines.push('G85 X-20 Y-40');
         }
 
         lines.push('G17');

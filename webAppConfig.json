@@ -1,6 +1,6 @@
 {
   "deployment_settings": {
-    "deployment_type": "PCB_ORDER_TABLE",
+    "deployment_type": "PCB_CAM_CNC",
     "CNC_Server_IP_address": "192:168:00:01",
     "out_PCBServer_IP_address":"192:168:255:01"
   },

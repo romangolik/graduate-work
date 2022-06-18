@@ -104,40 +104,6 @@ FILE_INPUT.addEventListener('change', event => {
     }
 });
 
-const SCROLL_TO_TOP_BUTTON = document.getElementById('scroll-to-top');
-const ABOUT_APPLICATION_CONTENT = document.getElementById('about-application-content');
-
-SCROLL_TO_TOP_BUTTON.addEventListener('click', () => {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-});
-
-window.addEventListener('scroll', event => {
-    const rect = ABOUT_APPLICATION_CONTENT.getBoundingClientRect();
-
-    if (document.body.scrollTop <= rect.bottom || document.documentElement.scrollTop <= rect.bottom) {
-        SCROLL_TO_TOP_BUTTON.setAttribute('hidden', '');
-    } else {
-        SCROLL_TO_TOP_BUTTON.removeAttribute('hidden');
-    }
-});
-
-const AUTO_CONTROL_PANEL = document.getElementById('auto-control-panel');
-const MANUAL_CONTROL_PANEL = document.getElementById('manual-control-panel');
-
-const TO_AUTO_CONTROL_BUTTON = document.getElementById('to-auto-control-panel');
-const TO_MANUAL_CONTROL_BUTTON = document.getElementById('to-manual-control-panel');
-
-TO_AUTO_CONTROL_BUTTON.addEventListener('click', () => {
-    AUTO_CONTROL_PANEL.removeAttribute('hidden');
-    MANUAL_CONTROL_PANEL.setAttribute('hidden', '');
-});
-
-TO_MANUAL_CONTROL_BUTTON.addEventListener('click', () => {
-    MANUAL_CONTROL_PANEL.removeAttribute('hidden');
-    AUTO_CONTROL_PANEL.setAttribute('hidden', '');
-});
-
 export {
     mainTabData,
 }
