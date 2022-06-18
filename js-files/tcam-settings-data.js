@@ -16,6 +16,9 @@ const LEFT_ZONE_SELECT = document.getElementById('left-zone');
 const RIGHT_ZONE_SELECT = document.getElementById('right-zone');
 const REFLECTION_BUTTON = document.getElementById('reflection-button');
 
+const LIMITS_PCB_CHECKBOX = document.getElementById('limits-pcb');
+const VIEW_PCB_CHECKBOX = document.getElementById('view-pcb');
+
 const MATERIAL_SELECT = document.getElementById('material');
 
 const LENGTH_CELL = document.getElementById('length-cell');
@@ -45,6 +48,8 @@ const DEFAULT_TCAM_SETTINGS_DATA = {
     leftZoneValue: 'none',
     rightZoneValue: 'none',
     reflection: true,
+    limits_pcb: getTechnicalSettingsData().inset_to_cnc_options.limits_PCB,
+    view_pcb: getTechnicalSettingsData().inset_to_cnc_options.view_PCB,
     selectedMaterial: getTechnicalSettingsData().materials[0]
 };
 
@@ -100,9 +105,21 @@ const calcTimeAndLength = (primitives) => {
 
 const recalculateManufacturingData = () => {
     let primitives = [];
+    let contourPrimitive;
+    let limitsPcb = [];
     tcamSettingsData.size = { ...mainTabData.size };
 
+    if (tcamSettingsData.limits_pcb) {
+        contourPrimitive = [ ...mainTabData.pcbPrimitives ].find(primitive => primitive.layer === 7);
+    }
+
     if (tcamSettingsData.leftZoneValue !== 'none') {
+        if (contourPrimitive) {
+            limitsPcb.push({
+                ...contourPrimitive,
+                points: contourPrimitive.pos
+            });
+        }
         [ ...mainTabData.pcbPrimitives ]
             .forEach(primitive => {
                 if (primitive.layer === LAYERS[tcamSettingsData.leftZoneValue]) {
@@ -112,6 +129,13 @@ const recalculateManufacturingData = () => {
     }
     if (tcamSettingsData.rightZoneValue !== 'none') {
         tcamSettingsData.size.width = mainTabData.size.width * 2;
+
+        if (contourPrimitive) {
+            limitsPcb.push({
+                ...contourPrimitive,
+                points: contourPrimitive.pos.map(({ x, y }) => ({ x: mainTabData.size.width + x, y }))
+            });
+        }
 
         [ ...mainTabData.pcbPrimitives ]
             .forEach(primitive => {
@@ -136,6 +160,7 @@ const recalculateManufacturingData = () => {
         +SPON_APERTURE_INPUT.value
     ).then(data => {
         tcamSettingsData.offsetPrimitives = data;
+        tcamSettingsData.offsetPrimitives.unshift(...limitsPcb);
         setManufacturingTableData();
     });
 }
@@ -148,6 +173,32 @@ const setManufacturingTableData = () => {
 
     setCostsData();
 }
+
+const resetTechnologicalScheme = () => {
+    LEFT_ZONE_SELECT.value = tcamSettingsData.leftZoneValue;
+    RIGHT_ZONE_SELECT.value = tcamSettingsData.rightZoneValue;
+    REFLECTION_BUTTON.classList.toggle('technical-scheme__reflection-button_disabled', !tcamSettingsData.reflection);
+    LIMITS_PCB_CHECKBOX.checked = tcamSettingsData.limits_pcb;
+}
+
+const resetManufacturingData = () => {
+    MATERIAL_SELECT.value = tcamSettingsData.selectedMaterial.type;
+    LENGTH_CELL.textContent = 0;
+    TIME_CELL.textContent = 0;
+    PRINTING_COST_CELL.textContent = 0;
+    TAX_PAYMENTS_CELL.textContent = 0;
+    TOTAL_COST_CELL.textContent = 0;
+}
+
+const resetTcamSettingsData = () => {
+    tcamSettingsData = { ...DEFAULT_TCAM_SETTINGS_DATA };
+
+    resetTechnologicalScheme();
+    resetManufacturingData();
+}
+
+LIMITS_PCB_CHECKBOX.checked = tcamSettingsData.limits_pcb;
+VIEW_PCB_CHECKBOX.checked = tcamSettingsData.view_pcb;
 
 LEFT_ZONE_SELECT.addEventListener('change', event => {
     tcamSettingsData.leftZoneValue = event.target.value;
@@ -165,6 +216,11 @@ REFLECTION_BUTTON.addEventListener('click', () => {
     recalculateManufacturingData();
 });
 
+LIMITS_PCB_CHECKBOX.addEventListener('change', event => {
+    tcamSettingsData.limits_pcb = event.target.checked;
+    recalculateManufacturingData();
+});
+
 MATERIAL_SELECT.addEventListener('change', event => {
     tcamSettingsData.selectedMaterial = getTechnicalSettingsData().materials.find(item => item.type === event.target.value);
     setCostsData();
@@ -175,27 +231,6 @@ initInputDebounce(SPON_APERTURE_INPUT, recalculateManufacturingData);
 initInputDebounce(ILLUMINATION_SPEED_INPUT, setManufacturingTableData);
 initInputDebounce(POSITIONING_SPEED_INPUT, setManufacturingTableData);
 initInputDebounce(PAUSE_INPUT, setManufacturingTableData);
-
-const resetTechnologicalScheme = () => {
-    tcamSettingsData = { ...DEFAULT_TCAM_SETTINGS_DATA };
-    LEFT_ZONE_SELECT.value = tcamSettingsData.leftZoneValue;
-    RIGHT_ZONE_SELECT.value = tcamSettingsData.rightZoneValue;
-    REFLECTION_BUTTON.classList.toggle('technical-scheme__reflection-button_disabled', !tcamSettingsData.reflection);
-}
-
-const resetManufacturingData = () => {
-    MATERIAL_SELECT.value = tcamSettingsData.selectedMaterial.type;
-    LENGTH_CELL.textContent = 0;
-    TIME_CELL.textContent = 0;
-    PRINTING_COST_CELL.textContent = 0;
-    TAX_PAYMENTS_CELL.textContent = 0;
-    TOTAL_COST_CELL.textContent = 0;
-}
-
-const resetTcamSettingsData = () => {
-    resetTechnologicalScheme();
-    resetManufacturingData();
-}
 
 export {
     tcamSettingsData,

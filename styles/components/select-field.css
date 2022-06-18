@@ -116,6 +116,7 @@ select:focus {
 
 .select-field__option_selected {
   color: var(--blue);
+  pointer-events: none;
   background-color: rgba(0,0,0,.12);
 }
 
