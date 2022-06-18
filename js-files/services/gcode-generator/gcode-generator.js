@@ -1,19 +1,42 @@
-export const generateGCode = (primitives) => {
+export const generateGCode = (tcamSettingData) => {
     const lines = [];
-    let lightingSpeed;
-    let positionSpeed;
+    const {
+        leftZone,
+        rightZone,
+    } = tcamSettingData.technologicalScheme;
+    const {
+        material,
+        length,
+        time,
+        totalCost
+    } = tcamSettingData.manufacturingParams;
+    const {
+        F0,
+        F1,
+        emission_power,
+        spon_aperture,
+        wait_run
+    } = tcamSettingData.processParams;
 
     const addStartFile = () => {
+        if (tcamSettingData.transferToPcb) {
+            lines.push(`;@ схема – ${leftZone}-${rightZone}`);
+            lines.push(`;@ матеріал – ${material.type}`);
+            lines.push(`;@ апертура D_a = ${spon_aperture} мм`);
+            lines.push(`;@ потужність випромінювання W = ${emission_power} Вт`);
+            lines.push(`;@ швидкість засвітки F1 = ${F1} мм/хв`);
+            lines.push(`;@ швидкість позиціювання F0 = ${F0} мм/хв`);
+            lines.push(`;@ затримка переміщення P = ${wait_run} c`);
+            lines.push(`;@ протяжність гравіровки L = ${length} м`);
+            lines.push(`;@ очікуваний час обробки T = ${time} с`);
+            lines.push(`;@ вартість замовлення з ПДВ ${totalCost} грн`);
+        }
+
         lines.push('G17');
         lines.push('G21');
         lines.push('G54');
         lines.push('G90');
         lines.push('M08');
-    }
-
-    const readSettings = () => {
-        lightingSpeed = 400;
-        positionSpeed = 2000;
     }
 
     const addEnd = () => {
@@ -22,17 +45,16 @@ export const generateGCode = (primitives) => {
     }
 
     return new Promise(resolve => {
-        readSettings();
         addStartFile();
 
-        primitives.forEach(primitive => {
+        tcamSettingData.offsetPrimitives.forEach(primitive => {
             primitive.points.forEach(({ x, y }, index) => {
                 if (index === 0) {
-                    lines.push(`G00 X${x.toFixed(3)} Y${y.toFixed(3)} F${positionSpeed}`);
-                    lines.push('M03 G04 P0.5');
+                    lines.push(`G00 X${x.toFixed(3)} Y${y.toFixed(3)} F${F0}`);
+                    lines.push(`M03 G04 P${wait_run}`);
                 } else {
                     lines.push(index === 1 ?
-                        `G01 X${x.toFixed(3)} Y${y.toFixed(3)} F${lightingSpeed}` :
+                        `G01 X${x.toFixed(3)} Y${y.toFixed(3)} F${F1}` :
                         `X${x.toFixed(3)} Y${y.toFixed(3)}`);
                 }
             });

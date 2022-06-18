@@ -27,13 +27,13 @@ const calcTaxFul = time => {
 export const calcTotalSum = (size, materialCost, time) => {
     const materialCosts = calcMaterialCosts(size, materialCost);
     const processingCost = calcProcessingCost(time);
-    const taxPaymentsCost = calcTaxFul(time);
+    const taxPayments = calcTaxFul(time);
 
     const printingCost = (processingCost + materialCosts).toFixed(2);
 
     return {
-        totalCost: +(processingCost + materialCosts + taxPaymentsCost).toFixed(2),
+        totalCost: +(processingCost + materialCosts + taxPayments).toFixed(2),
         printingCost,
-        taxPaymentsCost
+        taxPayments
     }
 }

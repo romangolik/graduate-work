@@ -38,7 +38,7 @@ document.getElementById('generateCNC')
     .addEventListener('click', () => {
         showProgressBar();
         if (tcamSettingsData.offsetPrimitives.length) {
-            generateGCode(tcamSettingsData.offsetPrimitives)
+            generateGCode(tcamSettingsData)
                 .then(data => {
                     if (generateCNCTabData.image) {
                         generateCNCTabData.image.remove();
@@ -57,7 +57,7 @@ document.getElementById('generateCNC')
         } else {
             openModal(MODAL_TYPES.ERROR_MESSAGE, {
                 heading: 'Помилка генерування',
-                text: `Для даного шару примітивів немає`
+                text: `Не обрано схему плати`
             }).then();
             hideProgressBar();
         }

@@ -34,10 +34,14 @@ const ILLUMINATION_SPEED_INPUT = document.getElementById('illumination-speed');
 const POSITIONING_SPEED_INPUT = document.getElementById('positioning-speed');
 const PAUSE_INPUT = document.getElementById('pause');
 
+const TRANSFER_TO_PCB_CHECKBOX = document.getElementById('transfer-to-pcb');
+
 const LAYERS = {
     'bottom': 3,
     'top': 1
-}
+};
+
+const technicalSettingsData = getTechnicalSettingsData();
 
 const DEFAULT_TCAM_SETTINGS_DATA = {
     size: {
@@ -45,30 +49,58 @@ const DEFAULT_TCAM_SETTINGS_DATA = {
         width: 0
     },
     offsetPrimitives: [],
-    leftZoneValue: 'none',
-    rightZoneValue: 'none',
-    reflection: true,
-    limits_pcb: getTechnicalSettingsData().inset_to_cnc_options.limits_PCB,
-    view_pcb: getTechnicalSettingsData().inset_to_cnc_options.view_PCB,
-    selectedMaterial: getTechnicalSettingsData().materials[0]
+    transferToPcb: technicalSettingsData.inset_to_cnc_options.transfer_to_PCB,
+    technologicalScheme: {
+        leftZone: 'none',
+        rightZone: 'none',
+        reflection: true,
+        limitsPcb: technicalSettingsData.inset_to_cnc_options.limits_PCB,
+        viewPcb: technicalSettingsData.inset_to_cnc_options.view_PCB,
+    },
+    manufacturingParams: {
+        material: technicalSettingsData.materials[0],
+        length: 0,
+        time: 0,
+        printingCost: 0,
+        taxPayments: 0,
+        totalCost: 0
+    },
+    processParams: {
+        quality: technicalSettingsData.tech_mode.quality,
+        spon_aperture: technicalSettingsData.tech_mode.spon_aperture,
+        emission_power: technicalSettingsData.tech_mode.emission_power,
+        F0: technicalSettingsData.tech_mode.F0,
+        F1: technicalSettingsData.tech_mode.F1,
+        wait_run: technicalSettingsData.tech_mode.wait_run
+    }
 };
 
-let tcamSettingsData = { ...DEFAULT_TCAM_SETTINGS_DATA };
+const deepClone = (obj) => {
+    return JSON.parse(JSON.stringify(obj));
+}
 
 const setCostsData = () => {
-    const { totalCost, taxPaymentsCost, printingCost } = calcTotalSum(
+    const { totalCost, taxPayments, printingCost } = calcTotalSum(
         mainTabData.size,
-        tcamSettingsData.selectedMaterial.cost,
+        tcamSettingsData.manufacturingParams.material.cost,
         TIME_CELL.textContent
     );
 
+    tcamSettingsData.manufacturingParams = {
+        ...tcamSettingsData.manufacturingParams,
+        printingCost,
+        taxPayments,
+        totalCost
+    }
+
     PRINTING_COST_CELL.textContent = printingCost;
-    TAX_PAYMENTS_CELL.textContent = taxPaymentsCost;
+    TAX_PAYMENTS_CELL.textContent = taxPayments;
     TOTAL_COST_CELL.textContent = totalCost;
 };
 
 const calcTimeAndLength = (primitives) => {
     const contourCount = 3;
+    const { F0, F1, wait_run } = tcamSettingsData.processParams;
 
     let time = 0;
     let fullLength = 0;
@@ -78,12 +110,12 @@ const calcTimeAndLength = (primitives) => {
         return Math.sqrt(Math.pow(firstPoint.x - secondPoint.x, 2) + Math.pow(firstPoint.y - secondPoint.y, 2));
     }
 
-    primitives.forEach((primitive, index) => {
+    primitives.forEach(primitive => {
         let length = 0;
         let prevPoint = { ...primitive.points[0] };
 
         if (lastPointOfPrimitive) {
-            time += ((calcDistanceBetweenPoints(lastPointOfPrimitive, prevPoint) / (+POSITIONING_SPEED_INPUT.value / 60)) + +PAUSE_INPUT.value) * contourCount;
+            time += ((calcDistanceBetweenPoints(lastPointOfPrimitive, prevPoint) / (+F0 / 60)) + +wait_run) * contourCount;
         }
 
         for (let i = 1; i < primitive.points.length; i++) {
@@ -92,15 +124,13 @@ const calcTimeAndLength = (primitives) => {
             prevPoint = { ...currentPoint };
         }
 
-        time += ((length * contourCount) / (+ILLUMINATION_SPEED_INPUT.value / 60));
+        time += ((length * contourCount) / (+F1 / 60));
         fullLength += length * contourCount;
         lastPointOfPrimitive = prevPoint;
     });
 
-    return {
-        time: +time.toFixed(3),
-        length: +(fullLength / 1000).toFixed(2)
-    };
+    tcamSettingsData.manufacturingParams.time = +time.toFixed(3);
+    tcamSettingsData.manufacturingParams.length = +(fullLength / 1000).toFixed(2);
 }
 
 const recalculateManufacturingData = () => {
@@ -109,11 +139,11 @@ const recalculateManufacturingData = () => {
     let limitsPcb = [];
     tcamSettingsData.size = { ...mainTabData.size };
 
-    if (tcamSettingsData.limits_pcb) {
+    if (tcamSettingsData.technologicalScheme.limitsPcb) {
         contourPrimitive = [ ...mainTabData.pcbPrimitives ].find(primitive => primitive.layer === 7);
     }
 
-    if (tcamSettingsData.leftZoneValue !== 'none') {
+    if (tcamSettingsData.technologicalScheme.leftZone !== 'none') {
         if (contourPrimitive) {
             limitsPcb.push({
                 ...contourPrimitive,
@@ -122,12 +152,12 @@ const recalculateManufacturingData = () => {
         }
         [ ...mainTabData.pcbPrimitives ]
             .forEach(primitive => {
-                if (primitive.layer === LAYERS[tcamSettingsData.leftZoneValue]) {
+                if (primitive.layer === LAYERS[tcamSettingsData.technologicalScheme.leftZone]) {
                     primitives.push(primitive);
                 }
             });
     }
-    if (tcamSettingsData.rightZoneValue !== 'none') {
+    if (tcamSettingsData.technologicalScheme.rightZone !== 'none') {
         tcamSettingsData.size.width = mainTabData.size.width * 2;
 
         if (contourPrimitive) {
@@ -139,8 +169,8 @@ const recalculateManufacturingData = () => {
 
         [ ...mainTabData.pcbPrimitives ]
             .forEach(primitive => {
-                if (primitive.layer === LAYERS[tcamSettingsData.rightZoneValue]) {
-                    if (tcamSettingsData.reflection) {
+                if (primitive.layer === LAYERS[tcamSettingsData.technologicalScheme.rightZone]) {
+                    if (tcamSettingsData.technologicalScheme.reflection) {
                         primitives.push({
                             ...primitive,
                             pos: primitive.pos.map(({ x, y }) => ({ x: 2 * mainTabData.size.width + (x * -1), y }))
@@ -166,7 +196,8 @@ const recalculateManufacturingData = () => {
 }
 
 const setManufacturingTableData = () => {
-    const { time, length } = calcTimeAndLength(tcamSettingsData.offsetPrimitives);
+    calcTimeAndLength(tcamSettingsData.offsetPrimitives);
+    const { time, length } = tcamSettingsData.manufacturingParams;
 
     LENGTH_CELL.textContent = length;
     TIME_CELL.textContent = time;
@@ -175,54 +206,89 @@ const setManufacturingTableData = () => {
 }
 
 const resetTechnologicalScheme = () => {
-    LEFT_ZONE_SELECT.value = tcamSettingsData.leftZoneValue;
-    RIGHT_ZONE_SELECT.value = tcamSettingsData.rightZoneValue;
-    REFLECTION_BUTTON.classList.toggle('technical-scheme__reflection-button_disabled', !tcamSettingsData.reflection);
-    LIMITS_PCB_CHECKBOX.checked = tcamSettingsData.limits_pcb;
+    const {
+        leftZone,
+        rightZone,
+        reflection,
+        limitsPcb,
+        viewPcb
+    } = tcamSettingsData.technologicalScheme;
+
+    LEFT_ZONE_SELECT.value = leftZone;
+    RIGHT_ZONE_SELECT.value = rightZone;
+    REFLECTION_BUTTON.classList.toggle('technical-scheme__reflection-button_disabled', !reflection);
+    LIMITS_PCB_CHECKBOX.checked = limitsPcb;
+    VIEW_PCB_CHECKBOX.checked = viewPcb;
 }
 
 const resetManufacturingData = () => {
-    MATERIAL_SELECT.value = tcamSettingsData.selectedMaterial.type;
-    LENGTH_CELL.textContent = 0;
-    TIME_CELL.textContent = 0;
-    PRINTING_COST_CELL.textContent = 0;
-    TAX_PAYMENTS_CELL.textContent = 0;
-    TOTAL_COST_CELL.textContent = 0;
+    const {
+        material,
+        length,
+        time,
+        printingCost,
+        taxPayments,
+        totalCost
+    } = tcamSettingsData.manufacturingParams;
+
+    MATERIAL_SELECT.value = material.type;
+    LENGTH_CELL.textContent = length;
+    TIME_CELL.textContent = time;
+    PRINTING_COST_CELL.textContent = printingCost;
+    TAX_PAYMENTS_CELL.textContent = taxPayments;
+    TOTAL_COST_CELL.textContent = totalCost;
 }
 
 const resetTcamSettingsData = () => {
-    tcamSettingsData = { ...DEFAULT_TCAM_SETTINGS_DATA };
+    tcamSettingsData = deepClone(DEFAULT_TCAM_SETTINGS_DATA);
 
     resetTechnologicalScheme();
     resetManufacturingData();
+
+    TRANSFER_TO_PCB_CHECKBOX.checked = tcamSettingsData.transferToPcb;
 }
 
-LIMITS_PCB_CHECKBOX.checked = tcamSettingsData.limits_pcb;
-VIEW_PCB_CHECKBOX.checked = tcamSettingsData.view_pcb;
+let tcamSettingsData = deepClone(DEFAULT_TCAM_SETTINGS_DATA);
+
+LIMITS_PCB_CHECKBOX.checked = tcamSettingsData.technologicalScheme.limitsPcb;
+VIEW_PCB_CHECKBOX.checked = tcamSettingsData.technologicalScheme.viewPcb;
+TRANSFER_TO_PCB_CHECKBOX.checked = tcamSettingsData.transferToPcb;
 
 LEFT_ZONE_SELECT.addEventListener('change', event => {
-    tcamSettingsData.leftZoneValue = event.target.value;
+    tcamSettingsData.technologicalScheme.leftZone = event.target.value;
     recalculateManufacturingData();
 });
 
 RIGHT_ZONE_SELECT.addEventListener('change', event => {
-    tcamSettingsData.rightZoneValue = event.target.value;
+    tcamSettingsData.technologicalScheme.rightZone = event.target.value;
     recalculateManufacturingData();
 });
 
 REFLECTION_BUTTON.addEventListener('click', () => {
     REFLECTION_BUTTON.classList.toggle('technical-scheme__reflection-button_disabled');
-    tcamSettingsData.reflection = !REFLECTION_BUTTON.classList.contains('technical-scheme__reflection-button_disabled');
+    tcamSettingsData.technologicalScheme.reflection =
+        !REFLECTION_BUTTON.classList.contains('technical-scheme__reflection-button_disabled');
     recalculateManufacturingData();
 });
 
 LIMITS_PCB_CHECKBOX.addEventListener('change', event => {
-    tcamSettingsData.limits_pcb = event.target.checked;
+    tcamSettingsData.technologicalScheme.limitsPcb = event.target.checked;
+    recalculateManufacturingData();
+});
+
+VIEW_PCB_CHECKBOX.addEventListener('change', event => {
+    tcamSettingsData.technologicalScheme.viewPcb = event.target.checked;
+    recalculateManufacturingData();
+});
+
+TRANSFER_TO_PCB_CHECKBOX.addEventListener('change', event => {
+    tcamSettingsData.transferToPcb = event.target.checked;
     recalculateManufacturingData();
 });
 
 MATERIAL_SELECT.addEventListener('change', event => {
-    tcamSettingsData.selectedMaterial = getTechnicalSettingsData().materials.find(item => item.type === event.target.value);
+    tcamSettingsData.manufacturingParams.material =
+        getTechnicalSettingsData().materials.find(item => item.type === event.target.value);
     setCostsData();
 });
 
