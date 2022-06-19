@@ -307,6 +307,7 @@ const initOrderData = () => {
 
     ORDER_MATERIAL_SPAN.textContent = orderData.material;
     ORDER_COST_SPAN.textContent = orderData.totalCost;
+    ORDER_TECHNICAL_SCHEME_SPAN.textContent = orderData.technicalScheme;
 };
 
 const parseSendData = (formData) => {
@@ -323,8 +324,10 @@ const parseSendData = (formData) => {
 
 const ORDER_MATERIAL_SPAN = document.getElementById('order-material');
 const ORDER_COST_SPAN = document.getElementById('order-cost');
+const ORDER_TECHNICAL_SCHEME_SPAN = document.getElementById('order-technical-scheme');
 
 const ORDER_FORM = document.getElementById('order-form');
+const ORDER_BUTTON = document.getElementById('order-button');
 const ORDER_QUANTITY = document.getElementById('order-quantity');
 
 initInputDebounce(ORDER_QUANTITY, event => {
@@ -333,7 +336,7 @@ initInputDebounce(ORDER_QUANTITY, event => {
     ORDER_COST_SPAN.textContent = orderData.totalCost;
 });
 
-ORDER_FORM.addEventListener('submit', event => {
+ORDER_BUTTON.addEventListener('click', event => {
     event.preventDefault();
     const formData = Object.fromEntries(new FormData(ORDER_FORM));
     showProgressBar();

@@ -99,8 +99,7 @@ const setCostsData = () => {
 };
 
 const calcTimeAndLength = (primitives) => {
-    const contourCount = 3;
-    const { F0, F1, wait_run } = tcamSettingsData.processParams;
+    const { F0, F1, wait_run, spon_aperture, quality } = tcamSettingsData.processParams;
 
     let time = 0;
     let fullLength = 0;
@@ -112,6 +111,8 @@ const calcTimeAndLength = (primitives) => {
 
     primitives.forEach(primitive => {
         let length = 0;
+        let contourCount = 3;
+        //let contourCount = spon_aperture * (1.2 - quality / 100);
         let prevPoint = { ...primitive.points[0] };
 
         if (lastPointOfPrimitive) {

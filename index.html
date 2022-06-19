@@ -413,7 +413,7 @@
     <div class="tabs__item order-table-tab">
       <h2 class="tabs__item-heading">Стіл замовлень</h2>
       <div class="tabs__item-content">
-        <div>
+        <div class="order-table-tab__segment order-table-tab__general-information">
           <h3>Загальна інформація</h3>
           <p class="order-table-tab__paragraph">
             <b>Матеріал:</b>
@@ -429,134 +429,137 @@
             <span id="order-technical-scheme" class="order-table-tab__paragraph-value">none-none</span>
           </p>
         </div>
-        <form class="order-table-tab__form" id="order-form">
-          <div class="order-table-tab__delivery">
-            <p class="order-table-tab__delivery-heading">Спосіб доставки:</p>
-            <div class="order-table-tab__delivery-radio-buttons">
-              <label class="radio-button">
-                <input type="radio" name="delivery" id="nova-poshta" value="nova-poshta" checked>
-                <span class="radio-button__text">
+        <div class="order-table-tab__segment order-table-tab__form-wrapper">
+          <h3>Форма замовлення</h3>
+          <form class="order-table-tab__form" id="order-form">
+            <div class="order-table-tab__delivery">
+              <p class="order-table-tab__delivery-heading">Спосіб доставки:</p>
+              <div class="order-table-tab__delivery-radio-buttons">
+                <label class="radio-button">
+                  <input type="radio" name="delivery" id="nova-poshta" value="nova-poshta" checked>
+                  <span class="radio-button__text">
               <span class="radio-button__text__value">Нова пошта</span>
             </span>
-              </label>
-              <label class="radio-button">
-                <input type="radio" name="delivery" id="express-delivery" value="express-delivery">
-                <span class="radio-button__text">
+                </label>
+                <label class="radio-button">
+                  <input type="radio" name="delivery" id="express-delivery" value="express-delivery">
+                  <span class="radio-button__text">
               <span class="radio-button__text__value">Експрес доставка</span>
             </span>
+                </label>
+              </div>
+            </div>
+            <div class="input-field">
+              <label
+                for="department"
+                class="input-field__label">
+                Відділення:
               </label>
+              <div class="input-field__input-wrapper">
+                <input
+                  id="department"
+                  type="text"
+                  name="department"
+                  class="input-field__input"
+                  required>
+              </div>
             </div>
-          </div>
-          <div class="input-field">
-            <label
-              for="order-quantity"
-              class="input-field__label">
-              Кількість:
-            </label>
-            <div class="input-field__input-wrapper">
-              <input
-                id="order-quantity"
-                type="number"
-                name="quantity"
-                class="input-field__input"
-                required
-                value="1"
-                min="1"
-                max="1000">
+            <div class="input-field">
+              <label
+                for="order-quantity"
+                class="input-field__label">
+                Кількість:
+              </label>
+              <div class="input-field__input-wrapper">
+                <input
+                  id="order-quantity"
+                  type="number"
+                  name="quantity"
+                  class="input-field__input"
+                  required
+                  value="1"
+                  min="1"
+                  max="1000">
+              </div>
             </div>
-          </div>
-          <div class="input-field">
-            <label
-              for="department"
-              class="input-field__label">
-              Відділення:
-            </label>
-            <div class="input-field__input-wrapper">
-              <input
-                id="department"
-                type="text"
-                name="department"
-                class="input-field__input"
-                required>
+            <div class="input-field input-field_grid-column">
+              <label
+                for="surname"
+                class="input-field__label">
+                Прізвище:
+              </label>
+              <div class="input-field__input-wrapper">
+                <input
+                  id="surname"
+                  type="text"
+                  name="surname"
+                  class="input-field__input"
+                  required>
+              </div>
             </div>
-          </div>
-          <div class="input-field">
-            <label
-              for="surname"
-              class="input-field__label">
-              Прізвище:
-            </label>
-            <div class="input-field__input-wrapper">
-              <input
-                id="surname"
-                type="text"
-                name="surname"
-                class="input-field__input"
-                required>
+            <div class="input-field input-field_grid-column">
+              <label
+                for="name"
+                class="input-field__label">
+                Ім'я:
+              </label>
+              <div class="input-field__input-wrapper">
+                <input
+                  id="name"
+                  type="text"
+                  name="name"
+                  class="input-field__input"
+                  required>
+              </div>
             </div>
-          </div>
-          <div class="input-field">
-            <label
-              for="name"
-              class="input-field__label">
-              Ім'я:
-            </label>
-            <div class="input-field__input-wrapper">
-              <input
-                id="name"
-                type="text"
-                name="name"
-                class="input-field__input"
-                required>
+            <div class="input-field input-field_grid-column">
+              <label
+                for="middleName"
+                class="input-field__label">
+                По батькові:
+              </label>
+              <div class="input-field__input-wrapper">
+                <input
+                  id="middleName"
+                  type="text"
+                  name="middleName"
+                  class="input-field__input"
+                  required>
+              </div>
             </div>
-          </div>
-          <div class="input-field">
-            <label
-              for="middleName"
-              class="input-field__label">
-              По батькові:
-            </label>
-            <div class="input-field__input-wrapper">
-              <input
-                id="middleName"
-                type="text"
-                name="middleName"
-                class="input-field__input"
-                required>
+            <div class="input-field">
+              <label
+                for="phone"
+                class="input-field__label">
+                Номер телефону:
+              </label>
+              <div class="input-field__input-wrapper">
+                <input
+                  id="phone"
+                  type="tel"
+                  name="phone"
+                  class="input-field__input"
+                  required>
+              </div>
             </div>
-          </div>
-          <div class="input-field">
-            <label
-              for="phone"
-              class="input-field__label">
-              Номер телефону:
-            </label>
-            <div class="input-field__input-wrapper">
-              <input
-                id="phone"
-                type="tel"
-                name="phone"
-                class="input-field__input"
-                required>
+            <div class="input-field">
+              <label
+                for="email"
+                class="input-field__label">
+                E-mail:
+              </label>
+              <div class="input-field__input-wrapper">
+                <input
+                  id="email"
+                  type="email"
+                  name="email"
+                  class="input-field__input"
+                  required>
+              </div>
             </div>
-          </div>
-          <div class="input-field">
-            <label
-              for="email"
-              class="input-field__label">
-              E-mail:
-            </label>
-            <div class="input-field__input-wrapper">
-              <input
-                id="email"
-                type="email"
-                name="email"
-                class="input-field__input"
-                required>
-            </div>
-          </div>
-          <button type="submit" class="button button_basic">Замовити</button>
-        </form>
+          </form>
+          <button id="order-button" class="button button_basic">Замовити</button>
+        </div>
       </div>
     </div>
     <div class="tabs__item about-application-tab">
