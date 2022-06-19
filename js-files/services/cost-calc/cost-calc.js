@@ -7,7 +7,7 @@ const {
     tax_payments,
     operator_pay,
     depreciation_of_equipment,
-} = getEconomicCalculationsData().coefficients;
+} = getEconomicCalculationsData();
 
 const calcMaterialCosts = (size, materialCost) => {
     const workpieceCost = ((size.height * size.width) / 10000) * materialCost;

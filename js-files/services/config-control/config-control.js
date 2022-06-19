@@ -25,9 +25,9 @@ export const getEconomicCalculationsData = () => {
     const economicCalculationsData = ConfigData.economic_calculations;
 
     Object
-        .keys(economicCalculationsData.coefficients)
+        .keys(economicCalculationsData)
         .forEach(key => {
-            economicCalculationsData.coefficients[key] = +economicCalculationsData.coefficients[key];
+            economicCalculationsData[key] = +economicCalculationsData[key];
         });
 
     return economicCalculationsData;
