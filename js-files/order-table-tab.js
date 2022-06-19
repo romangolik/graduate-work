@@ -257,6 +257,8 @@ const sendEmail = data => {
                     text: `Операці замовлення була успішно виконана`
                 }).then();
                 localStorage.setItem('deliveryNumber', deliveryNumber + 1);
+                ORDER_FORM.reset();
+                orderData = deepClone(DEFAULT_ORDER_DATA);
             } else {
                 openModal(MODAL_TYPES.ERROR_MESSAGE, {
                     heading: 'Помилка офрмлення',
@@ -274,7 +276,11 @@ const sendEmail = data => {
         });
 }
 
-const orderData = {
+const deepClone = (obj) => {
+    return JSON.parse(JSON.stringify(obj));
+}
+
+const DEFAULT_ORDER_DATA = {
     totalCost: 0,
     user: {
         name: '',
@@ -289,6 +295,8 @@ const orderData = {
     material: '',
     technicalScheme: ''
 }
+
+let orderData = deepClone(DEFAULT_ORDER_DATA);
 
 const initOrderData = () => {
     const {
@@ -339,9 +347,16 @@ initInputDebounce(ORDER_QUANTITY, event => {
 ORDER_BUTTON.addEventListener('click', event => {
     event.preventDefault();
     const formData = Object.fromEntries(new FormData(ORDER_FORM));
-    showProgressBar();
-    parseSendData(formData);
-    sendEmail(orderData);
+    if (ORDER_FORM.checkValidity()) {
+        showProgressBar();
+        parseSendData(formData);
+        sendEmail(orderData);
+    } else {
+        openModal(MODAL_TYPES.ERROR_MESSAGE, {
+            heading: 'Невалідні дані',
+            text: `Дані форми є неваліднимим, або деякі поля є не заповненими`
+        }).then();
+    }
 });
 
 export {
