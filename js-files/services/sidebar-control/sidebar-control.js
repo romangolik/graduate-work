@@ -1,3 +1,5 @@
+import { initOrderData } from '../../order-table-tab.js';
+
 export const initSidebarControl = () => {
     const BURGER = document.getElementById('burger');
     const OVERLAY = document.getElementById('overlay');
@@ -32,6 +34,10 @@ export const initSidebarControl = () => {
 
             document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
+
+            if (link.textContent.trim() === 'Стіл замовлень') {
+                initOrderData();
+            }
 
             closeNavigationMenu();
         });

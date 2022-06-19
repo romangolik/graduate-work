@@ -4,7 +4,7 @@ export const initInputDebounce = (input, handler, debounceTime = 500) => {
     input.addEventListener('change', event => {
         input.value = event.target.value;
         if (handler) {
-            handler();
+            handler(event);
         }
     });
 
@@ -26,7 +26,7 @@ export const initInputDebounce = (input, handler, debounceTime = 500) => {
             }
 
             if (handler) {
-                handler();
+                handler(event);
             }
         }, debounceTime);
     });

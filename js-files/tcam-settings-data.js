@@ -292,11 +292,26 @@ MATERIAL_SELECT.addEventListener('change', event => {
     setCostsData();
 });
 
-initInputDebounce(QUALITY_INPUT, recalculateManufacturingData);
-initInputDebounce(SPON_APERTURE_INPUT, recalculateManufacturingData);
-initInputDebounce(ILLUMINATION_SPEED_INPUT, setManufacturingTableData);
-initInputDebounce(POSITIONING_SPEED_INPUT, setManufacturingTableData);
-initInputDebounce(PAUSE_INPUT, setManufacturingTableData);
+initInputDebounce(QUALITY_INPUT, event => {
+    tcamSettingsData.processParams.quality = +event.target.value;
+    setManufacturingTableData();
+});
+initInputDebounce(SPON_APERTURE_INPUT, event => {
+    tcamSettingsData.processParams.spon_aperture = +event.target.value;
+    setManufacturingTableData();
+});
+initInputDebounce(ILLUMINATION_SPEED_INPUT, event => {
+    tcamSettingsData.processParams.F1 = +event.target.value;
+    setManufacturingTableData();
+});
+initInputDebounce(POSITIONING_SPEED_INPUT, event => {
+    tcamSettingsData.processParams.F0 = +event.target.value;
+    setManufacturingTableData();
+});
+initInputDebounce(PAUSE_INPUT, event => {
+    tcamSettingsData.processParams.wait_run = +event.target.value;
+    setManufacturingTableData();
+});
 
 export {
     tcamSettingsData,

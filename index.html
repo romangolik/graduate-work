@@ -293,7 +293,9 @@
       <div class="tabs__item-content">
         <div id="manual-control-panel" class="cnc-control-tab__control-panel">
           <div class="cnc-control-tab__manual-control-panel">
-            <button class="cnc-control-tab__file-button">Файл не обрано</button>
+            <button
+              id="cnc-control-file"
+              class="cnc-control-tab__file-button">Файл не обрано</button>
             <input class="cnc-control-tab__absolute-coordinates" type="text" value="X50.0 Y100.0 Z-20.5">
             <div class="cnc-control-tab__buttons cnc-control-tab__buttons-4">
               <button>M</button>
@@ -411,13 +413,23 @@
     <div class="tabs__item order-table-tab">
       <h2 class="tabs__item-heading">Стіл замовлень</h2>
       <div class="tabs__item-content">
-        <p class="order-table-tab__paragraph">
-          <b>Матеріал:</b> <span class="order-table-tab__paragraph-value">FR4-1-TG150-Cu35-S1.5 мм</span>
-        </p>
-        <p class="order-table-tab__paragraph">
-          <b>Вартість:</b> <span class="order-table-tab__paragraph-value">52 грн.</span>
-        </p>
-        <form class="order-table-tab__form">
+        <div>
+          <h3>Загальна інформація</h3>
+          <p class="order-table-tab__paragraph">
+            <b>Матеріал:</b>
+            <span id="order-material" class="order-table-tab__paragraph-value">FR4-1-TG150-Cu35-S1.5 мм</span>
+          </p>
+          <p class="order-table-tab__paragraph">
+            <b>Вартість:</b>
+            <span id="order-cost" class="order-table-tab__paragraph-value">0</span>
+            <span class="order-table-tab__paragraph-value"> грн</span>
+          </p>
+          <p class="order-table-tab__paragraph">
+            <b>Технологічна схема:</b>
+            <span id="order-technical-scheme" class="order-table-tab__paragraph-value">none-none</span>
+          </p>
+        </div>
+        <form class="order-table-tab__form" id="order-form">
           <div class="order-table-tab__delivery">
             <p class="order-table-tab__delivery-heading">Спосіб доставки:</p>
             <div class="order-table-tab__delivery-radio-buttons">
@@ -437,18 +449,20 @@
           </div>
           <div class="input-field">
             <label
-              for="quantity"
+              for="order-quantity"
               class="input-field__label">
               Кількість:
             </label>
             <div class="input-field__input-wrapper">
               <input
-                id="quantity"
+                id="order-quantity"
                 type="number"
                 name="quantity"
                 class="input-field__input"
                 required
-                value="1">
+                value="1"
+                min="1"
+                max="1000">
             </div>
           </div>
           <div class="input-field">
@@ -498,15 +512,15 @@
           </div>
           <div class="input-field">
             <label
-              for="middle-name"
+              for="middleName"
               class="input-field__label">
               По батькові:
             </label>
             <div class="input-field__input-wrapper">
               <input
-                id="middle-name"
+                id="middleName"
                 type="text"
-                name="middle-name"
+                name="middleName"
                 class="input-field__input"
                 required>
             </div>
@@ -526,7 +540,22 @@
                 required>
             </div>
           </div>
-          <button class="button button_basic">Замовити</button>
+          <div class="input-field">
+            <label
+              for="email"
+              class="input-field__label">
+              E-mail:
+            </label>
+            <div class="input-field__input-wrapper">
+              <input
+                id="email"
+                type="email"
+                name="email"
+                class="input-field__input"
+                required>
+            </div>
+          </div>
+          <button type="submit" class="button button_basic">Замовити</button>
         </form>
       </div>
     </div>
@@ -886,6 +915,7 @@
 <script src="js-files/main.js" type="module"></script>
 <script src="js-files/tcam-settings-data.js" type="module"></script>
 <script src="js-files/generate-cnc-tab.js" type="module"></script>
+<script src="js-files/order-table-tab.js" type="module"></script>
 <script src="js-files/cnc-control-tab.js" type="module"></script>
 <script src="js-files/about-application-tab.js" type="module"></script>
 <svg style="display: none">
@@ -900,6 +930,10 @@
       <path
         d="m6.71 16.71 9.29-9.3 9.29 9.3a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-10-10a1 1 0 0 0 -1.42 0l-10 10a1 1 0 0 0 1.42 1.42z"
         fill="currentColor"></path>
+    </symbol>
+    <symbol viewBox="0 0 512 512" id="successful-icon">
+      <path d="M497.36,69.995c-7.532-7.545-19.753-7.558-27.285-0.032L238.582,300.845l-83.522-90.713    c-7.217-7.834-19.419-8.342-27.266-1.126c-7.841,7.217-8.343,19.425-1.126,27.266l97.126,105.481    c3.557,3.866,8.535,6.111,13.784,6.22c0.141,0.006,0.277,0.006,0.412,0.006c5.101,0,10.008-2.026,13.623-5.628L497.322,97.286    C504.873,89.761,504.886,77.54,497.36,69.995z" fill="#34ab00"></path>
+      <path d="M492.703,236.703c-10.658,0-19.296,8.638-19.296,19.297c0,119.883-97.524,217.407-217.407,217.407    c-119.876,0-217.407-97.524-217.407-217.407c0-119.876,97.531-217.407,217.407-217.407c10.658,0,19.297-8.638,19.297-19.296    C275.297,8.638,266.658,0,256,0C114.84,0,0,114.84,0,256c0,141.154,114.84,256,256,256c141.154,0,256-114.846,256-256    C512,245.342,503.362,236.703,492.703,236.703z" fill="#34ab00"></path>
     </symbol>
   </defs>
 </svg>
