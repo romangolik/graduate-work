@@ -318,7 +318,7 @@ const initOrderData = () => {
         rightZone
     } = tcamSettingsData.technologicalScheme;
 
-    orderData.totalCost = totalCost * orderData.quantity;
+    orderData.totalCost = +(totalCost * orderData.quantity).toFixed(2);
     orderData.material = material.type;
     orderData.technicalScheme = leftZone + '-' + rightZone;
 
@@ -349,7 +349,7 @@ const ORDER_QUANTITY = document.getElementById('order-quantity');
 
 initInputDebounce(ORDER_QUANTITY, event => {
     orderData.quantity = +event.target.value;
-    orderData.totalCost = tcamSettingsData.manufacturingParams.totalCost * orderData.quantity;
+    orderData.totalCost = +(tcamSettingsData.manufacturingParams.totalCost * orderData.quantity).toFixed(2);
     ORDER_COST_SPAN.textContent = orderData.totalCost;
 });
 

@@ -1,5 +1,6 @@
 {
   "deployment_settings": {
+    "__Deployment_Type__": "Вид розгортання: PCB_CAM_CNC - станочний; PCB_OrderTable - стіл замовлень.",
     "deployment_type": "PCB_ORDER_TABLE",
     "CNC_Server_IP_address": "192:168:00:01",
     "out_PCBServer_IP_address":"192:168:255:01",
@@ -17,6 +18,7 @@
     }
   },
   "technical_settings": {
+    "__UV_PCB_Tech_Params__": "Cегмент технологічних налаштувань",
     "materials": [
       {
         "type": "FR4-1-TG150-Cu35-S1.5 мм",
@@ -66,6 +68,7 @@
     }
   },
   "economic_calculations": {
+    "__Economic_Calculations__": "Сегмент даних обрахунку вартості ",
     "tax_payments": "0.25",
     "depreciation_of_equipment": "64",
     "operator_pay": "115",
