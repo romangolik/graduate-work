@@ -2,7 +2,15 @@
   "deployment_settings": {
     "deployment_type": "PCB_ORDER_TABLE",
     "CNC_Server_IP_address": "192:168:00:01",
-    "out_PCBServer_IP_address":"192:168:255:01"
+    "out_PCBServer_IP_address":"192:168:255:01",
+    "transfer_server": {
+      "url": "https://api.sendinblue.com/v3/smtp/email",
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "api-key": "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"
+      }
+    }
   },
   "technical_settings": {
     "materials": [

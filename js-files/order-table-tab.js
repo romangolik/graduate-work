@@ -1,5 +1,6 @@
 import { openModal } from './components/modals/modals.js';
 import { initInputDebounce } from './services/input-debounce/input-debounce.js';
+import { getTransferServerData } from './services/config-control/config-control.js';
 import { showProgressBar, hideProgressBar } from './components/progress-bar/progress-bar.js';
 
 import { MODAL_TYPES } from './components/modals/_data/modal-types.js';
@@ -231,17 +232,14 @@ const getEmailHtml = (data, deliveryNumber) => (`
 `)
 
 const sendEmail = data => {
+    const transferServerData = getTransferServerData();
     let deliveryNumber = localStorage.getItem('deliveryNumber');
     deliveryNumber = deliveryNumber ? +deliveryNumber : 1;
 
-    fetch('https://api.sendinblue.com/v3/smtp/email', {
+    fetch(transferServerData.url, {
         method: 'POST',
         mode: 'cors',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'api-key': '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'
-        },
+        headers: transferServerData.headers,
         body: JSON.stringify({
             subject: `Замовлення №${deliveryNumber}`,
             htmlContent: getEmailHtml(data, deliveryNumber),

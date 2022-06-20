@@ -33,6 +33,10 @@ export const getEconomicCalculationsData = () => {
     return economicCalculationsData;
 };
 
+export const getTransferServerData = () => {
+    return ConfigData.deployment_settings.transfer_server;
+}
+
 const getUvLaserTableInnerHtml = data => (`
     <tr class="tcam-settings__table-row">
       <td class="tcam-settings__table-cell tcam-settings__table-option">апертура</td>
