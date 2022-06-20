@@ -60,9 +60,9 @@
       "quality": "80"
     },
     "inset_to_cnc_options": {
-      "transfer_to_PCB": true,
-      "limits_PCB": true,
-      "view_PCB": true
+      "transfer_to_PCB": false,
+      "limits_PCB": false,
+      "view_PCB": false
     }
   },
   "economic_calculations": {
