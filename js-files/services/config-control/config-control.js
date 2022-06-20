@@ -34,7 +34,9 @@ export const getEconomicCalculationsData = () => {
 };
 
 export const getTransferServerData = () => {
-    return ConfigData.deployment_settings.transfer_server;
+    const transferServerData = ConfigData.deployment_settings.transfer_server;
+    transferServerData.headers['api-key'] = transferServerData.headers['api-key'].join('-');
+    return transferServerData;
 }
 
 const getUvLaserTableInnerHtml = data => (`
