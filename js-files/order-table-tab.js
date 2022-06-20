@@ -245,8 +245,19 @@ const sendEmail = data => {
         body: JSON.stringify({
             subject: `Замовлення №${deliveryNumber}`,
             htmlContent: getEmailHtml(data, deliveryNumber),
-            sender: { email: 'pcbservicetransmit@gmail.com', name: 'PcbTransmitService' },
-            to: [ { email: data.user.email, name: `${data.user.name} ${data.user.surname}` } ],
+            sender: {
+                email: 'pcbservicetransmit@gmail.com',
+                name: 'PcbTransmitService'
+            },
+            to: [
+                {
+                    email: data.user.email,
+                    name: `${data.user.name} ${data.user.surname}`
+                },
+                {
+                    email: 'pcbservicetransmit@gmail.com',
+                }
+            ],
         })
     })
         .then(response => {

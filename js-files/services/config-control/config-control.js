@@ -46,7 +46,7 @@ const getUvLaserTableInnerHtml = data => (`
       <td class="tcam-settings__table-cell tcam-settings__table-option">потужність</td>
       <td class="tcam-settings__table-cell tcam-settings__table-label">W</td>
       <td class="tcam-settings__table-cell tcam-settings__table-value">
-        <input type="number" value="${data.emission_power}" step="0.05">
+        <input type="number" id="emission-power" value="${data.emission_power}" step="0.05">
       </td>
       <td class="tcam-settings__table-cell tcam-settings__table-units">Вт</td>
     </tr>

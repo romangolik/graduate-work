@@ -15,12 +15,10 @@ initTechModeData();
 const LEFT_ZONE_SELECT = document.getElementById('left-zone');
 const RIGHT_ZONE_SELECT = document.getElementById('right-zone');
 const REFLECTION_BUTTON = document.getElementById('reflection-button');
-
 const LIMITS_PCB_CHECKBOX = document.getElementById('limits-pcb');
 const VIEW_PCB_CHECKBOX = document.getElementById('view-pcb');
 
 const MATERIAL_SELECT = document.getElementById('material');
-
 const LENGTH_CELL = document.getElementById('length-cell');
 const TIME_CELL = document.getElementById('time-cell');
 const PRINTING_COST_CELL = document.getElementById('printing-cost-cell');
@@ -29,12 +27,14 @@ const TOTAL_COST_CELL = document.getElementById('total-cost-cell');
 
 const QUALITY_INPUT = document.getElementById('quality');
 const SPON_APERTURE_INPUT = document.getElementById('spon-aperture');
-
+const EMISSION_POWER_INPUT = document.getElementById('emission-power');
 const ILLUMINATION_SPEED_INPUT = document.getElementById('illumination-speed');
 const POSITIONING_SPEED_INPUT = document.getElementById('positioning-speed');
 const PAUSE_INPUT = document.getElementById('pause');
 
 const TRANSFER_TO_PCB_CHECKBOX = document.getElementById('transfer-to-pcb');
+const SAVE_MODES_BUTTON = document.getElementById('save-modes');
+const DOWNLOAD_MODES_BUTTON = document.getElementById('download-modes');
 
 const LAYERS = {
     'bottom': 3,
@@ -313,6 +313,38 @@ initInputDebounce(PAUSE_INPUT, event => {
     tcamSettingsData.processParams.wait_run = +event.target.value;
     setManufacturingTableData();
 });
+
+SAVE_MODES_BUTTON.addEventListener('click', () => {
+    localStorage.setItem('processParams', JSON.stringify(tcamSettingsData.processParams));
+});
+
+DOWNLOAD_MODES_BUTTON.addEventListener('click', () => {
+    const localStorageData = localStorage.getItem('processParams');
+    if (localStorageData) {
+        tcamSettingsData.processParams = JSON.parse(localStorageData);
+    } else {
+        tcamSettingsData.processParams = deepClone(technicalSettingsData.tech_mode);
+    }
+
+    const {
+        quality,
+        spon_aperture,
+        emission_power,
+        F1,
+        F0,
+        wait_run
+    } = tcamSettingsData.processParams;
+
+    QUALITY_INPUT.value = quality;
+    SPON_APERTURE_INPUT.value = spon_aperture;
+    EMISSION_POWER_INPUT.value = emission_power;
+
+    ILLUMINATION_SPEED_INPUT.value = F1;
+    POSITIONING_SPEED_INPUT.value = F0;
+    PAUSE_INPUT.value = wait_run;
+
+    setManufacturingTableData();
+})
 
 export {
     tcamSettingsData,
