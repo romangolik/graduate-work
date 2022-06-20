@@ -8,6 +8,7 @@ import { initInputDebounce } from './services/input-debounce/input-debounce.js';
 import { getOffsetPrimitives } from './services/gcam-module/gcam-module.js';
 
 import { mainTabData } from './main.js';
+import { tcamModule } from './services/tcam-module/tcam-module.js';
 
 initMaterialSelect();
 initTechModeData();
@@ -99,7 +100,7 @@ const setCostsData = () => {
 };
 
 const calcTimeAndLength = (primitives) => {
-    const { F0, F1, wait_run, spon_aperture, quality } = tcamSettingsData.processParams;
+    const { F0, F1, wait_run } = tcamSettingsData.processParams;
 
     let time = 0;
     let fullLength = 0;
@@ -111,12 +112,10 @@ const calcTimeAndLength = (primitives) => {
 
     primitives.forEach(primitive => {
         let length = 0;
-        let contourCount = 3;
-        //let contourCount = spon_aperture * (1.2 - quality / 100);
         let prevPoint = { ...primitive.points[0] };
 
         if (lastPointOfPrimitive) {
-            time += ((calcDistanceBetweenPoints(lastPointOfPrimitive, prevPoint) / (+F0 / 60)) + +wait_run) * contourCount;
+            time += (calcDistanceBetweenPoints(lastPointOfPrimitive, prevPoint) / (+F0 / 60)) + +wait_run;
         }
 
         for (let i = 1; i < primitive.points.length; i++) {
@@ -125,8 +124,8 @@ const calcTimeAndLength = (primitives) => {
             prevPoint = { ...currentPoint };
         }
 
-        time += ((length * contourCount) / (+F1 / 60));
-        fullLength += length * contourCount;
+        time += length / (+F1 / 60);
+        fullLength += length;
         lastPointOfPrimitive = prevPoint;
     });
 
@@ -186,9 +185,10 @@ const recalculateManufacturingData = () => {
             });
     }
 
-    getOffsetPrimitives(
+    tcamModule(
         primitives,
-        +SPON_APERTURE_INPUT.value
+        tcamSettingsData.processParams.spon_aperture,
+        tcamSettingsData.processParams.quality,
     ).then(data => {
         tcamSettingsData.offsetPrimitives = data;
         tcamSettingsData.offsetPrimitives.unshift(...limitsPcb);
@@ -295,11 +295,11 @@ MATERIAL_SELECT.addEventListener('change', event => {
 
 initInputDebounce(QUALITY_INPUT, event => {
     tcamSettingsData.processParams.quality = +event.target.value;
-    setManufacturingTableData();
+    recalculateManufacturingData();
 });
 initInputDebounce(SPON_APERTURE_INPUT, event => {
     tcamSettingsData.processParams.spon_aperture = +event.target.value;
-    setManufacturingTableData();
+    recalculateManufacturingData();
 });
 initInputDebounce(ILLUMINATION_SPEED_INPUT, event => {
     tcamSettingsData.processParams.F1 = +event.target.value;

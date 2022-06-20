@@ -41,7 +41,7 @@ const findLineIntersection = (line1, line2) => {
     }
 }
 
-const offsetPolygon = (pts, offset, looped = false) => {
+const offsetPolygon = (pts, offset, looped = false, inside = true) => {
     if (looped) {
         const first = pts[0];
         const second = pts[1];
@@ -174,7 +174,7 @@ const offsetPolygon = (pts, offset, looped = false) => {
     }
 
     if (looped) {
-        return upperPoints;
+        return inside ? downPoints : upperPoints;
     }
 
     return [
@@ -184,37 +184,43 @@ const offsetPolygon = (pts, offset, looped = false) => {
     ];
 }
 
-const offsetPad = (primitiveData, offsetValue) => {
+export const offsetPad = (primitiveData, offsetValue, inside = true) => {
     const size = primitiveData.properties.size;
     const halfSize = size / 2;
 
     if (primitiveData.properties.form === 1) {
-        return getCircleVertices(halfSize + offsetValue, 30, primitiveData.pos[0]);
+        return getCircleVertices(halfSize + offsetValue * (inside ? -1 : 1), 30, primitiveData.pos[0]);
     } else if (primitiveData.properties.form === 2) {
-        return getOctagonVertices(halfSize + offsetValue, primitiveData.pos[0]);
+        return getOctagonVertices(halfSize + offsetValue * (inside ? -1 : 1), primitiveData.pos[0]);
     } else if (primitiveData.properties.form === 3) {
         return offsetPolygon(
             getPolygonVertices(primitiveData.pos[0], size, size),
             offsetValue,
-            true
+            true,
+            inside
         );
     }
 }
 
-const offsetSMDPad = (primitiveData, offsetValue) => {
+export const offsetSMDPad = (primitiveData, offsetValue, inside = true) => {
     return offsetPolygon(
         getPolygonVertices(primitiveData.pos[0], primitiveData.properties.size_y, primitiveData.properties.size_x),
         offsetValue,
-        true
+        true,
+        inside
     );
 }
 
-const offsetPolyline = (primitiveData, offsetValue) => {
-    return offsetPolygon([...primitiveData.pos], primitiveData.properties.width / 2 + offsetValue)
+export const offsetPolyline = (primitiveData, offsetValue, inside = true) => {
+    const halfWidth = primitiveData.properties.width / 2;
+    if (halfWidth === offsetValue) {
+        return [...primitiveData.pos];
+    }
+    return offsetPolygon([...primitiveData.pos], primitiveData.properties.width / 2 + offsetValue * (inside ? -1 : 1))
 }
 
-const offsetZone = (primitiveData, offsetValue) => {
-    return offsetPolygon([...primitiveData.pos], +offsetValue, true);
+const offsetZone = (primitiveData, offsetValue, inside = true) => {
+    return offsetPolygon([...primitiveData.pos], +offsetValue, true, inside);
 }
 
 const offsetPrimitiveFunc = {
@@ -230,7 +236,7 @@ export const getOffsetPrimitives = async (primitives, offsetValue) => {
            type: primitive.type,
            pos: primitive.pos,
            properties: primitive.properties,
-           points: offsetPrimitiveFunc[primitive.type](primitive, offsetValue / 2)
+           points: offsetPrimitiveFunc[primitive.type](primitive, offsetValue / 2, true)
        }));
        resolve(result);
     });
